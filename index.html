@@ -3,40 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANY.AI | الوكيل الذكي للتاجر الجزائري</title>
+    <title>MANY.AI | تطبيق الوكيل الذكي</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; }
-        .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); max-width: 600px; width: 90%; }
-        .logo { font-size: 3rem; font-weight: bold; color: #2c3e50; margin-bottom: 10px; }
-        .logo span { color: #27ae60; }
-        h1 { color: #34495e; font-size: 1.8rem; }
-        p { color: #7f8c8d; line-height: 1.8; font-size: 1.1rem; }
-        .badge { background: #e67e22; color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.9rem; font-weight: bold; }
-        .plans { margin-top: 30px; display: flex; justify-content: space-around; }
-        .plan { border: 1px solid #ddd; padding: 15px; border-radius: 10px; width: 45%; }
-        .footer { margin-top: 30px; color: #bdc3c7; font-size: 0.8rem; }
+        :root { --primary: #2ecc71; --dark: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .app-container { background: white; width: 100%; max-width: 400px; height: 90vh; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); overflow-y: auto; position: relative; display: flex; flex-direction: column; }
+        .app-header { background: var(--primary); color: white; padding: 30px 20px; text-align: center; border-radius: 0 0 25px 25px; }
+        .content { padding: 20px; flex-grow: 1; }
+        .price-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 15px; padding: 15px; margin-bottom: 20px; text-align: right; }
+        .input-group { margin-bottom: 15px; text-align: right; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--dark); }
+        input, select { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 12px; box-sizing: border-box; font-size: 16px; }
+        .btn-submit { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        #success-msg { display: none; text-align: center; padding: 40px 20px; }
+        .success-icon { font-size: 50px; color: var(--primary); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">MANY<span>.AI</span></div>
-        <div class="badge">قيد التطوير - نسخة الـ 100 تاجر</div>
-        <h1>الذكاء الاصطناعي اللي "يهدر" جزائري</h1>
-        <p>نحن نبني الآن أول وكيل مبيعات ذكي موجه للسوق الجزائري. يرد على الزبائن، يسجل الطلبيات، ويسير المخزون بذكاء بشري.</p>
-        
-        <div class="plans">
-            <div class="plan">
-                <h4>التجار الصغار</h4>
-                <p>1000 دج / شهر</p>
-            </div>
-            <div class="plan">
-                <h4>الشركات الكبرى</h4>
-                <p>2000 دج / شهر</p>
-            </div>
+
+<div class="app-container">
+    <div id="main-app">
+        <div class="app-header">
+            <div style="background:rgba(255,255,255,0.2); display:inline-block; padding:5px 15px; border-radius:20px; font-size:12px; margin-bottom:10px;">نسخة التجار الأوائل 🇩🇿</div>
+            <h1 style="margin:0;">MANY.AI</h1>
+            <p style="margin:5px 0 0;">الوكيل الذكي لتسيير المكالمات</p>
         </div>
 
-        <div class="footer">مشروع MANY.AI موجه للسوق الجزائري والعالمي 🇩🇿</div>
+        <div class="content">
+            <div class="price-card">
+                <strong>اختر خطتك التجارية:</strong>
+                <ul style="margin:10px 0 0; padding-right:20px; font-size:14px;">
+                    <li>الفئة 1 ( < 50 مكالمة): 1000 دج</li>
+                    <li>الفئة 2 ( > 50 مكالمة): 2000 دج</li>
+                </ul>
+            </div>
+
+            <form id="regForm" onsubmit="handleRegister(event)">
+                <div class="input-group">
+                    <label>الاسم التجاري</label>
+                    <input type="text" id="name" placeholder="اسم محلك أو شركتك" required>
+                </div>
+                <div class="input-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="phone" placeholder="06 / 07 / 05" required>
+                </div>
+                <div class="input-group">
+                    <label>الفئة المناسبة</label>
+                    <select id="category" required>
+                        <option value="1">الفئة الأولى - 1000 دج</option>
+                        <option value="2">الفئة الثانية - 2000 دج</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">تفعيل الحساب الآن</button>
+            </form>
+        </div>
     </div>
+
+    <div id="success-msg">
+        <div class="success-icon">✅</div>
+        <h2>تم استلام طلبك!</h2>
+        <p>شكراً لثقتك في MANY.AI. سيتصل بك فريقنا لتفعيل الوكيل الذكي الخاص بك في أقرب وقت.</p>
+        <button onclick="location.reload()" style="background:none; border:1px solid #ccc; padding:10px; border-radius:10px; cursor:pointer;">العودة</button>
+    </div>
+</div>
+
+<script>
+    function handleRegister(e) {
+        e.preventDefault();
+        document.getElementById('main-app').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+        // هنا مستقبلاً نربط البيانات بقاعدة البيانات الخاصة بك
+    }
+</script>
+
 </body>
 </html>
-
