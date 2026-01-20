@@ -833,6 +833,71 @@
                         
                         <div id="planPro" class="border-2 border-green-500 rounded-2xl p-5 cursor-pointer bg-gradient-to-r from-blue-50 to-white plan-card active-plan">
                             <div class="flex justify-between items-start mb-3">
-                                <div>
-                                    <h3 class="font-bold text-lg text-gray-800" data-lang-ar="الباقة الاحترافية" data-lang-fr="Forfait Pro">الباقة الاحترافية</h3>
-                                    <p class="text-2xl font-black text-green-600 mt-1">2000 دج<span class="text-sm text-gray-500 font-normal" data-lang-ar
+                                                <div id="planPro" class="plan-card border-2 border-gray-200 rounded-2xl p-5 cursor-pointer bg-gradient-to-r from-blue-50 to-white">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">الباقة الاحترافية</h3>
+                            <p class="text-2xl font-black text-green-600 mt-1">2000 دج<span class="text-sm text-gray-500 font-normal">/شهرياً</span></p>
+                        </div>
+                        <div class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold animate-bounce">
+                            فئة 50+ مكالمة
+                        </div>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 ml-2"></i> مكالمات غير محدودة يومياً</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 ml-2"></i> ربط مباشر مع Yassir و TemTem</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 ml-2"></i> ذكاء اصطناعي متقدم للمخزون</li>
+                    </ul>
+                </div>
+            </div> <div class="mt-10 text-center">
+                <button id="activateSubscription" class="gradient-btn w-full md:w-1/2 text-xl shadow-2xl py-4">
+                    <i class="fas fa-credit-card ml-2"></i> تفعيل الاشتراك (بريديموب / الذهبية)
+                </button>
+            </div>
+        </div> </div> <footer class="max-w-4xl mx-auto mt-12 pb-8 text-center border-t border-gray-200 pt-6">
+        <p class="text-primary-green font-bold text-lg">MANY.AI | 2026</p>
+        <p class="text-gray-500 text-sm">نظام ذكاء اصطناعي مطور خصيصاً للمحلات الجزائرية</p>
+    </footer>
+
+    <script>
+        // تفعيل تفاعل بطاقات التواصل الاجتماعي
+        document.querySelectorAll('.social-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                checkbox.checked = !checkbox.checked;
+                this.classList.toggle('active', checkbox.checked);
+                this.classList.toggle('inactive', !checkbox.checked);
+            });
+        });
+
+        // تفعيل اختيار الباقات
+        const plans = document.querySelectorAll('.plan-card');
+        plans.forEach(plan => {
+            plan.addEventListener('click', function() {
+                plans.forEach(p => p.classList.remove('border-green-600', 'ring-4', 'ring-green-100'));
+                this.classList.add('border-green-600', 'ring-4', 'ring-green-100');
+            });
+        });
+
+        // برمجة زر التفعيل (نظام الاشتراك)
+        document.getElementById('activateSubscription').addEventListener('click', function() {
+            const shopName = document.getElementById('shopName').value;
+            if (!shopName) {
+                alert("يرجى إدخال اسم المحل أولاً قبل التفعيل");
+                return;
+            }
+
+            this.innerHTML = '<i class="fas fa-sync fa-spin ml-2"></i> جاري التحقق من الدفع...';
+            
+            setTimeout(() => {
+                alert(`شكراً لك! تم استلام طلب تفعيل متجر "${shopName}". يرجى إتمام الدفع عبر بريديموب لتفعيل الحساب فوراً.`);
+                this.innerHTML = '<i class="fas fa-check ml-2"></i> تم إرسال الطلب';
+                this.style.background = "#2563eb"; // تغيير اللون للأزرق بعد الطلب
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
+
+
+                
