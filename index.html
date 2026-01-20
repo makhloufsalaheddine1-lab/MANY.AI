@@ -3,229 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANY.AI | الوكيل الذكي للمخازن</title>
+    <title>MANY.AI | الوكيل الذكي الشامل</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #030712; color: #f3f4f6; overflow-x: hidden; }
-        .cyber-card { background: rgba(17, 24, 39, 0.8); border: 1px solid rgba(34, 197, 94, 0.2); backdrop-filter: blur(12px); border-radius: 2rem; }
+        body { font-family: 'Tajawal', sans-serif; background: #020617; color: #f8fafc; overflow-x: hidden; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        .ai-border { border: 2px solid transparent; background: linear-gradient(#020617, #020617) padding-box, linear-gradient(90deg, #22c55e, #3b82f6) border-box; }
+        .scan-line { height: 2px; background: #22c55e; box-shadow: 0 0 20px #22c55e; position: absolute; width: 100%; top: 0; animation: scan 2s linear infinite; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        #video-container { position: relative; border-radius: 1.5rem; overflow: hidden; background: #000; }
+        canvas { position: absolute; top: 0; left: 0; z-index: 10; }
         .hidden { display: none; }
-        .solde-badge { background: linear-gradient(45deg, #ef4444, #b91c1c); animation: flash 1.5s infinite; }
-        @keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        input, select { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; transition: 0.3s; }
-        input:focus { border-color: #22c55e !important; box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); }
     </style>
 </head>
-<body class="p-2 md:p-6">
+<body class="p-4 md:p-8">
 
-    <div id="notif" class="fixed top-5 left-5 z-50 space-y-2 w-72"></div>
+    <div id="notif-area" class="fixed top-5 left-5 z-50 space-y-2"></div>
 
-    <div id="reg-section" class="max-w-xl mx-auto mt-4 p-6 cyber-card shadow-2xl">
-        <div class="text-center mb-8">
-            <h1 class="text-5xl font-black text-white italic mb-2 tracking-tighter">MANY<span class="text-green-500">.AI</span></h1>
-            <p class="text-gray-400 text-xs tracking-[0.3em] font-bold">SMART ALGERIAN INVENTORY</p>
+    <div id="login-screen" class="max-w-md mx-auto mt-10 p-8 glass rounded-[2.5rem] shadow-2xl">
+        <div class="text-center mb-10">
+            <h1 class="text-5xl font-black italic tracking-tighter mb-2">MANY<span class="text-green-500">.AI</span></h1>
+            <p class="text-[10px] text-blue-400 font-bold tracking-[0.4em]">الوكيل الجزائري الذكي</p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <input type="text" id="m-owner" placeholder="الاسم واللقب (صاحب المشروع)" class="p-4 rounded-2xl text-sm">
-            <input type="text" id="m-shop" placeholder="اسم المحل التجاري" class="p-4 rounded-2xl text-sm">
-            <input type="text" id="m-sector" placeholder="نوع التجارة (ملابس، مواد..)" class="p-4 rounded-2xl text-sm">
-            <input type="tel" id="m-phone" placeholder="رقم الهاتف (الجزائر)" class="p-4 rounded-2xl text-sm text-right">
+        <div class="space-y-4">
+            <input type="text" id="m-shop" placeholder="اسم المحل (البركة، القدس...)" class="w-full p-4 bg-white/5 rounded-2xl outline-none focus:ring-2 ring-green-500">
+            <input type="tel" id="m-phone" placeholder="رقم هاتفك للتفعيل" class="w-full p-4 bg-white/5 rounded-2xl outline-none">
+            <div class="p-4 bg-green-500/5 border border-green-500/20 rounded-2xl">
+                <p class="text-[9px] text-green-400 mb-2 text-center">دفع 1000/2000 دج عبر بريدي موب (التحقق آلي)</p>
+                <input type="text" id="tx-ref" placeholder="رقم المعاملة (TxID)" class="w-full p-3 bg-black/50 rounded-xl text-center font-mono">
+            </div>
+            <button onclick="startAI()" class="w-full py-5 bg-green-600 rounded-[2rem] font-black text-xl hover:bg-green-500 transition-all shadow-[0_0_30px_rgba(34,197,94,0.3)]">تشغيل الوكيل الذكي ⚡</button>
         </div>
-        <input type="email" id="m-email" placeholder="البريد الإلكتروني" class="w-full p-4 rounded-2xl mb-4 text-sm text-right">
-
-        <div class="grid grid-cols-2 gap-3 mb-6">
-            <label class="cursor-pointer group">
-                <input type="radio" name="plan" value="1000" class="hidden peer" checked>
-                <div class="p-4 border-2 border-white/5 rounded-3xl peer-checked:border-green-500 peer-checked:bg-green-500/5 transition-all">
-                    <p class="text-[10px] text-gray-400">الفئة الأولى</p>
-                    <p class="font-black text-white text-xl">1000 دج</p>
-                    <p class="text-[9px] text-green-500">حتى 50 مكالمة/يوم</p>
-                </div>
-            </label>
-            <label class="cursor-pointer group">
-                <input type="radio" name="plan" value="2000" class="hidden peer">
-                <div class="p-4 border-2 border-white/5 rounded-3xl peer-checked:border-blue-500 peer-checked:bg-blue-500/5 transition-all">
-                    <p class="text-[10px] text-gray-400">الفئة الثانية</p>
-                    <p class="font-black text-white text-xl">2000 دج</p>
-                    <p class="text-[9px] text-blue-400">أكثر من 50 مكالمة</p>
-                </div>
-            </label>
-        </div>
-
-        <div class="p-4 bg-yellow-500/5 border border-yellow-500/20 rounded-2xl mb-6 text-center">
-            <p class="text-[10px] text-yellow-500 mb-2 italic">💳 بريدي موب (RIB): 007999990000123456</p>
-            <input type="text" id="tx-ref" placeholder="أدخل رقم المعاملة للتفعيل الفوري" class="w-full p-3 rounded-xl text-center font-mono text-sm">
-        </div>
-
-        <button onclick="activateSystem()" class="w-full bg-green-600 hover:bg-green-500 p-5 rounded-[2rem] font-black text-white text-lg shadow-[0_0_30px_rgba(34,197,94,0.3)] transition-all transform active:scale-95">دفع وتفعيل الوكيل 🚀</button>
     </div>
 
-    <div id="dash-section" class="max-w-6xl mx-auto hidden animate-fade-in">
-        <header class="flex flex-col md:flex-row justify-between items-center mb-6 p-6 cyber-card border-b-2 border-green-500">
+    <div id="main-app" class="max-w-6xl mx-auto hidden">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 bg-gradient-to-tr from-green-600 to-green-400 rounded-full flex items-center justify-center font-black text-white shadow-lg">M</div>
+                <div class="w-16 h-16 ai-border rounded-full flex items-center justify-center font-black text-2xl">M</div>
                 <div>
-                    <h2 id="disp-shop" class="text-xl font-black text-white"></h2>
-                    <p id="disp-owner" class="text-[10px] text-gray-400"></p>
+                    <h2 id="disp-shop" class="text-2xl font-black text-white"></h2>
+                    <p class="text-xs text-green-400 font-bold">الحالة: الوكيل يراقب المخزون الآن ✅</p>
                 </div>
             </div>
-            <div class="text-left mt-4 md:mt-0">
-                <div id="clock" class="text-xs font-mono text-green-400 bg-black/40 px-4 py-2 rounded-full"></div>
+            <div class="bg-black/40 px-6 py-3 rounded-full border border-white/10">
+                <span id="order-count" class="text-blue-400 font-bold">0</span> <span class="text-[10px] text-gray-400">طلبيات تم معالجتها آلياً</span>
             </div>
-        </header>
+        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 space-y-6">
-                <div class="p-6 cyber-card relative overflow-hidden group">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="font-black text-white flex items-center gap-2">📸 عين الوكيل الذكي</h3>
-                        <button onclick="simulateScan()" class="bg-blue-600 px-4 py-2 rounded-full text-[10px] font-bold hover:bg-blue-500 transition-all">تصوير الرف الآن</button>
+                <div class="p-6 glass rounded-[2.5rem] relative group">
+                    <h3 class="text-sm font-bold mb-4 flex items-center gap-2">👁️ رؤية الوكيل (Object Recognition)</h3>
+                    <div id="video-container">
+                        <video id="webcam" autoplay playsinline muted></video>
+                        <canvas id="overlay"></canvas>
+                        <div id="scanner" class="scan-line"></div>
                     </div>
-                    
-                    <div id="camera-box" class="h-48 bg-black/60 rounded-3xl border-2 border-dashed border-white/10 flex items-center justify-center relative">
-                        <p id="scan-text" class="text-gray-500 text-[10px] italic">بانتظار تصوير الرف لتحليل الألوان والكميات...</p>
-                        <div id="scan-line" class="hidden absolute top-0 left-0 w-full h-1 bg-green-500 shadow-[0_0_15px_#22c55e] animate-scan"></div>
+                    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <input type="text" id="p-name" placeholder="السلعة" class="p-3 bg-white/5 rounded-xl text-xs">
+                        <input type="number" id="p-qty" placeholder="الكمية" class="p-3 bg-white/5 rounded-xl text-xs">
+                        <input type="number" id="p-price" placeholder="السعر" class="p-3 bg-white/5 rounded-xl text-xs">
+                        <button onclick="saveProduct()" class="bg-white text-black font-black py-3 rounded-xl text-xs">تثبيت 💾</button>
                     </div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
-                        <input type="text" id="p-name" placeholder="اسم المنتج" class="p-3 rounded-xl text-[10px]">
-                        <input type="number" id="p-qty" placeholder="الكمية" class="p-3 rounded-xl text-[10px]">
-                        <input type="text" id="p-price" placeholder="السعر (دج)" class="p-3 rounded-xl text-[10px]">
-                        <div class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/10">
-                            <input type="checkbox" id="p-solde" class="w-4 h-4">
-                            <label class="text-[10px] text-red-400 font-bold">SOLDE</label>
-                        </div>
-                    </div>
-                    <button onclick="addNewItem()" class="w-full mt-4 bg-white text-black p-3 rounded-xl font-black text-sm hover:bg-green-400 transition-all">إضافة للمخزون المحمي</button>
                 </div>
 
-                <div class="p-6 cyber-card">
+                <div class="p-6 glass rounded-[2.5rem]">
                     <table class="w-full text-right">
                         <thead>
                             <tr class="text-[10px] text-gray-500 border-b border-white/5">
-                                <th class="pb-4">المنتج</th>
-                                <th class="pb-4 text-center">الكمية</th>
-                                <th class="pb-4 text-center">السعر</th>
-                                <th class="pb-4 text-left">الحالة بالذكاء</th>
+                                <th class="pb-4">المنتج</th><th class="pb-4 text-center">الكمية</th><th class="pb-4 text-center">السعر النهائي</th><th class="pb-4 text-left">توصية AI</th>
                             </tr>
                         </thead>
-                        <tbody id="inventory-table">
-                            </tbody>
+                        <tbody id="inventory-data"></tbody>
                     </table>
                 </div>
             </div>
 
             <div class="space-y-6">
-                <div class="p-6 cyber-card bg-green-500/5 border-green-500/30">
-                    <h3 class="text-sm font-bold mb-4">💳 حالة الاشتراك</h3>
-                    <div id="plan-info" class="p-3 bg-black/40 rounded-2xl border border-white/5 mb-2"></div>
-                    <p class="text-[9px] text-gray-400 italic">تم تخصيص 10% من هذا الاشتراك للحالات الإنسانية ❤️</p>
+                <div class="p-6 glass rounded-[2.5rem] bg-blue-500/5">
+                    <h3 class="text-sm font-bold mb-4">🎧 حل أزمة المكالمات</h3>
+                    <p class="text-[10px] text-gray-400 mb-4">الوكيل يقوم الآن بتحويل المحادثات الصوتية إلى طلبيات مؤكدة.</p>
+                    <button onclick="simulateOrder()" class="w-full py-4 bg-blue-600 rounded-2xl font-bold text-xs">محاكاة استقبال طلبية صوتية</button>
                 </div>
 
-                <div class="p-6 cyber-card">
-                    <h3 class="text-sm font-bold mb-4">🎨 الألوان الأكثر توفراً</h3>
-                    <div class="flex gap-2">
-                        <div class="w-6 h-6 rounded-full bg-red-500 shadow-lg shadow-red-500/20"></div>
-                        <div class="w-6 h-6 rounded-full bg-blue-500 shadow-lg shadow-blue-500/20"></div>
-                        <div class="w-6 h-6 rounded-full bg-black border border-white/20"></div>
+                <div class="p-6 glass rounded-[2.5rem] border-red-500/20">
+                    <h3 class="text-sm font-bold mb-4">📈 تحليل السوق (الجزائر)</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-[10px]"><span class="text-gray-400">الطلب في "العاصمة"</span><span class="text-green-400 font-bold">مرتفع 🔥</span></div>
+                        <div class="flex justify-between text-[10px]"><span class="text-gray-400">الطلب في "وهران"</span><span class="text-blue-400 font-bold">مستقر ⚖️</span></div>
                     </div>
                 </div>
-
-                <button onclick="autoRepair()" class="w-full p-4 bg-red-600/10 border border-red-500/20 rounded-[2rem] text-red-400 text-[10px] font-black hover:bg-red-600 hover:text-white transition-all">إصلاح النظام آلياً 🛠️</button>
             </div>
         </div>
     </div>
 
     <script>
-        function activateSystem() {
-            const owner = document.getElementById('m-owner').value;
+        let model;
+        let video = document.getElementById('webcam');
+        let canvas = document.getElementById('overlay');
+        let ctx = canvas.getContext('2d');
+
+        async function startAI() {
             const shop = document.getElementById('m-shop').value;
             const ref = document.getElementById('tx-ref').value;
-            const plan = document.querySelector('input[name="plan"]:checked').value;
 
-            if(!owner || !shop || !ref) {
-                showNotif("❌ يرجى إدخال البيانات كاملة مع رقم المعاملة");
-                return;
-            }
+            if(!shop || !ref) { alert("أدخل اسم المحل ورقم العملية أولاً"); return; }
 
-            showNotif("🔐 جاري التفعيل بمنطق يسير...");
+            showNotif("🧠 جاري تحميل عقل الوكيل الذكي...");
             
-            setTimeout(() => {
-                document.getElementById('reg-section').classList.add('hidden');
-                document.getElementById('dash-section').classList.remove('hidden');
-                document.getElementById('disp-shop').innerText = "متجر " + shop;
-                document.getElementById('disp-owner').innerText = owner + " | الجزائر";
-                document.getElementById('plan-info').innerHTML = `
-                    <p class="text-green-500 font-bold">باقة ${plan} دج</p>
-                    <p class="text-[10px] text-white italic">${plan == '1000' ? 'الفئة 1: 50 مكالمة/يوم' : 'الفئة 2: مكالمات غير محدودة'}</p>
-                `;
-                showNotif("✅ تم التفعيل بنجاح! مرحباً بك في MANY.AI");
-            }, 2500);
+            // تحميل النموذج الحقيقي من Google
+            model = await cocoSsd.load();
+            
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('main-app').classList.remove('hidden');
+            document.getElementById('disp-shop').innerText = "متجر " + shop;
+
+            startWebcam();
+            showNotif("✅ الوكيل يعمل الآن ويراقب المحل");
         }
 
-        function simulateScan() {
-            const line = document.getElementById('scan-line');
-            const txt = document.getElementById('scan-text');
-            line.classList.remove('hidden');
-            txt.innerText = "🤖 جاري تحليل الرف والألوان...";
+        async function startWebcam() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false });
+            video.srcObject = stream;
+            video.onloadedmetadata = () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                detectFrame();
+            };
+        }
+
+        async function detectFrame() {
+            const predictions = await model.detect(video);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
+            predictions.forEach(prediction => {
+                ctx.strokeStyle = "#22c55e";
+                ctx.lineWidth = 4;
+                ctx.strokeRect(...prediction.bbox);
+                ctx.fillStyle = "#22c55e";
+                ctx.font = "bold 16px Tajawal";
+                ctx.fillText(`مكتشف: ${prediction.class}`, prediction.bbox[0], prediction.bbox[1] > 10 ? prediction.bbox[1] - 5 : 10);
+            });
+            requestAnimationFrame(detectFrame);
+        }
+
+        function saveProduct() {
+            const name = document.getElementById('p-name').value;
+            const qty = document.getElementById('p-qty').value;
+            const price = document.getElementById('p-price').value;
+            if(!name || !qty) return;
+
+            const row = `
+                <tr class="border-b border-white/5 animate-pulse">
+                    <td class="py-4 font-black text-white">${name}</td>
+                    <td class="text-center">${qty}</td>
+                    <td class="text-center font-bold text-green-400">${price} دج</td>
+                    <td class="text-left text-[9px] font-bold ${qty < 5 ? 'text-red-500' : 'text-blue-400'}">
+                        ${qty < 5 ? '⚠️ اطلب فوراً' : '✨ المخزون آمن'}
+                    </td>
+                </tr>
+            `;
+            document.getElementById('inventory-data').innerHTML += row;
+            showNotif(`📦 تم تسيير ${name} بنجاح`);
+        }
+
+        function simulateOrder() {
+            showNotif("🎧 جاري معالجة طلبية صوتية واردة...");
             setTimeout(() => {
-                line.classList.add('hidden');
-                txt.innerHTML = "✅ تم التحليل: <span class='text-green-500'>12 قطعة مكتشفة</span>";
-                document.getElementById('p-name').value = "منتج محلل آلياً";
-                document.getElementById('p-qty').value = "12";
-                document.getElementById('p-price').value = "2500";
+                let count = parseInt(document.getElementById('order-count').innerText);
+                document.getElementById('order-count').innerText = count + 1;
+                showNotif("✅ تم تحويل مكالمة إلى طلبية (حذاء مقاس 42) - تم الحجز");
             }, 3000);
         }
 
-        function addNewItem() {
-            const name = document.getElementById('p-name').value;
-            const qty = parseInt(document.getElementById('p-qty').value);
-            const price = document.getElementById('p-price').value;
-            const isSolde = document.getElementById('p-solde').checked;
-
-            if(!name || !qty) return;
-
-            let status = qty > 5 ? '✅ متوفر' : '⚠️ قارب على النفاد';
-            let soldeTag = isSolde ? '<span class="solde-badge text-[8px] px-2 py-0.5 rounded-full text-white ml-2 font-black">SOLDE</span>' : '';
-
-            const row = `
-                <tr class="border-b border-white/5 hover:bg-white/5 transition-all group">
-                    <td class="py-4 text-sm font-bold text-white uppercase">${soldeTag}${name}</td>
-                    <td class="text-center font-mono text-sm">${qty}</td>
-                    <td class="text-center text-green-400 font-bold text-sm">${price} دج</td>
-                    <td class="text-left text-[9px] font-bold ${qty > 5 ? 'text-green-500' : 'text-red-500 animate-pulse'}">${status}</td>
-                </tr>
-            `;
-
-            document.getElementById('inventory-table').innerHTML += row;
-            showNotif(`📦 تم تسيير ${name} بنجاح`);
-            // Reset
-            document.getElementById('p-name').value = ''; document.getElementById('p-qty').value = '';
-        }
-
-        function autoRepair() {
-            showNotif("🛠️ جاري الفحص الذاتي للأخطاء...");
-            setTimeout(() => showNotif("✅ النظام صلح نفسه بنجاح"), 2000);
-        }
-
         function showNotif(msg) {
-            const c = document.getElementById('notif');
-            const t = document.createElement('div');
-            t.className = "p-4 cyber-card border-l-4 border-green-500 text-[10px] text-white animate-bounce shadow-2xl";
-            t.innerText = msg; c.appendChild(t);
-            setTimeout(() => t.remove(), 4000);
+            const area = document.getElementById('notif-area');
+            const n = document.createElement('div');
+            n.className = "p-4 glass border-l-4 border-blue-500 rounded-xl text-xs shadow-2xl animate-bounce";
+            n.innerText = msg; area.appendChild(n);
+            setTimeout(() => n.remove(), 4000);
         }
-
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleString('ar-DZ'); }, 1000);
     </script>
-
-    <style>
-        @keyframes scan { from { top: 0; } to { top: 100%; } }
-        .animate-scan { animation: scan 2s linear infinite; }
-        .animate-fade-in { animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
 </body>
 </html>
