@@ -3,143 +3,2100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANY.AI | الوكيل الذكي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <title>MANY.AI | الوكيل الذكي الجزائري</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #ffffff; color: #333; }
-        .tech-font { font-family: 'Montserrat', sans-serif; }
-        .algeria-line { height: 4px; background: linear-gradient(90deg, #006633 50%, #d21034 50%); width: 100px; margin: 0 auto; border-radius: 2px; }
-        .input-box { width: 100%; padding: 15px; border: 2px solid #f0f0f0; border-radius: 15px; transition: 0.3s; background: #fafafa; }
-        .input-box:focus { border-color: #006633; background: #fff; outline: none; }
-        .btn-active { background-color: #006633; color: white; padding: 18px; border-radius: 50px; font-weight: bold; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,102,51,0.2); }
-        .btn-active:hover { background-color: #d21034; }
-        .glass-panel { border: 1px solid #eee; border-radius: 30px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        :root {
+            --primary-green: #006633;
+            --primary-red: #d21034;
+            --dark-green: #004d26;
+            --light-green: #e6f2ed;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+        }
+        
+        * {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e6f2ed 100%);
+            min-height: 100vh;
+            color: #1e293b;
+        }
+        
+        .tech-font {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 900;
+        }
+        
+        .algeria-gradient {
+            background: linear-gradient(90deg, #006633 0%, #d21034 50%, #f5f5f5 50%, #f5f5f5 100%);
+            height: 5px;
+            width: 120px;
+            border-radius: 3px;
+            margin: 0 auto;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 102, 51, 0.1);
+            border-radius: 20px;
+        }
+        
+        .gradient-btn {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: white;
+            font-weight: 700;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 102, 51, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-btn:hover {
+            background: linear-gradient(135deg, var(--primary-red) 0%, #a50c29 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(210, 16, 52, 0.3);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            background: white;
+            font-size: 16px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 102, 51, 0.1);
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+        
+        .camera-container {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            border: 12px solid #0f172a;
+        }
+        
+        .pulse-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #10b981;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse-green 2s infinite;
+        }
+        
+        @keyframes pulse-green {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 18px;
+            padding: 20px;
+            border-left: 5px solid var(--primary-green);
+        }
+        
+        .alert-card {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border-right: 5px solid #f59e0b;
+        }
+        
+        .order-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-right: 5px solid #10b981;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        .sidebar-item {
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+        
+        .sidebar-item:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .sidebar-item.active {
+            background-color: #e6f2ed;
+            color: var(--primary-green);
+            border-right: 4px solid var(--primary-green);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        
+        .badge-success {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        
+        .badge-warning {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        
+        .badge-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.5s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .ai-scan-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 48%, rgba(0, 102, 51, 0.1) 50%, transparent 52%);
+            background-size: 300% 300%;
+            animation: scan 2s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+        
+        .tooltip {
+            position: relative;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .tooltip-text {
+            visibility: hidden;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1e293b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip-text:after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1e293b transparent transparent transparent;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-input {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+            
+            .gradient-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .dashboard-card {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
-<body class="p-4 md:p-10">
-
-    <div id="login-zone" class="max-w-xl mx-auto">
-        <div class="text-center mb-10">
-            <h1 class="tech-font text-5xl font-black italic text-gray-800">MANY<span class="text-green-600">.AI</span></h1>
-            <div class="algeria-line mt-2"></div>
-            <p class="mt-4 text-sm text-gray-500 font-bold tracking-widest">الوكيل التجاري الجزائري الأول</p>
-        </div>
-
-        <div class="glass-panel bg-white">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <input type="text" id="name" placeholder="صاحب المحل" class="input-box">
-                <input type="text" id="shop" placeholder="اسم المحل" class="input-box">
+<body class="p-4 md:p-6">
+    <!-- تطبيق MANY.AI -->
+    <div id="app">
+        <!-- منطقة تسجيل الدخول -->
+        <div id="loginSection" class="max-w-3xl mx-auto fade-in">
+            <div class="text-center mb-12">
+                <h1 class="tech-font text-5xl md:text-6xl font-black text-gray-900 mb-3">
+                    MANY<span class="text-green-600">.AI</span>
+                </h1>
+                <div class="algeria-gradient mt-2 mb-4"></div>
+                <p class="text-lg text-gray-600 font-bold tracking-wide">
+                    الوكيل التجاري الذكي الأول في الجزائر
+                </p>
+                <p class="text-sm text-gray-500 mt-2">
+                    نظام ذكي متكامل لإدارة المخزون والمبيعات باستخدام الذكاء الاصطناعي
+                </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <select id="sector" class="input-box text-gray-500">
-                    <option>نوع النشاط التجاري</option>
-                    <option>ملابس</option>
-                    <option>مواد غذائية</option>
-                    <option>هواتف وإلكترونيات</option>
-                </select>
-                <input type="tel" id="phone" placeholder="رقم الهاتف" class="input-box">
-            </div>
-
-            <div class="mb-6 p-4 bg-gray-50 rounded-2xl border border-gray-100">
-                <p class="text-[11px] text-gray-400 mb-3 font-bold">باقة الخدمة (عدد المكالمات اليومي):</p>
-                <div class="flex gap-2">
-                    <button onclick="selectPlan(1000)" id="p1" class="flex-1 p-3 rounded-xl border-2 border-green-600 bg-green-50 text-green-700 font-bold text-xs">1000 دج (50 مكالمة)</button>
-                    <button onclick="selectPlan(2000)" id="p2" class="flex-1 p-3 rounded-xl border-2 border-transparent bg-white text-gray-400 font-bold text-xs">2000 دج (غير محدود)</button>
-                </div>
-            </div>
-
-            <div class="mb-8">
-                <label class="text-[10px] font-bold text-red-500 mr-2 uppercase">BaridiMob Transaction ID</label>
-                <input type="text" id="tx" placeholder="أدخل رقم المعاملة للتفعيل الفوري" class="input-box text-center border-red-100 font-mono">
-            </div>
-
-            <button onclick="launchApp()" class="btn-active text-xl">تفعيل الوكيل الآن ⚡</button>
-        </div>
-    </div>
-
-    <div id="dashboard" class="hidden max-w-6xl mx-auto animate-in fade-in duration-700">
-        <div class="flex justify-between items-center mb-10 border-b pb-6">
-            <div>
-                <h2 id="welcome" class="text-3xl font-black text-gray-800"></h2>
-                <div class="flex gap-2 mt-1">
-                    <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="text-xs font-bold text-green-600 uppercase tracking-tighter">الوكيل متصل ويراقب</span>
-                </div>
-            </div>
-            <div class="text-left bg-gray-50 p-4 rounded-2xl">
-                <p class="text-[10px] text-gray-400 font-bold">الرصيد المتبقي</p>
-                <p class="text-xl font-black text-red-600">42 <span class="text-[10px]">مكالمة</span></p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2">
-                <div class="bg-gray-900 rounded-[40px] overflow-hidden shadow-2xl relative aspect-video">
-                    <video id="v" class="w-full h-full object-cover opacity-80" autoplay playsinline></video>
-                    <div class="absolute inset-0 border-[20px] border-white/5 pointer-events-none"></div>
-                    <div class="absolute top-5 right-5 bg-green-600 text-white px-4 py-1 rounded-full text-[10px] font-bold">LIVE AI SCAN</div>
+            <div class="glass-card p-6 md:p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    تفعيل الاشتراك الجديد
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            <i class="fas fa-user text-green-600 mr-1"></i> صاحب المحل
+                        </label>
+                        <input type="text" id="ownerName" placeholder="أدخل الاسم الكامل" class="form-input">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            <i class="fas fa-store text-green-600 mr-1"></i> اسم المحل
+                        </label>
+                        <input type="text" id="shopName" placeholder="اسم المحل التجاري" class="form-input">
+                    </div>
                 </div>
                 
-                <div class="mt-6 flex gap-4">
-                    <input type="text" id="pn" placeholder="اسم السلعة" class="input-box shadow-sm">
-                    <input type="number" id="pq" placeholder="الكمية" class="input-box shadow-sm w-32">
-                    <button onclick="addItem()" class="bg-black text-white px-10 rounded-2xl font-bold">إضافة</button>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            <i class="fas fa-briefcase text-green-600 mr-1"></i> نوع النشاط
+                        </label>
+                        <select id="businessType" class="form-input">
+                            <option value="">اختر نوع النشاط</option>
+                            <option value="clothing">ملابس وأزياء</option>
+                            <option value="food">مواد غذائية</option>
+                            <option value="electronics">هواتف وإلكترونيات</option>
+                            <option value="furniture">أثاث ومنزلية</option>
+                            <option value="sports">رياضية وترفيه</option>
+                            <option value="stationery">مكتبية وقرطاسية</option>
+                            <option value="other">نشاط آخر</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            <i class="fas fa-phone text-green-600 mr-1"></i> رقم الهاتف
+                        </label>
+                        <input type="tel" id="phoneNumber" placeholder="05 XX XX XX XX" class="form-input">
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <p class="text-sm font-bold text-gray-700 mb-4">
+                        <i class="fas fa-box-open text-green-600 mr-1"></i> اختر باقة الخدمة
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div id="planBasic" class="border-2 border-green-500 rounded-2xl p-5 cursor-pointer bg-gradient-to-r from-green-50 to-white plan-card active-plan">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-800">الباقة الأساسية</h3>
+                                    <p class="text-2xl font-black text-green-600 mt-1">1000 دج<span class="text-sm text-gray-500 font-normal">/شهرياً</span></p>
+                                </div>
+                                <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-bold">
+                                    الأكثر طلباً
+                                </div>
+                            </div>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 50 مكالمة يومية</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> مسح مخزون بالكاميرا</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> إدارة طلبات أساسية</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> تقارير مبيعات يومية</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="planPro" class="border-2 border-gray-300 rounded-2xl p-5 cursor-pointer bg-gray-50 plan-card">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-800">الباقة الاحترافية</h3>
+                                    <p class="text-2xl font-black text-gray-800 mt-1">2000 دج<span class="text-sm text-gray-500 font-normal">/شهرياً</span></p>
+                                </div>
+                                <div class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-bold">
+                                    غير محدود
+                                </div>
+                            </div>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> مكالمات غير محدودة</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> ذكاء اصطناعي متقدم</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> تحليلات تنبؤية</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> دعم فني مميز</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <label class="block text-sm font-bold text-red-600 mb-2">
+                        <i class="fas fa-receipt text-red-500 mr-1"></i> رقم معاملة BaridiMob
+                    </label>
+                    <input type="text" id="transactionId" placeholder="أدخل رقم المعاملة للتفعيل الفوري" class="form-input border-red-200 focus:border-red-400">
+                    <p class="text-xs text-gray-500 mt-2">
+                        يمكنك دفع الاشتراك عبر BaridiMob باستخدام الرقم 555 أو عبر موقع baridimob.dz
+                    </p>
+                </div>
+                
+                <button id="activateButton" class="gradient-btn w-full text-lg py-4 mt-4">
+                    <i class="fas fa-bolt mr-2"></i> تفعيل الاشتراك والبدء الآن
+                </button>
+                
+                <div class="flex flex-wrap justify-center items-center gap-4 mt-8 pt-6 border-t border-gray-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-shield-alt text-green-600 mr-2"></i>
+                        <span class="text-sm text-gray-600">آمن 100%</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-headset text-green-600 mr-2"></i>
+                        <span class="text-sm text-gray-600">دعم فني 24/7</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-bolt text-green-600 mr-2"></i>
+                        <span class="text-sm text-gray-600">تشغيل فوري</span>
+                    </div>
                 </div>
             </div>
-
-            <div class="space-y-6">
-                <div class="glass-panel bg-green-50/30 border-green-100">
-                    <h3 class="font-bold text-sm mb-4">🎧 آخر طلبيات الوكيل الصوتي</h3>
-                    <div id="orders" class="space-y-3">
-                        <div class="bg-white p-3 rounded-xl shadow-sm border-r-4 border-green-600 text-[11px]">
-                            <b>زبون من العاصمة:</b> طلب 2 قميص صيفي - <span class="text-green-600 font-bold text-[9px]">تم الحجز ✅</span>
+            
+            <div class="text-center text-sm text-gray-500 mt-10">
+                <p>MANY.AI ® 2023 - جميع الحقوق محفوظة - أول وكيل ذكي جزائري</p>
+            </div>
+        </div>
+        
+        <!-- لوحة التحكم الرئيسية -->
+        <div id="dashboardSection" class="hidden">
+            <!-- شريط التنقل العلوي -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 p-6 bg-white rounded-2xl shadow-lg">
+                <div class="flex items-center gap-4">
+                    <div class="flex flex-col">
+                        <h1 class="tech-font text-2xl md:text-3xl font-black text-gray-900">
+                            MANY<span class="text-green-600">.AI</span>
+                        </h1>
+                        <div class="flex items-center mt-1">
+                            <div class="pulse-indicator mr-2"></div>
+                            <span id="shopNameDisplay" class="text-gray-700 font-bold text-lg"></span>
                         </div>
                     </div>
                 </div>
-
-                <div class="glass-panel bg-red-50/30 border-red-100">
-                    <h3 class="font-bold text-sm mb-4 text-red-700">🚨 تنبيهات المخزون</h3>
-                    <div id="alerts" class="space-y-2 text-[11px]">
-                        <div class="flex justify-between text-gray-500 italic">
-                            <span>حذاء رياضي 44</span>
-                            <span class="font-bold text-red-600">بقي 1 فقط!</span>
+                
+                <div class="flex flex-wrap items-center gap-4">
+                    <!-- بطاقة الرصيد -->
+                    <div class="stat-card min-w-[180px]">
+                        <p class="text-xs text-gray-500 font-bold mb-1">المكالمات المتبقية</p>
+                        <div class="flex items-center justify-between">
+                            <p id="remainingCalls" class="text-2xl font-black text-gray-800">42</p>
+                            <div class="text-green-600 bg-green-100 p-2 rounded-full">
+                                <i class="fas fa-phone-alt text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                            <div id="callsProgress" class="bg-green-600 h-2 rounded-full" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- إشعارات -->
+                    <div class="relative tooltip">
+                        <button id="notificationBtn" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-full">
+                            <i class="fas fa-bell text-gray-700"></i>
+                            <span id="notificationCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                        </button>
+                        <div class="tooltip-text">الإشعارات والتنبيهات</div>
+                    </div>
+                    
+                    <!-- الملف الشخصي -->
+                    <div class="relative tooltip">
+                        <button id="profileBtn" class="bg-gradient-to-r from-green-500 to-green-600 text-white p-3 rounded-full">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="tooltip-text">الملف الشخصي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- المحتوى الرئيسي -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- الشريط الجانبي -->
+                <div class="lg:col-span-1">
+                    <div class="dashboard-card mb-6">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">القائمة الرئيسية</h3>
+                        <div class="space-y-2">
+                            <div class="sidebar-item active" data-tab="overview">
+                                <i class="fas fa-home text-green-600"></i>
+                                <span>لوحة التحكم</span>
+                            </div>
+                            <div class="sidebar-item" data-tab="inventory">
+                                <i class="fas fa-boxes text-blue-600"></i>
+                                <span>المخزون</span>
+                            </div>
+                            <div class="sidebar-item" data-tab="orders">
+                                <i class="fas fa-shopping-cart text-purple-600"></i>
+                                <span>الطلبات</span>
+                            </div>
+                            <div class="sidebar-item" data-tab="camera">
+                                <i class="fas fa-camera text-red-600"></i>
+                                <span>كاميرا الذكاء</span>
+                            </div>
+                            <div class="sidebar-item" data-tab="analytics">
+                                <i class="fas fa-chart-bar text-yellow-600"></i>
+                                <span>التقارير</span>
+                            </div>
+                            <div class="sidebar-item" data-tab="settings">
+                                <i class="fas fa-cog text-gray-600"></i>
+                                <span>الإعدادات</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- بطاقة الزبون النشط -->
+                    <div class="dashboard-card mb-6">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">الزبائن النشطين</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-blue-100 text-blue-800 p-2 rounded-full">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">محمد من الجزائر</p>
+                                        <p class="text-xs text-gray-500">طلب 2 قميص</p>
+                                    </div>
+                                </div>
+                                <span class="badge badge-success">جديد</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-green-100 text-green-800 p-2 rounded-full">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">فاطمة من وهران</p>
+                                        <p class="text-xs text-gray-500">تستفسر عن سعر</p>
+                                    </div>
+                                </div>
+                                <span class="badge badge-warning">قيد المعالجة</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-purple-100 text-purple-800 p-2 rounded-full">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">أحمد من قسنطينة</p>
+                                        <p class="text-xs text-gray-500">طلب إرجاع</p>
+                                    </div>
+                                </div>
+                                <span class="badge badge-danger">يتطلب تدخلاً</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- رصيد اليوم -->
+                    <div class="dashboard-card">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">مبيعات اليوم</h3>
+                        <div class="text-center">
+                            <p class="text-3xl font-black text-green-600 mb-2">12,450 دج</p>
+                            <p class="text-sm text-gray-500">8 طلبات مكتملة</p>
+                            <div class="mt-4 p-3 bg-green-50 rounded-xl">
+                                <p class="text-sm font-bold text-green-800">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    زيادة 15% عن الأمس
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- المنطقة الرئيسية -->
+                <div class="lg:col-span-3">
+                    <!-- تبويبات المحتوى -->
+                    <div id="contentTabs">
+                        <!-- نظرة عامة -->
+                        <div id="tabOverview" class="tab-content">
+                            <div class="mb-6">
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">مرحباً بك في MANY.AI</h2>
+                                <p class="text-gray-600">الوكيل الذكي يراقب متجرك ويعمل على زيادة مبيعاتك</p>
+                            </div>
+                            
+                            <!-- إحصائيات سريعة -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                                <div class="stat-card">
+                                    <p class="text-xs text-gray-500 font-bold mb-1">إجمالي المبيعات</p>
+                                    <p class="text-2xl font-black text-gray-800">45,200 دج</p>
+                                    <div class="flex items-center mt-2">
+                                        <i class="fas fa-arrow-up text-green-500 mr-1"></i>
+                                        <span class="text-xs text-green-600 font-bold">+12% هذا الشهر</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <p class="text-xs text-gray-500 font-bold mb-1">الطلبات النشطة</p>
+                                    <p class="text-2xl font-black text-gray-800">8</p>
+                                    <div class="flex items-center mt-2">
+                                        <i class="fas fa-clock text-yellow-500 mr-1"></i>
+                                        <span class="text-xs text-yellow-600 font-bold">+2 جديدة</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <p class="text-xs text-gray-500 font-bold mb-1">المخزون المنخفض</p>
+                                    <p class="text-2xl font-black text-gray-800">5</p>
+                                    <div class="flex items-center mt-2">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-1"></i>
+                                        <span class="text-xs text-red-600 font-bold">تحتاج تعبئة</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <p class="text-xs text-gray-500 font-bold mb-1">الزبائن الجدد</p>
+                                    <p class="text-2xl font-black text-gray-800">14</p>
+                                    <div class="flex items-center mt-2">
+                                        <i class="fas fa-user-plus text-blue-500 mr-1"></i>
+                                        <span class="text-xs text-blue-600 font-bold">+5 اليوم</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- كاميرا الذكاء الاصطناعي -->
+                            <div class="camera-container mb-8">
+                                <div class="relative">
+                                    <div id="cameraFeed" class="w-full h-64 md:h-80 flex items-center justify-center bg-gray-900">
+                                        <div class="text-center">
+                                            <i class="fas fa-video text-gray-500 text-5xl mb-4"></i>
+                                            <p class="text-gray-400 font-bold">كاميرا الذكاء الاصطناعي</p>
+                                            <p class="text-gray-500 text-sm mt-2">جاهزة لمسح المخزون وتتبع المنتجات</p>
+                                            <button id="startCameraBtn" class="gradient-btn mt-4 px-8 py-3">
+                                                <i class="fas fa-play mr-2"></i> تشغيل الكاميرا
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="ai-scan-overlay"></div>
+                                    <div class="absolute top-4 right-4">
+                                        <span class="badge badge-success">AI SCAN ACTIVE</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gray-800 text-white">
+                                    <div class="flex flex-wrap items-center justify-between">
+                                        <div>
+                                            <p class="font-bold">مسح المخزون الذكي</p>
+                                            <p class="text-sm text-gray-300">اكتشف المنتجات واحسب الكميات تلقائياً</p>
+                                        </div>
+                                        <div class="flex gap-2 mt-2 md:mt-0">
+                                            <button id="scanInventoryBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-bold">
+                                                <i class="fas fa-search mr-1"></i> بدء المسح
+                                            </button>
+                                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold">
+                                                <i class="fas fa-chart-bar mr-1"></i> تحليل
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- الطلبات والتنبيهات -->
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <!-- آخر الطلبات -->
+                                <div class="dashboard-card order-card">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h3 class="font-bold text-lg text-gray-800">آخر الطلبات</h3>
+                                        <span class="badge badge-success">اليوم</span>
+                                    </div>
+                                    <div id="recentOrders" class="space-y-3 max-h-80 overflow-y-auto scrollbar-custom pr-2">
+                                        <!-- سيتم ملؤها ديناميكياً -->
+                                    </div>
+                                </div>
+                                
+                                <!-- تنبيهات المخزون -->
+                                <div class="dashboard-card alert-card">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h3 class="font-bold text-lg text-gray-800">تنبيهات المخزون</h3>
+                                        <span class="badge badge-danger">مستعجل</span>
+                                    </div>
+                                    <div id="inventoryAlerts" class="space-y-3 max-h-80 overflow-y-auto scrollbar-custom pr-2">
+                                        <!-- سيتم ملؤها ديناميكياً -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- إدارة المخزون -->
+                        <div id="tabInventory" class="tab-content hidden">
+                            <div class="mb-6">
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">إدارة المخزون</h2>
+                                <p class="text-gray-600">تتبع منتجاتك وإدارتها بذكاء</p>
+                            </div>
+                            
+                            <!-- إضافة منتج جديد -->
+                            <div class="dashboard-card mb-6">
+                                <h3 class="font-bold text-lg text-gray-800 mb-4">إضافة منتج جديد</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <input type="text" id="productName" placeholder="اسم المنتج" class="form-input">
+                                    <input type="number" id="productQuantity" placeholder="الكمية" class="form-input">
+                                    <input type="number" id="productPrice" placeholder="السعر (دج)" class="form-input">
+                                    <button id="addProductBtn" class="gradient-btn">
+                                        <i class="fas fa-plus mr-2"></i> إضافة
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- قائمة المنتجات -->
+                            <div class="dashboard-card">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="font-bold text-lg text-gray-800">قائمة المنتجات</h3>
+                                    <div class="flex gap-2">
+                                        <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-gray-800">
+                                            <i class="fas fa-filter mr-1"></i> تصفية
+                                        </button>
+                                        <button class="px-4 py-2 bg-green-100 hover:bg-green-200 text-green-800 rounded-lg font-bold">
+                                            <i class="fas fa-download mr-1"></i> تصدير
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="overflow-x-auto">
+                                    <table class="w-full">
+                                        <thead>
+                                            <tr class="bg-gray-50">
+                                                <th class="text-right p-3 font-bold text-gray-700">المنتج</th>
+                                                <th class="text-right p-3 font-bold text-gray-700">الكمية</th>
+                                                <th class="text-right p-3 font-bold text-gray-700">السعر</th>
+                                                <th class="text-right p-3 font-bold text-gray-700">الحالة</th>
+                                                <th class="text-right p-3 font-bold text-gray-700">الإجراءات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="inventoryTable">
+                                            <!-- سيتم ملؤها ديناميكياً -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الطلبات -->
+                        <div id="tabOrders" class="tab-content hidden">
+                            <div class="mb-6">
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">إدارة الطلبات</h2>
+                                <p class="text-gray-600">تتبع ومعالجة جميع طلبات الزبائن</p>
+                            </div>
+                            
+                            <!-- إحصائيات الطلبات -->
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                                <div class="stat-card">
+                                    <p class="text-xs text-gray-500 font-bold mb-1">الطلبات الجديدة</p>
+                                    <p class="text-2xl font-black text-blue-600">3</p>
+                                </div>
+                                <div class="stat-card">
+                                    <p class="text-xs text-gray-500 font-bold mb-1">قيد المعالجة</p>
+                                    <p class="text-2xl font-black text-yellow-600">5</p>
+                                </div>
+                                <div class="stat-card">
+                                    <p class="text-xs text-gray-500 font-bold mb-1">مكتملة</p>
+                                    <p class="text-2xl font-black text-green-600">12</p>
+                                </div>
+                                <div class="stat-card">
+                                    <p class="text-xs text-gray-500 font-bold mb-1">ملغاة</p>
+                                    <p class="text-2xl font-black text-red-600">2</p>
+                                </div>
+                            </div>
+                            
+                            <!-- قائمة الطلبات -->
+                            <div class="dashboard-card">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                                    <h3 class="font-bold text-lg text-gray-800 mb-4 md:mb-0">جميع الطلبات</h3>
+                                    <div class="flex gap-2">
+                                        <select class="form-input w-full md:w-auto">
+                                            <option>جميع الحالات</option>
+                                            <option>جديدة</option>
+                                            <option>قيد المعالجة</option>
+                                            <option>مكتملة</option>
+                                            <option>ملغاة</option>
+                                        </select>
+                                        <input type="date" class="form-input w-full md:w-auto">
+                                    </div>
+                                </div>
+                                
+                                <div id="ordersList" class="space-y-4">
+                                    <!-- سيتم ملؤها ديناميكياً -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- كاميرا الذكاء -->
+                        <div id="tabCamera" class="tab-content hidden">
+                            <div class="mb-6">
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">كاميرا الذكاء الاصطناعي</h2>
+                                <p class="text-gray-600">مسح المخزون الذكي وتحليل المنتجات</p>
+                            </div>
+                            
+                            <!-- منطقة الكاميرا الرئيسية -->
+                            <div class="camera-container mb-6">
+                                <div class="relative">
+                                    <video id="liveCamera" class="w-full h-auto" autoplay playsinline muted></video>
+                                    <canvas id="detectionCanvas" class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
+                                    <div class="ai-scan-overlay"></div>
+                                    <div class="absolute top-4 right-4">
+                                        <span id="cameraStatus" class="badge badge-success">AI SCAN ACTIVE</span>
+                                    </div>
+                                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3">
+                                        <button id="toggleCameraBtn" class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-bold">
+                                            <i class="fas fa-play mr-2"></i> تشغيل الكاميرا
+                                        </button>
+                                        <button id="captureBtn" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold">
+                                            <i class="fas fa-camera mr-2"></i> التقاط صورة
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gray-800 text-white">
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                        <div class="mb-4 md:mb-0">
+                                            <p class="font-bold">نظام الرؤية الحاسوبية</p>
+                                            <p class="text-sm text-gray-300">اكتشف المنتجات واحسب الكميات تلقائياً</p>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button id="scanBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-bold">
+                                                <i class="fas fa-search mr-1"></i> بدء المسح
+                                            </button>
+                                            <button id="analyzeBtn" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg font-bold">
+                                                <i class="fas fa-brain mr-1"></i> تحليل ذكي
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- نتائج الاكتشاف -->
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                <div class="dashboard-card">
+                                    <h3 class="font-bold text-lg text-gray-800 mb-4">المنتجات المكتشفة</h3>
+                                    <div id="detectedProducts" class="space-y-3">
+                                        <p class="text-gray-500 text-center py-4">لم يتم اكتشاف أي منتجات بعد. ابدأ المسح بالكاميرا.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="dashboard-card">
+                                    <h3 class="font-bold text-lg text-gray-800 mb-4">إحصائيات المسح</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-700">عدد المنتجات</span>
+                                            <span id="productCount" class="font-bold text-2xl text-green-600">0</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-700">إجمالي الكمية</span>
+                                            <span id="totalQuantity" class="font-bold text-2xl text-blue-600">0</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-700">دقة الاكتشاف</span>
+                                            <span id="detectionAccuracy" class="font-bold text-2xl text-purple-600">0%</span>
+                                        </div>
+                                    </div>
+                                    <button id="updateInventoryBtn" class="gradient-btn w-full mt-6">
+                                        <i class="fas fa-sync-alt mr-2"></i> تحديث المخزون
+                                    </button>
+                                </div>
+                                
+                                <div class="dashboard-card">
+                                    <h3 class="font-bold text-lg text-gray-800 mb-4">تاريخ المسح</h3>
+                                    <div id="scanHistory" class="space-y-3 max-h-60 overflow-y-auto scrollbar-custom">
+                                        <div class="p-3 bg-gray-50 rounded-lg">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="font-bold text-sm">مسح المخزون</span>
+                                                <span class="text-xs text-gray-500">اليوم 10:30</span>
+                                            </div>
+                                            <p class="text-xs text-gray-600">تم اكتشاف 8 منتجات</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- التقارير -->
+                        <div id="tabAnalytics" class="tab-content hidden">
+                            <div class="mb-6">
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">التقارير والتحليلات</h2>
+                                <p class="text-gray-600">تحليل أداء متجرك وتوقعات المبيعات</p>
+                            </div>
+                            
+                            <!-- الرسوم البيانية -->
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                                <div class="dashboard-card">
+                                    <h3 class="font-bold text-lg text-gray-800 mb-4">مبيعات الأسبوع</h3>
+                                    <div class="h-64 flex items-center justify-center bg-gray-50 rounded-xl">
+                                        <div class="text-center">
+                                            <i class="fas fa-chart-line text-4xl text-gray-300 mb-3"></i>
+                                            <p class="text-gray-500">رسم بياني للمبيعات</p>
+                                            <p class="text-sm text-gray-400">(في النسخة الكاملة سيكون هنا رسم بياني تفاعلي)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="dashboard-card">
+                                    <h3 class="font-bold text-lg text-gray-800 mb-4">المنتجات الأكثر مبيعاً</h3>
+                                    <div class="h-64 flex items-center justify-center bg-gray-50 rounded-xl">
+                                        <div class="text-center">
+                                            <i class="fas fa-chart-pie text-4xl text-gray-300 mb-3"></i>
+                                            <p class="text-gray-500">رسم بياني دائري</p>
+                                            <p class="text-sm text-gray-400">(في النسخة الكاملة سيكون هنا رسم بياني تفاعلي)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- تقارير متقدمة -->
+                            <div class="dashboard-card">
+                                <h3 class="font-bold text-lg text-gray-800 mb-4">التقارير المتقدمة</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="p-4 bg-blue-50 rounded-xl">
+                                        <div class="flex items-center justify-between mb-3">
+                                            <i class="fas fa-users text-2xl text-blue-600"></i>
+                                            <span class="badge badge-success">+15%</span>
+                                        </div>
+                                        <p class="font-bold text-gray-800">الزبائن الجدد</p>
+                                        <p class="text-sm text-gray-600">زيادة 15% هذا الشهر</p>
+                                    </div>
+                                    
+                                    <div class="p-4 bg-green-50 rounded-xl">
+                                        <div class="flex items-center justify-between mb-3">
+                                            <i class="fas fa-shopping-cart text-2xl text-green-600"></i>
+                                            <span class="badge badge-success">+22%</span>
+                                        </div>
+                                        <p class="font-bold text-gray-800">معدل الطلبات</p>
+                                        <p class="text-sm text-gray-600">زيادة 22% عن الشهر الماضي</p>
+                                    </div>
+                                    
+                                    <div class="p-4 bg-purple-50 rounded-xl">
+                                        <div class="flex items-center justify-between mb-3">
+                                            <i class="fas fa-chart-line text-2xl text-purple-600"></i>
+                                            <span class="badge badge-success">+18%</span>
+                                        </div>
+                                        <p class="font-bold text-gray-800">متوسط سلة الشراء</p>
+                                        <p class="text-sm text-gray-600">ارتفاع 18% هذا الشهر</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الإعدادات -->
+                        <div id="tabSettings" class="tab-content hidden">
+                            <div class="mb-6">
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">إعدادات المتجر</h2>
+                                <p class="text-gray-600">تخصيص إعدادات الوكيل الذكي لمتجرك</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                <!-- معلومات المتجر -->
+                                <div class="dashboard-card lg:col-span-2">
+                                    <h3 class="font-bold text-lg text-gray-800 mb-4">معلومات المتجر</h3>
+                                    <div class="space-y-4">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-bold text-gray-700 mb-2">اسم المتجر</label>
+                                                <input type="text" id="settingShopName" class="form-input" value="متجر النجاح">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-bold text-gray-700 mb-2">صاحب المتجر</label>
+                                                <input type="text" id="settingOwnerName" class="form-input" value="أحمد بن عمر">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-bold text-gray-700 mb-2">رقم الهاتف</label>
+                                                <input type="tel" id="settingPhone" class="form-input" value="0551234567">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-bold text-gray-700 mb-2">نوع النشاط</label>
+                                                <select id="settingBusinessType" class="form-input">
+                                                    <option>ملابس وأزياء</option>
+                                                    <option selected>مواد غذائية</option>
+                                                    <option>هواتف وإلكترونيات</option>
+                                                    <option>أثاث ومنزلية</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-sm font-bold text-gray-700 mb-2">عنوان المتجر</label>
+                                            <textarea id="settingAddress" class="form-input h-24" placeholder="العنوان الكامل للمتجر">الجزائر العاصمة، حي المحطة</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- إعدادات الوكيل -->
+                                <div class="dashboard-card">
+                                    <h3 class="font-bold text-lg text-gray-800 mb-4">إعدادات الوكيل</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="flex items-center justify-between cursor-pointer">
+                                                <span class="text-gray-700 font-bold">الرد التلقائي</span>
+                                                <div class="relative">
+                                                    <input type="checkbox" class="sr-only" checked>
+                                                    <div class="block bg-gray-300 w-12 h-6 rounded-full"></div>
+                                                    <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform translate-x-6 bg-green-600"></div>
+                                                </div>
+                                            </label>
+                                            <p class="text-xs text-gray-500 mt-1">الرد التلقائي على رسائل الزبائن</p>
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="flex items-center justify-between cursor-pointer">
+                                                <span class="text-gray-700 font-bold">تنبيهات المخزون</span>
+                                                <div class="relative">
+                                                    <input type="checkbox" class="sr-only" checked>
+                                                    <div class="block bg-gray-300 w-12 h-6 rounded-full"></div>
+                                                    <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform translate-x-6 bg-green-600"></div>
+                                                </div>
+                                            </label>
+                                            <p class="text-xs text-gray-500 mt-1">إشعارات عند انخفاض المخزون</p>
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="flex items-center justify-between cursor-pointer">
+                                                <span class="text-gray-700 font-bold">تقارير يومية</span>
+                                                <div class="relative">
+                                                    <input type="checkbox" class="sr-only" checked>
+                                                    <div class="block bg-gray-300 w-12 h-6 rounded-full"></div>
+                                                    <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform translate-x-6 bg-green-600"></div>
+                                                </div>
+                                            </label>
+                                            <p class="text-xs text-gray-500 mt-1">إرسال تقارير يومية على البريد</p>
+                                        </div>
+                                        
+                                        <button class="gradient-btn w-full mt-6">
+                                            <i class="fas fa-save mr-2"></i> حفظ الإعدادات
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تذييل الصفحة -->
+            <div class="mt-10 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+                <p>MANY.AI ® 2023 - نظام الوكيل الذكي الجزائري - جميع الحقوق محفوظة</p>
+                <p class="mt-1">الدعم الفني: 0550-123-456 | البريد: support@manyai.dz</p>
             </div>
         </div>
     </div>
 
+    <!-- JavaScript -->
     <script>
-        function selectPlan(p) {
-            document.getElementById('p1').className = p==1000 ? "flex-1 p-3 rounded-xl border-2 border-green-600 bg-green-50 text-green-700 font-bold text-xs" : "flex-1 p-3 rounded-xl border-2 border-transparent bg-white text-gray-400 font-bold text-xs";
-            document.getElementById('p2').className = p==2000 ? "flex-1 p-3 rounded-xl border-2 border-green-600 bg-green-50 text-green-700 font-bold text-xs" : "flex-1 p-3 rounded-xl border-2 border-transparent bg-white text-gray-400 font-bold text-xs";
+        // بيانات التطبيق
+        const appData = {
+            shopName: '',
+            ownerName: '',
+            remainingCalls: 42,
+            totalCalls: 65,
+            selectedPlan: 'basic',
+            cameraActive: false,
+            stream: null,
+            
+            // بيانات الطلبات
+            recentOrders: [
+                {
+                    customer: 'زبون من العاصمة',
+                    items: '2 قميص صيفي',
+                    status: 'تم الحجز',
+                    time: 'منذ 5 دقائق',
+                    statusClass: 'badge-success'
+                },
+                {
+                    customer: 'سارة من وهران',
+                    items: '1 بنطلون جينز',
+                    status: 'قيد التجهيز',
+                    time: 'منذ 15 دقيقة',
+                    statusClass: 'badge-warning'
+                },
+                {
+                    customer: 'عمر من قسنطينة',
+                    items: '3 قميص رجالي',
+                    status: 'تم التسليم',
+                    time: 'منذ ساعة',
+                    statusClass: 'badge-success'
+                },
+                {
+                    customer: 'فاطمة من باتنة',
+                    items: '1 حذاء رياضي',
+                    status: 'ملغي',
+                    time: 'منذ ساعتين',
+                    statusClass: 'badge-danger'
+                },
+                {
+                    customer: 'خالد من عنابة',
+                    items: '5 قمصان أطفال',
+                    status: 'قيد التوصيل',
+                    time: 'منذ 3 ساعات',
+                    statusClass: 'badge-warning'
+                }
+            ],
+            
+            // تنبيهات المخزون
+            inventoryAlerts: [
+                {
+                    product: 'حذاء رياضي مقاس 44',
+                    remaining: 1,
+                    status: 'بقي 1 فقط!',
+                    urgency: 'high'
+                },
+                {
+                    product: 'قميص صيفي أزرق',
+                    remaining: 3,
+                    status: 'كمية منخفضة',
+                    urgency: 'medium'
+                },
+                {
+                    product: 'بنطلون جينز أسود',
+                    remaining: 2,
+                    status: 'يحتاج تعبئة',
+                    urgency: 'high'
+                },
+                {
+                    product: 'جاكيت شتوي',
+                    remaining: 5,
+                    status: 'كمية متوسطة',
+                    urgency: 'low'
+                },
+                {
+                    product: 'قبعة صيفية',
+                    remaining: 0,
+                    status: 'نفذ من المخزون',
+                    urgency: 'critical'
+                }
+            ],
+            
+            // المنتجات
+            inventoryItems: [
+                {
+                    name: 'قميص صيفي أزرق',
+                    quantity: 3,
+                    price: 2500,
+                    minStock: 5,
+                    status: 'low'
+                },
+                {
+                    name: 'بنطلون جينز أسود',
+                    quantity: 2,
+                    price: 4500,
+                    minStock: 4,
+                    status: 'low'
+                },
+                {
+                    name: 'حذاء رياضي أبيض',
+                    quantity: 1,
+                    price: 8500,
+                    minStock: 3,
+                    status: 'critical'
+                },
+                {
+                    name: 'جاكيت شتوي رمادي',
+                    quantity: 5,
+                    price: 12000,
+                    minStock: 4,
+                    status: 'normal'
+                },
+                {
+                    name: 'قبعة صيفية',
+                    quantity: 0,
+                    price: 1500,
+                    minStock: 10,
+                    status: 'out'
+                }
+            ]
+        };
+
+        // تهيئة التطبيق عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تهيئة اختيار الباقات
+            initPlanSelection();
+            
+            // تهيئة زر التفعيل
+            initActivationButton();
+            
+            // تهيئة القائمة الجانبية
+            initSidebar();
+            
+            // تهيئة بيانات العرض
+            initDashboardData();
+            
+            // تهيئة الكاميرا
+            initCamera();
+            
+            // تحميل البيانات الأولية
+            loadInitialData();
+        });
+
+        // تهيئة اختيار الباقات
+        function initPlanSelection() {
+            const basicPlan = document.getElementById('planBasic');
+            const proPlan = document.getElementById('planPro');
+            
+            basicPlan.addEventListener('click', function() {
+                basicPlan.classList.add('active-plan', 'border-green-500');
+                basicPlan.classList.remove('border-gray-300');
+                proPlan.classList.remove('active-plan', 'border-green-500');
+                proPlan.classList.add('border-gray-300');
+                appData.selectedPlan = 'basic';
+            });
+            
+            proPlan.addEventListener('click', function() {
+                proPlan.classList.add('active-plan', 'border-green-500');
+                proPlan.classList.remove('border-gray-300');
+                basicPlan.classList.remove('active-plan', 'border-green-500');
+                basicPlan.classList.add('border-gray-300');
+                appData.selectedPlan = 'pro';
+            });
         }
 
-        function launchApp() {
-            const s = document.getElementById('shop').value;
-            const t = document.getElementById('tx').value;
-            if(!s || !t) { alert("أكمل البيانات من فضلك"); return; }
-
-            document.getElementById('login-zone').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-            document.getElementById('welcome').innerText = "متجر " + s;
-
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-                .then(st => { document.getElementById('v').srcObject = st; });
+        // تهيئة زر التفعيل
+        function initActivationButton() {
+            const activateButton = document.getElementById('activateButton');
+            
+            activateButton.addEventListener('click', function() {
+                const ownerName = document.getElementById('ownerName').value;
+                const shopName = document.getElementById('shopName').value;
+                const businessType = document.getElementById('businessType').value;
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                const transactionId = document.getElementById('transactionId').value;
+                
+                // التحقق من الحقول المطلوبة
+                if (!ownerName || !shopName || !businessType || !phoneNumber || !transactionId) {
+                    showAlert('يرجى ملء جميع الحقول المطلوبة', 'error');
+                    return;
+                }
+                
+                // التحقق من صحة رقم الهاتف
+                const phoneRegex = /^(\+213|0)[5-7]\d{8}$/;
+                if (!phoneRegex.test(phoneNumber)) {
+                    showAlert('يرجى إدخال رقم هاتف جزائري صحيح', 'error');
+                    return;
+                }
+                
+                // حفظ بيانات المتجر
+                appData.shopName = shopName;
+                appData.ownerName = ownerName;
+                
+                // إظهار رسالة نجاح
+                showAlert('تم تفعيل الاشتراك بنجاح! جاري تحميل لوحة التحكم...', 'success');
+                
+                // الانتقال إلى لوحة التحكم بعد تأخير
+                setTimeout(() => {
+                    switchToDashboard();
+                }, 2000);
+            });
         }
 
-        function addItem() {
-            const n = document.getElementById('pn').value;
-            const q = document.getElementById('pq').value;
-            if(!n || !q) return;
-            const div = document.createElement('div');
-            div.className = "flex justify-between text-gray-700 border-b pb-2 text-[11px] font-bold animate-pulse";
-            div.innerHTML = `<span>${n}</span><span class="text-green-600">+${q} قطعة</span>`;
-            document.getElementById('alerts').prepend(div);
+        // تهيئة القائمة الجانبية
+        function initSidebar() {
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // إزالة النشاط من جميع العناصر
+                    sidebarItems.forEach(el => el.classList.remove('active'));
+                    
+                    // إضافة النشاط للعنصر المحدد
+                    this.classList.add('active');
+                    
+                    // تحويل التبويب
+                    const tabName = this.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
         }
+
+        // تهيئة بيانات لوحة التحكم
+        function initDashboardData() {
+            // تحديث اسم المتجر
+            const shopNameDisplay = document.getElementById('shopNameDisplay');
+            shopNameDisplay.textContent = appData.shopName || 'متجر النجاح';
+            
+            // تحديث المكالمات المتبقية
+            updateCallsDisplay();
+            
+            // تحميل الطلبات الأخيرة
+            loadRecentOrders();
+            
+            // تحميل تنبيهات المخزون
+            loadInventoryAlerts();
+            
+            // تحميل جدول المخزون
+            loadInventoryTable();
+        }
+
+        // تحميل البيانات الأولية
+        function loadInitialData() {
+            // لا يوجد بيانات أولية للتحميل حالياً
+        }
+
+        // التحويل إلى لوحة التحكم
+        function switchToDashboard() {
+            const loginSection = document.getElementById('loginSection');
+            const dashboardSection = document.getElementById('dashboardSection');
+            
+            // إضافة تأثيرات الانتقال
+            loginSection.classList.add('hidden');
+            dashboardSection.classList.remove('hidden');
+            dashboardSection.classList.add('fade-in');
+            
+            // تحديث اسم المتجر في لوحة التحكم
+            const shopNameDisplay = document.getElementById('shopNameDisplay');
+            shopNameDisplay.textContent = appData.shopName;
+            
+            // تحديث العنوان الترحيبي
+            document.title = `MANY.AI | ${appData.shopName}`;
+        }
+
+        // تبديل التبويبات
+        function switchTab(tabName) {
+            // إخفاء جميع التبويبات
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => tab.classList.add('hidden'));
+            
+            // إظهار التبويب المحدد
+            const selectedTab = document.getElementById(`tab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`);
+            if (selectedTab) {
+                selectedTab.classList.remove('hidden');
+                selectedTab.classList.add('slide-in-right');
+                
+                // إذا كان التبويب هو الكاميرا، تحقق من حالة الكاميرا
+                if (tabName === 'camera') {
+                    updateCameraStatus();
+                }
+            }
+        }
+
+        // تحديث عرض المكالمات
+        function updateCallsDisplay() {
+            const remainingCalls = document.getElementById('remainingCalls');
+            const callsProgress = document.getElementById('callsProgress');
+            
+            if (remainingCalls && callsProgress) {
+                remainingCalls.textContent = appData.remainingCalls;
+                
+                const percentage = (appData.remainingCalls / appData.totalCalls) * 100;
+                callsProgress.style.width = `${percentage}%`;
+                
+                // تغيير اللون حسب النسبة
+                if (percentage < 20) {
+                    callsProgress.style.backgroundColor = '#d21034'; // أحمر
+                } else if (percentage < 50) {
+                    callsProgress.style.backgroundColor = '#f59e0b'; // أصفر
+                }
+            }
+        }
+
+        // تحميل الطلبات الأخيرة
+        function loadRecentOrders() {
+            const ordersContainer = document.getElementById('recentOrders');
+            
+            if (!ordersContainer) return;
+            
+            ordersContainer.innerHTML = '';
+            
+            appData.recentOrders.forEach(order => {
+                const orderElement = document.createElement('div');
+                orderElement.className = 'p-3 bg-gray-50 rounded-xl';
+                orderElement.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <p class="font-bold text-gray-800">${order.customer}</p>
+                            <p class="text-sm text-gray-600">${order.items}</p>
+                        </div>
+                        <span class="${order.statusClass}">${order.status}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">${order.time}</span>
+                        <button class="text-xs text-green-600 font-bold hover:text-green-800">
+                            <i class="fas fa-eye mr-1"></i> تفاصيل
+                        </button>
+                    </div>
+                `;
+                
+                ordersContainer.appendChild(orderElement);
+            });
+        }
+
+        // تحميل تنبيهات المخزون
+        function loadInventoryAlerts() {
+            const alertsContainer = document.getElementById('inventoryAlerts');
+            
+            if (!alertsContainer) return;
+            
+            alertsContainer.innerHTML = '';
+            
+            appData.inventoryAlerts.forEach(alert => {
+                // تحديد لون حسب الأهمية
+                let urgencyColor = 'text-red-600';
+                let bgColor = 'bg-red-50';
+                
+                if (alert.urgency === 'medium') {
+                    urgencyColor = 'text-yellow-600';
+                    bgColor = 'bg-yellow-50';
+                } else if (alert.urgency === 'low') {
+                    urgencyColor = 'text-blue-600';
+                    bgColor = 'bg-blue-50';
+                } else if (alert.urgency === 'critical') {
+                    urgencyColor = 'text-red-800';
+                    bgColor = 'bg-red-100';
+                }
+                
+                const alertElement = document.createElement('div');
+                alertElement.className = `p-3 ${bgColor} rounded-xl`;
+                alertElement.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-gray-800">${alert.product}</span>
+                        <span class="font-bold ${urgencyColor}">${alert.status}</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="text-xs text-gray-500">الحد الأدنى: 5</span>
+                        <button class="text-xs text-green-600 font-bold hover:text-green-800">
+                            <i class="fas fa-sync-alt mr-1"></i> إعادة طلب
+                        </button>
+                    </div>
+                `;
+                
+                alertsContainer.appendChild(alertElement);
+            });
+        }
+
+        // تحميل جدول المخزون
+        function loadInventoryTable() {
+            const inventoryTable = document.getElementById('inventoryTable');
+            
+            if (!inventoryTable) return;
+            
+            inventoryTable.innerHTML = '';
+            
+            appData.inventoryItems.forEach(item => {
+                // تحديد لون الحالة
+                let statusText = 'طبيعي';
+                let statusClass = 'badge-success';
+                
+                if (item.status === 'low') {
+                    statusText = 'منخفض';
+                    statusClass = 'badge-warning';
+                } else if (item.status === 'critical') {
+                    statusText = 'حرج';
+                    statusClass = 'badge-danger';
+                } else if (item.status === 'out') {
+                    statusText = 'نفذ';
+                    statusClass = 'badge-danger';
+                }
+                
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-100 hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="p-3">
+                        <div class="font-bold text-gray-800">${item.name}</div>
+                    </td>
+                    <td class="p-3">
+                        <div class="font-bold ${item.quantity === 0 ? 'text-red-600' : 'text-gray-800'}">
+                            ${item.quantity}
+                        </div>
+                    </td>
+                    <td class="p-3">
+                        <div class="font-bold text-gray-800">${item.price.toLocaleString()} دج</div>
+                    </td>
+                    <td class="p-3">
+                        <span class="${statusClass}">${statusText}</span>
+                    </td>
+                    <td class="p-3">
+                        <div class="flex gap-2">
+                            <button class="text-green-600 hover:text-green-800 tooltip" title="تعديل">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-red-600 hover:text-red-800 tooltip" title="حذف">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="text-blue-600 hover:text-blue-800 tooltip" title="تفاصيل">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                
+                inventoryTable.appendChild(row);
+            });
+        }
+
+        // تهيئة الكاميرا
+        function initCamera() {
+            const startCameraBtn = document.getElementById('startCameraBtn');
+            const toggleCameraBtn = document.getElementById('toggleCameraBtn');
+            const scanBtn = document.getElementById('scanBtn');
+            const captureBtn = document.getElementById('captureBtn');
+            const liveCamera = document.getElementById('liveCamera');
+            
+            if (startCameraBtn) {
+                startCameraBtn.addEventListener('click', toggleCamera);
+            }
+            
+            if (toggleCameraBtn) {
+                toggleCameraBtn.addEventListener('click', toggleCamera);
+            }
+            
+            if (scanBtn) {
+                scanBtn.addEventListener('click', simulateScan);
+            }
+            
+            if (captureBtn) {
+                captureBtn.addEventListener('click', captureImage);
+            }
+        }
+
+        // تبديل حالة الكاميرا
+        function toggleCamera() {
+            const toggleCameraBtn = document.getElementById('toggleCameraBtn');
+            const cameraStatus = document.getElementById('cameraStatus');
+            const liveCamera = document.getElementById('liveCamera');
+            const cameraFeed = document.getElementById('cameraFeed');
+            
+            if (!appData.cameraActive) {
+                // محاكاة تشغيل الكاميرا
+                appData.cameraActive = true;
+                
+                if (toggleCameraBtn) {
+                    toggleCameraBtn.innerHTML = '<i class="fas fa-pause mr-2"></i> إيقاف الكاميرا';
+                    toggleCameraBtn.classList.remove('bg-green-600');
+                    toggleCameraBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+                }
+                
+                if (cameraStatus) {
+                    cameraStatus.textContent = 'كاميرا نشطة';
+                    cameraStatus.className = 'badge badge-success';
+                }
+                
+                if (cameraFeed) {
+                    cameraFeed.innerHTML = `
+                        <div class="relative w-full h-full">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-green-100 rounded-full">
+                                        <i class="fas fa-video text-3xl text-green-600"></i>
+                                    </div>
+                                    <p class="text-white font-bold text-lg">كاميرا الذكاء الاصطناعي نشطة</p>
+                                    <p class="text-gray-300 mt-2">تستعد الكاميرا لمسح المخزون</p>
+                                </div>
+                            </div>
+                            <div class="absolute top-4 left-4 bg-black/70 text-white px-3 py-1 rounded-full text-xs">
+                                <i class="fas fa-circle text-green-500 mr-1"></i> LIVE
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                showAlert('تم تشغيل كاميرا الذكاء الاصطناعي بنجاح', 'success');
+                
+                // محاكاة اكتشاف المنتجات بعد ثانيتين
+                setTimeout(() => {
+                    simulateScan();
+                }, 2000);
+                
+            } else {
+                // إيقاف الكاميرا
+                appData.cameraActive = false;
+                
+                if (toggleCameraBtn) {
+                    toggleCameraBtn.innerHTML = '<i class="fas fa-play mr-2"></i> تشغيل الكاميرا';
+                    toggleCameraBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+                    toggleCameraBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                }
+                
+                if (cameraStatus) {
+                    cameraStatus.textContent = 'كاميرا متوقفة';
+                    cameraStatus.className = 'badge badge-danger';
+                }
+                
+                if (cameraFeed) {
+                    cameraFeed.innerHTML = `
+                        <div class="text-center">
+                            <i class="fas fa-video text-gray-500 text-5xl mb-4"></i>
+                            <p class="text-gray-400 font-bold">كاميرا الذكاء الاصطناعي</p>
+                            <p class="text-gray-500 text-sm mt-2">جاهزة لمسح المخزون وتتبع المنتجات</p>
+                            <button id="startCameraBtn" class="gradient-btn mt-4 px-8 py-3">
+                                <i class="fas fa-play mr-2"></i> تشغيل الكاميرا
+                            </button>
+                        </div>
+                    `;
+                    
+                    // إعادة إرفاق الحدث للزر الجديد
+                    const newStartBtn = document.getElementById('startCameraBtn');
+                    if (newStartBtn) {
+                        newStartBtn.addEventListener('click', toggleCamera);
+                    }
+                }
+                
+                showAlert('تم إيقاف كاميرا الذكاء الاصطناعي', 'info');
+            }
+        }
+
+        // محاكاة مسح المخزون
+        function simulateScan() {
+            if (!appData.cameraActive) {
+                showAlert('يرجى تشغيل الكاميرا أولاً', 'warning');
+                return;
+            }
+            
+            showAlert('جارٍ مسح المخزون باستخدام الذكاء الاصطناعي...', 'info');
+            
+            // محاكاة اكتشاف المنتجات
+            setTimeout(() => {
+                const detectedProducts = [
+                    { name: 'قميص صيفي أزرق', quantity: 3, confidence: 92 },
+                    { name: 'بنطلون جينز أسود', quantity: 2, confidence: 88 },
+                    { name: 'حذاء رياضي أبيض', quantity: 1, confidence: 95 },
+                    { name: 'جاكيت شتوي رمادي', quantity: 5, confidence: 85 }
+                ];
+                
+                updateDetectedProducts(detectedProducts);
+                showAlert('تم اكتشاف 4 منتجات في المخزون', 'success');
+                
+                // إضافة إلى سجل المسح
+                addToScanHistory();
+                
+            }, 1500);
+        }
+
+        // تحديث المنتجات المكتشفة
+        function updateDetectedProducts(products) {
+            const detectedContainer = document.getElementById('detectedProducts');
+            const productCount = document.getElementById('productCount');
+            const totalQuantity = document.getElementById('totalQuantity');
+            const detectionAccuracy = document.getElementById('detectionAccuracy');
+            
+            if (!detectedContainer) return;
+            
+            // تحديث الإحصائيات
+            if (productCount) productCount.textContent = products.length;
+            
+            const total = products.reduce((sum, product) => sum + product.quantity, 0);
+            if (totalQuantity) totalQuantity.textContent = total;
+            
+            const avgConfidence = products.reduce((sum, product) => sum + product.confidence, 0) / products.length;
+            if (detectionAccuracy) detectionAccuracy.textContent = `${Math.round(avgConfidence)}%`;
+            
+            // تحديث قائمة المنتجات
+            detectedContainer.innerHTML = '';
+            
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'p-3 bg-gray-50 rounded-xl';
+                productElement.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-gray-800">${product.name}</span>
+                        <span class="text-sm font-bold text-green-600">${product.quantity} قطعة</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">دقة الاكتشاف: ${product.confidence}%</span>
+                        <span class="text-xs ${product.quantity < 3 ? 'text-red-600 font-bold' : 'text-green-600'}">
+                            ${product.quantity < 3 ? 'منخفض' : 'جيد'}
+                        </span>
+                    </div>
+                `;
+                
+                detectedContainer.appendChild(productElement);
+            });
+        }
+
+        // إضافة إلى سجل المسح
+        function addToScanHistory() {
+            const scanHistory = document.getElementById('scanHistory');
+            
+            if (!scanHistory) return;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+            
+            const historyItem = document.createElement('div');
+            historyItem.className = 'p-3 bg-gray-50 rounded-lg';
+            historyItem.innerHTML = `
+                <div class="flex justify-between items-center mb-1">
+                    <span class="font-bold text-sm">مسح المخزون</span>
+                    <span class="text-xs text-gray-500">${timeString}</span>
+                </div>
+                <p class="text-xs text-gray-600">تم اكتشاف 4 منتجات، إجمالي 11 قطعة</p>
+            `;
+            
+            // إضافة في البداية
+            scanHistory.insertBefore(historyItem, scanHistory.firstChild);
+            
+            // حفظ فقط آخر 5 عمليات مسح
+            if (scanHistory.children.length > 5) {
+                scanHistory.removeChild(scanHistory.lastChild);
+            }
+        }
+
+        // التقاط صورة
+        function captureImage() {
+            if (!appData.cameraActive) {
+                showAlert('يرجى تشغيل الكاميرا أولاً', 'warning');
+                return;
+            }
+            
+            showAlert('جارٍ التقاط صورة للمخزون...', 'info');
+            
+            // محاكاة التقاط الصورة
+            setTimeout(() => {
+                showAlert('تم التقاط الصورة بنجاح', 'success');
+                
+                // محاكاة معالجة الصورة
+                setTimeout(() => {
+                    simulateScan();
+                }, 1000);
+            }, 1000);
+        }
+
+        // تحديث حالة الكاميرا
+        function updateCameraStatus() {
+            const cameraStatus = document.getElementById('cameraStatus');
+            const toggleCameraBtn = document.getElementById('toggleCameraBtn');
+            
+            if (cameraStatus && toggleCameraBtn) {
+                if (appData.cameraActive) {
+                    cameraStatus.textContent = 'كاميرا نشطة';
+                    cameraStatus.className = 'badge badge-success';
+                    toggleCameraBtn.innerHTML = '<i class="fas fa-pause mr-2"></i> إوقف الكاميرا';
+                    toggleCameraBtn.classList.remove('bg-green-600');
+                    toggleCameraBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+                } else {
+                    cameraStatus.textContent = 'كاميرا متوقفة';
+                    cameraStatus.className = 'badge badge-danger';
+                    toggleCameraBtn.innerHTML = '<i class="fas fa-play mr-2"></i> شغل الكاميرا';
+                    toggleCameraBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+                    toggleCameraBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                }
+            }
+        }
+
+        // إظهار رسالة تنبيه
+        function showAlert(message, type = 'info') {
+            // إنشاء عنصر التنبيه
+            const alertDiv = document.createElement('div');
+            
+            // تحديد الألوان حسب النوع
+            let bgColor = 'bg-blue-50';
+            let textColor = 'text-blue-800';
+            let borderColor = 'border-blue-200';
+            let icon = 'info-circle';
+            
+            if (type === 'success') {
+                bgColor = 'bg-green-50';
+                textColor = 'text-green-800';
+                borderColor = 'border-green-200';
+                icon = 'check-circle';
+            } else if (type === 'error') {
+                bgColor = 'bg-red-50';
+                textColor = 'text-red-800';
+                borderColor = 'border-red-200';
+                icon = 'exclamation-circle';
+            } else if (type === 'warning') {
+                bgColor = 'bg-yellow-50';
+                textColor = 'text-yellow-800';
+                borderColor = 'border-yellow-200';
+                icon = 'exclamation-triangle';
+            }
+            
+            alertDiv.className = `fixed top-4 right-4 z-50 ${bgColor} ${borderColor} border-l-4 ${textColor} p-4 rounded-r-lg shadow-lg max-w-md transform transition-transform duration-300 translate-x-0`;
+            alertDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-${icon} text-lg mr-3"></i>
+                    <div class="flex-1">
+                        <p class="font-bold">${type === 'success' ? 'نجاح' : type === 'error' ? 'خطأ' : type === 'warning' ? 'تحذير' : 'ملاحظة'}</p>
+                        <p class="text-sm mt-1">${message}</p>
+                    </div>
+                    <button class="text-gray-500 hover:text-gray-700 ml-3" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            // إضافة التنبيه للصفحة
+            document.body.appendChild(alertDiv);
+            
+            // إزالة التنبيه تلقائياً بعد 5 ثوانٍ
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (alertDiv.parentNode) {
+                            alertDiv.parentNode.removeChild(alertDiv);
+                        }
+                    }, 300);
+                }
+            }, 5000);
+        }
+
+        // إضافة منتج جديد
+        document.getElementById('addProductBtn')?.addEventListener('click', function() {
+            const productName = document.getElementById('productName').value;
+            const productQuantity = parseInt(document.getElementById('productQuantity').value) || 0;
+            const productPrice = parseInt(document.getElementById('productPrice').value) || 0;
+            
+            if (!productName || productQuantity <= 0 || productPrice <= 0) {
+                showAlert('يرجى ملء جميع الحقول بشكل صحيح', 'error');
+                return;
+            }
+            
+            // إضافة المنتج للبيانات
+            const newProduct = {
+                name: productName,
+                quantity: productQuantity,
+                price: productPrice,
+                minStock: 5,
+                status: productQuantity < 3 ? 'low' : 'normal'
+            };
+            
+            appData.inventoryItems.push(newProduct);
+            
+            // إعادة تحميل الجدول
+            loadInventoryTable();
+            
+            // إظهار رسالة نجاح
+            showAlert(`تم إضافة المنتج "${productName}" بنجاح`, 'success');
+            
+            // مسح الحقول
+            document.getElementById('productName').value = '';
+            document.getElementById('productQuantity').value = '';
+            document.getElementById('productPrice').value = '';
+            
+            // تحديث تنبيهات المخزون
+            addInventoryAlert(newProduct);
+        });
+
+        // إضافة تنبيه للمخزون
+        function addInventoryAlert(product) {
+            if (product.quantity <= product.minStock) {
+                let urgency = 'medium';
+                let status = 'كمية منخفضة';
+                
+                if (product.quantity === 0) {
+                    urgency = 'critical';
+                    status = 'نفذ من المخزون';
+                } else if (product.quantity < 3) {
+                    urgency = 'high';
+                    status = 'بقي ' + product.quantity + ' فقط!';
+                }
+                
+                const newAlert = {
+                    product: product.name,
+                    remaining: product.quantity,
+                    status: status,
+                    urgency: urgency
+                };
+                
+                appData.inventoryAlerts.unshift(newAlert);
+                
+                // إعادة تحميل التنبيهات
+                loadInventoryAlerts();
+                
+                // تحديث عداد التنبيهات
+                updateNotificationCount();
+            }
+        }
+
+        // تحديث عداد الإشعارات
+        function updateNotificationCount() {
+            const notificationCount = document.getElementById('notificationCount');
+            if (notificationCount) {
+                const criticalAlerts = appData.inventoryAlerts.filter(a => a.urgency === 'critical' || a.urgency === 'high').length;
+                notificationCount.textContent = criticalAlerts > 0 ? criticalAlerts : '';
+            }
+        }
+
+        // تحديث المخزون من الاكتشاف
+        document.getElementById('updateInventoryBtn')?.addEventListener('click', function() {
+            showAlert('جارٍ تحديث المخزون بناءً على نتائج المسح...', 'info');
+            
+            setTimeout(() => {
+                showAlert('تم تحديث المخزون بنجاح', 'success');
+                
+                // محاكاة تحديث البيانات
+                appData.inventoryItems[0].quantity = 3; // قميص صيفي أزرق
+                appData.inventoryItems[1].quantity = 2; // بنطلون جينز أسود
+                appData.inventoryItems[2].quantity = 1; // حذاء رياضي أبيض
+                appData.inventoryItems[3].quantity = 5; // جاكيت شتوي رمادي
+                
+                // إعادة تحميل الجدول
+                loadInventoryTable();
+                
+                // تحديث تنبيهات المخزون
+                appData.inventoryAlerts = appData.inventoryAlerts.filter(a => 
+                    !a.product.includes('قميص صيفي') && 
+                    !a.product.includes('بنطلون جينز') &&
+                    !a.product.includes('حذاء رياضي') &&
+                    !a.product.includes('جاكيت شتوي')
+                );
+                
+                loadInventoryAlerts();
+                updateNotificationCount();
+            }, 1500);
+        });
+
+        // معالجة نقرات الإشعارات
+        document.getElementById('notificationBtn')?.addEventListener('click', function() {
+            showAlert('لديك ' + appData.inventoryAlerts.length + ' تنبيهات في المخزون', 'info');
+            switchTab('inventory');
+        });
+
+        // معالجة نقرات الملف الشخصي
+        document.getElementById('profileBtn')?.addEventListener('click', function() {
+            switchTab('settings');
+        });
+
+        // مسح المخزون من لوحة النظرة العامة
+        document.getElementById('scanInventoryBtn')?.addEventListener('click', function() {
+            // التحول إلى تبويب الكاميرا
+            const cameraTab = document.querySelector('.sidebar-item[data-tab="camera"]');
+            if (cameraTab) {
+                cameraTab.click();
+            }
+            
+            // تشغيل الكاميرا بعد تأخير بسيط
+            setTimeout(() => {
+                if (!appData.cameraActive) {
+                    toggleCamera();
+                } else {
+                    simulateScan();
+                }
+            }, 500);
+        });
+
+        // تهيئة زر الإضافة في لوحة المخزون
+        document.getElementById('addProductBtn')?.addEventListener('click', function() {
+            const productName = document.getElementById('productName').value;
+            const productQuantity = document.getElementById('productQuantity').value;
+            const productPrice = document.getElementById('productPrice').value;
+            
+            if (!productName || !productQuantity || !productPrice) {
+                showAlert('يرجى ملء جميع الحقول', 'error');
+                return;
+            }
+            
+            // إضافة المنتج للبيانات
+            const newProduct = {
+                name: productName,
+                quantity: parseInt(productQuantity),
+                price: parseInt(productPrice),
+                minStock: 5,
+                status: parseInt(productQuantity) < 3 ? 'low' : 'normal'
+            };
+            
+            appData.inventoryItems.push(newProduct);
+            
+            // إعادة تحميل الجدول
+            loadInventoryTable();
+            
+            // إظهار رسالة نجاح
+            showAlert(`تم إضافة "${productName}" إلى المخزون`, 'success');
+            
+            // مسح الحقول
+            document.getElementById('productName').value = '';
+            document.getElementById('productQuantity').value = '';
+            document.getElementById('productPrice').value = '';
+        });
+
+        // محاكاة بيانات للطلبات
+        function loadOrdersList() {
+            const ordersList = document.getElementById('ordersList');
+            if (!ordersList) return;
+            
+            const orders = [
+                {
+                    id: '#ORD-1001',
+                    customer: 'محمد أحمد',
+                    items: '2 قميص، 1 بنطلون',
+                    total: '14,500 دج',
+                    status: 'مكتمل',
+                    statusClass: 'badge-success',
+                    date: '2023-10-15'
+                },
+                {
+                    id: '#ORD-1002',
+                    customer: 'سارة خالد',
+                    items: '1 حذاء رياضي',
+                    total: '8,500 دج',
+                    status: 'قيد التوصيل',
+                    statusClass: 'badge-warning',
+                    date: '2023-10-14'
+                },
+                {
+                    id: '#ORD-1003',
+                    customer: 'علي محمود',
+                    items: '3 قمصان أطفال',
+                    total: '9,000 دج',
+                    status: 'قيد المعالجة',
+                    statusClass: 'badge-warning',
+                    date: '2023-10-14'
+                },
+                {
+                    id: '#ORD-1004',
+                    customer: 'فاطمة عمر',
+                    items: '1 جاكيت شتوي',
+                    total: '12,000 دج',
+                    status: 'جديد',
+                    statusClass: 'badge-success',
+                    date: '2023-10-13'
+                }
+            ];
+            
+            ordersList.innerHTML = '';
+            
+            orders.forEach(order => {
+                const orderElement = document.createElement('div');
+                orderElement.className = 'p-4 border border-gray-200 rounded-xl hover:bg-gray-50';
+                orderElement.innerHTML = `
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-gray-100 p-2 rounded-lg">
+                                    <i class="fas fa-shopping-bag text-gray-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-800">${order.id} - ${order.customer}</p>
+                                    <p class="text-sm text-gray-600">${order.items}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:items-end">
+                            <p class="font-bold text-gray-800 text-lg">${order.total}</p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <span class="${order.statusClass}">${order.status}</span>
+                                <span class="text-xs text-gray-500">${order.date}</span>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                ordersList.appendChild(orderElement);
+            });
+        }
+
+        // عند تحميل تبويب الطلبات
+        const ordersTab = document.querySelector('.sidebar-item[data-tab="orders"]');
+        if (ordersTab) {
+            ordersTab.addEventListener('click', loadOrdersList);
+        }
+
+        // إظهار معلومات التلميح عند التمرير على الأزرار
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltips = document.querySelectorAll('.tooltip');
+            tooltips.forEach(tooltip => {
+                tooltip.addEventListener('mouseenter', function() {
+                    const tooltipText = this.querySelector('.tooltip-text');
+                    if (tooltipText) {
+                        tooltipText.style.visibility = 'visible';
+                        tooltipText.style.opacity = '1';
+                    }
+                });
+                
+                tooltip.addEventListener('mouseleave', function() {
+                    const tooltipText = this.querySelector('.tooltip-text');
+                    if (tooltipText) {
+                        tooltipText.style.visibility = 'hidden';
+                        tooltipText.style.opacity = '0';
+                    }
+                });
+            });
+        });
+
+        // تحديث عداد المكالمات تلقائياً (محاكاة)
+        setInterval(() => {
+            if (appData.remainingCalls > 0 && Math.random() > 0.7) {
+                appData.remainingCalls--;
+                updateCallsDisplay();
+                
+                // إذا وصل المكالمات إلى 20، إظهار تنبيه
+                if (appData.remainingCalls === 20) {
+                    showAlert('تنبيه: بقي 20 مكالمة فقط من باقاتك الشهرية', 'warning');
+                }
+                
+                // إذا وصل المكالمات إلى 10، إظهار تنبيه عاجل
+                if (appData.remainingCalls === 10) {
+                    showAlert('تنبيه عاجل: بقي 10 مكالمات فقط! يرجى تجديد الباقة', 'error');
+                }
+            }
+        }, 10000); // كل 10 ثوانٍ
+
+        // تهيئة نهاية الصفحة
+        console.log('MANY.AI - الوكيل الذكي الجزائري جاهز للعمل!');
     </script>
 </body>
 </html>
