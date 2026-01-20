@@ -835,1589 +835,4 @@
                             <div class="flex justify-between items-start mb-3">
                                 <div>
                                     <h3 class="font-bold text-lg text-gray-800" data-lang-ar="الباقة الاحترافية" data-lang-fr="Forfait Pro">الباقة الاحترافية</h3>
-                                    <p class="text-2xl font-black text-green-600 mt-1">2000 دج<span class="text-sm text-gray-500 font-normal" data-lang-ar="/شهرياً" data-lang-fr="/mois">/شهرياً</span></p>
-                                </div>
-                                <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold">
-                                    موصى به
-                                </div>
-                            </div>
-                            <ul class="space-y-2 text-sm text-gray-600">
-                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> <span data-lang-ar="مكالمات غير محدودة" data-lang-fr="Appels illimités">مكالمات غير محدودة</span></li>
-                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> <span data-lang-ar="كل وسائل التواصل" data-lang-fr="Tous les canaux">كل وسائل التواصل</span></li>
-                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> <span data-lang-ar="نظام توصيل ذكي" data-lang-fr="Système de livraison">نظام توصيل ذكي</span></li>
-                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> <span data-lang-ar="تحليلات متقدمة" data-lang-fr="Analyses avancées">تحليلات متقدمة</span></li>
-                            </ul>
-                        </div>
-                        
-                        <div id="planEnterprise" class="border-2 border-gray-300 rounded-2xl p-5 cursor-pointer bg-gray-50 plan-card">
-                            <div class="flex justify-between items-start mb-3">
-                                <div>
-                                    <h3 class="font-bold text-lg text-gray-800" data-lang-ar="الباقة المؤسساتية" data-lang-fr="Forfait Entreprise">الباقة المؤسساتية</h3>
-                                    <p class="text-2xl font-black text-gray-800 mt-1">5000 دج<span class="text-sm text-gray-500 font-normal" data-lang-ar="/شهرياً" data-lang-fr="/mois">/شهرياً</span></p>
-                                </div>
-                                <div class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-bold">
-                                    متعدد الفروع
-                                </div>
-                            </div>
-                            <ul class="space-y-2 text-sm text-gray-600">
-                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> <span data-lang-ar="فروع غير محدودة" data-lang-fr="Succursales illimitées">فروع غير محدودة</span></li>
-                                <li class="fas fa-check text-green-500 mr-2"></i> <span data-lang-ar="ذكاء اصطناعي متقدم" data-lang-fr="IA avancée">ذكاء اصطناعي متقدم</span></li>
-                                <li class="fas fa-check text-green-500 mr-2"></i> <span data-lang-ar="API مخصص" data-lang-fr="API personnalisé">API مخصص</span></li>
-                                <li class="fas fa-check text-green-500 mr-2"></i> <span data-lang-ar="دعم 24/7" data-lang-fr="Support 24/7">دعم 24/7</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mb-8">
-                    <label class="block text-sm font-bold text-red-600 mb-2">
-                        <i class="fas fa-receipt text-red-500 mr-1"></i> 
-                        <span data-lang-ar="رقم معاملة BaridiMob" data-lang-fr="Numéro de transaction BaridiMob">رقم معاملة BaridiMob</span> *
-                    </label>
-                    <input type="text" id="transactionId" placeholder="أدخل رقم المعاملة للتفعيل الفوري" class="form-input border-red-200 focus:border-red-400">
-                    
-                    <!-- معلومات التفعيل -->
-                    <div class="mt-4 p-3 bg-blue-50 rounded-xl border border-blue-200">
-                        <div class="flex items-start">
-                            <i class="fas fa-info-circle text-blue-600 mt-1 mr-2"></i>
-                            <div>
-                                <p class="text-sm font-bold text-blue-800">معلومات التفعيل:</p>
-                                <ul class="text-xs text-blue-600 mt-1 space-y-1">
-                                    <li>• للنسخة <strong>التجريبية</strong>: أدخل الرقم <strong>555</strong></li>
-                                    <li>• للإصدار <strong>الحقيقي</strong>: أدخل رقم معاملة BaridiMob الحقيقي</li>
-                                    <li>• لاختبار <strong>النظام</strong>: يمكن استخدام <strong>TEST123456</strong></li>
-                                </ul>
-                                <p class="text-xs text-gray-500 mt-2">
-                                    💡 يمكنك دفع الاشتراك عبر تطبيق BaridiMob أو زيارة baridimob.dz
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <button id="activateButton" class="gradient-btn w-full text-lg py-4 mt-4">
-                    <i class="fas fa-bolt mr-2"></i> 
-                    <span data-lang-ar="تفعيل الاشتراك والبدء الآن" data-lang-fr="Activer l'abonnement et commencer">تفعيل الاشتراك والبدء الآن</span>
-                </button>
-                
-                <div class="flex flex-wrap justify-center items-center gap-4 mt-8 pt-6 border-t border-gray-200">
-                    <div class="flex items-center">
-                        <i class="fas fa-shield-alt text-green-600 mr-2"></i>
-                        <span class="text-sm text-gray-600" data-lang-ar="آمن 100%" data-lang-fr="100% Sécurisé">آمن 100%</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-headset text-green-600 mr-2"></i>
-                        <span class="text-sm text-gray-600" data-lang-ar="دعم فني 24/7" data-lang-fr="Support 24/7">دعم فني 24/7</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-bolt text-green-600 mr-2"></i>
-                        <span class="text-sm text-gray-600" data-lang-ar="تشغيل فوري" data-lang-fr="Démarrage instantané">تشغيل فوري</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center text-sm text-gray-500 mt-10">
-                <p data-lang-ar="MANY.AI ® 2023 - جميع الحقوق محفوظة - أول وكيل ذكي جزائري متكامل" data-lang-fr="MANY.AI ® 2023 - Tous droits réservés - Premier agent intelligent algérien intégré">
-                    MANY.AI ® 2023 - جميع الحقوق محفوظة - أول وكيل ذكي جزائري متكامل
-                </p>
-            </div>
-        </div>
-        
-        <!-- لوحة التحكم الرئيسية -->
-        <div id="dashboardSection" class="hidden">
-            <!-- شريط التنقل العلوي -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 p-6 bg-white rounded-2xl shadow-lg">
-                <div class="flex items-center gap-4">
-                    <div class="flex flex-col">
-                        <h1 class="tech-font text-2xl md:text-3xl font-black text-gray-900">
-                            MANY<span class="text-green-600">.AI</span>
-                        </h1>
-                        <div class="flex items-center mt-1">
-                            <div class="pulse-indicator mr-2"></div>
-                            <span id="shopNameDisplay" class="text-gray-700 font-bold text-lg"></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex flex-wrap items-center gap-4">
-                    <!-- بطاقة الرصيد -->
-                    <div class="stat-card min-w-[180px]">
-                        <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="المكالمات المتبقية" data-lang-fr="Appels restants">المكالمات المتبقية</p>
-                        <div class="flex items-center justify-between">
-                            <p id="remainingCalls" class="text-2xl font-black text-gray-800">42</p>
-                            <div class="text-green-600 bg-green-100 p-2 rounded-full">
-                                <i class="fas fa-phone-alt text-sm"></i>
-                            </div>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
-                            <div id="callsProgress" class="bg-green-600 h-2 rounded-full" style="width: 65%"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- إشعارات -->
-                    <div class="relative tooltip">
-                        <button id="notificationBtn" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-full">
-                            <i class="fas fa-bell text-gray-700"></i>
-                            <span id="notificationCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                        </button>
-                        <div class="tooltip-text" data-lang-ar="الإشعارات والتنبيهات" data-lang-fr="Notifications et alertes">الإشعارات والتنبيهات</div>
-                    </div>
-                    
-                    <!-- الملف الشخصي -->
-                    <div class="relative tooltip">
-                        <button id="profileBtn" class="bg-gradient-to-r from-green-500 to-green-600 text-white p-3 rounded-full">
-                            <i class="fas fa-user"></i>
-                        </button>
-                        <div class="tooltip-text" data-lang-ar="الملف الشخصي" data-lang-fr="Profil">الملف الشخصي</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- المحتوى الرئيسية -->
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                <!-- الشريط الجانبي -->
-                <div class="lg:col-span-1">
-                    <div class="dashboard-card mb-6">
-                        <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="القائمة الرئيسية" data-lang-fr="Menu principal">القائمة الرئيسية</h3>
-                        <div class="space-y-2">
-                            <div class="sidebar-item active" data-tab="overview">
-                                <i class="fas fa-home text-green-600"></i>
-                                <span data-lang-ar="لوحة التحكم" data-lang-fr="Tableau de bord">لوحة التحكم</span>
-                            </div>
-                            <div class="sidebar-item" data-tab="inventory">
-                                <i class="fas fa-boxes text-blue-600"></i>
-                                <span data-lang-ar="المخزون الذكي" data-lang-fr="Stock intelligent">المخزون الذكي</span>
-                            </div>
-                            <div class="sidebar-item" data-tab="orders">
-                                <i class="fas fa-shopping-cart text-purple-600"></i>
-                                <span data-lang-ar="الطلبات والزبائن" data-lang-fr="Commandes et clients">الطلبات والزبائن</span>
-                            </div>
-                            <div class="sidebar-item" data-tab="camera">
-                                <i class="fas fa-camera text-red-600"></i>
-                                <span data-lang-ar="كاميرا الذكاء" data-lang-fr="Caméra intelligente">كاميرا الذكاء</span>
-                            </div>
-                            <div class="sidebar-item" data-tab="social">
-                                <i class="fas fa-share-alt text-pink-600"></i>
-                                <span data-lang-ar="وسائل التواصل" data-lang-fr="Réseaux sociaux">وسائل التواصل</span>
-                            </div>
-                            <div class="sidebar-item" data-tab="analytics">
-                                <i class="fas fa-chart-bar text-yellow-600"></i>
-                                <span data-lang-ar="التقارير والتحليلات" data-lang-fr="Rapports et analyses">التقارير والتحليلات</span>
-                            </div>
-                            <div class="sidebar-item" data-tab="settings">
-                                <i class="fas fa-cog text-gray-600"></i>
-                                <span data-lang-ar="الإعدادات" data-lang-fr="Paramètres">الإعدادات</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- بطاقة الزبون النشط -->
-                    <div class="dashboard-card mb-6">
-                        <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="الزبائن النشطين" data-lang-fr="Clients actifs">الزبائن النشطين</h3>
-                        <div id="activeCustomers" class="space-y-4">
-                            <!-- سيتم ملؤها ديناميكياً -->
-                        </div>
-                    </div>
-                    
-                    <!-- رصيد اليوم -->
-                    <div class="dashboard-card">
-                        <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="مبيعات اليوم" data-lang-fr="Ventes du jour">مبيعات اليوم</h3>
-                        <div class="text-center">
-                            <p id="todaySales" class="text-3xl font-black text-green-600 mb-2">0 دج</p>
-                            <p id="todayOrders" class="text-sm text-gray-500">0 طلب</p>
-                            <div class="mt-4 p-3 bg-green-50 rounded-xl">
-                                <p class="text-sm font-bold text-green-800">
-                                    <i class="fas fa-arrow-up mr-1"></i>
-                                    <span data-lang-ar="جاهز للعمل" data-lang-fr="Prêt à fonctionner">جاهز للعمل</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- المنطقة الرئيسية -->
-                <div class="lg:col-span-3">
-                    <!-- تبويبات المحتوى -->
-                    <div id="contentTabs">
-                        <!-- نظرة عامة -->
-                        <div id="tabOverview" class="tab-content">
-                            <div class="mb-6">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-2" data-lang-ar="مرحباً بك في MANY.AI" data-lang-fr="Bienvenue sur MANY.AI">مرحباً بك في MANY.AI</h2>
-                                <p class="text-gray-600" data-lang-ar="الوكيل الذكي يراقب متجرك ويعمل على زيادة مبيعاتك تلقائياً" data-lang-fr="L'agent intelligent surveille votre magasin et augmente vos ventes automatiquement">الوكيل الذكي يراقب متجرك ويعمل على زيادة مبيعاتك تلقائياً</p>
-                            </div>
-                            
-                            <!-- إحصائيات سريعة -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="إجمالي المبيعات" data-lang-fr="Ventes totales">إجمالي المبيعات</p>
-                                    <p id="totalSales" class="text-2xl font-black text-gray-800">0 دج</p>
-                                    <div class="flex items-center mt-2">
-                                        <i class="fas fa-calendar text-green-500 mr-1"></i>
-                                        <span class="text-xs text-green-600 font-bold" data-lang-ar="هذا الشهر" data-lang-fr="Ce mois">هذا الشهر</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="إجمالي الطلبات" data-lang-fr="Commandes totales">إجمالي الطلبات</p>
-                                    <p id="totalOrders" class="text-2xl font-black text-gray-800">0</p>
-                                    <div class="flex items-center mt-2">
-                                        <i class="fas fa-shopping-cart text-blue-500 mr-1"></i>
-                                        <span class="text-xs text-blue-600 font-bold" data-lang-ar="جميع الطلبات" data-lang-fr="Toutes commandes">جميع الطلبات</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="الزبائن النشطين" data-lang-fr="Clients actifs">الزبائن النشطين</p>
-                                    <p id="activeCustomersCount" class="text-2xl font-black text-gray-800">0</p>
-                                    <div class="flex items-center mt-2">
-                                        <i class="fas fa-users text-purple-500 mr-1"></i>
-                                        <span class="text-xs text-purple-600 font-bold" data-lang-ar="اليوم" data-lang-fr="Aujourd'hui">اليوم</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="المخزون المتوفر" data-lang-fr="Stock disponible">المخزون المتوفر</p>
-                                    <p id="availableStock" class="text-2xl font-black text-gray-800">0 منتج</p>
-                                    <div class="flex items-center mt-2">
-                                        <i class="fas fa-box text-yellow-500 mr-1"></i>
-                                        <span class="text-xs text-yellow-600 font-bold" data-lang-ar="في المخزن" data-lang-fr="En stock">في المخزن</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- إشعارات النظام -->
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                                <!-- آخر الطلبات -->
-                                <div class="dashboard-card order-card">
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h3 class="font-bold text-lg text-gray-800" data-lang-ar="آخر الطلبات" data-lang-fr="Dernières commandes">آخر الطلبات</h3>
-                                        <span class="badge badge-success" data-lang-ar="اليوم" data-lang-fr="Aujourd'hui">اليوم</span>
-                                    </div>
-                                    <div id="recentOrders" class="space-y-3 max-h-80 overflow-y-auto scrollbar-custom pr-2">
-                                        <!-- سيتم ملؤها ديناميكياً -->
-                                        <div class="text-center py-8 text-gray-400">
-                                            <i class="fas fa-shopping-cart text-3xl mb-3"></i>
-                                            <p data-lang-ar="لا توجد طلبات حديثة" data-lang-fr="Aucune commande récente">لا توجد طلبات حديثة</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- تنبيهات المخزون -->
-                                <div class="dashboard-card alert-card">
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h3 class="font-bold text-lg text-gray-800" data-lang-ar="تنبيهات المخزون" data-lang-fr="Alertes de stock">تنبيهات المخزون</h3>
-                                        <span class="badge badge-danger" data-lang-ar="مستعجل" data-lang-fr="Urgent">مستعجل</span>
-                                    </div>
-                                    <div id="inventoryAlerts" class="space-y-3 max-h-80 overflow-y-auto scrollbar-custom pr-2">
-                                        <!-- سيتم ملؤها ديناميكياً -->
-                                        <div class="text-center py-8 text-gray-400">
-                                            <i class="fas fa-check-circle text-3xl mb-3"></i>
-                                            <p data-lang-ar="المخزون في حالة جيدة" data-lang-fr="Stock en bon état">المخزون في حالة جيدة</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- كاميرا الذكاء الاصطناعي -->
-                            <div class="camera-container mb-8">
-                                <div class="relative">
-                                    <div id="cameraFeed" class="w-full h-64 md:h-80 flex items-center justify-center bg-gray-900 camera-grid">
-                                        <div class="text-center">
-                                            <i class="fas fa-video text-gray-500 text-5xl mb-4"></i>
-                                            <p class="text-gray-400 font-bold" data-lang-ar="كاميرا الذكاء الاصطناعي" data-lang-fr="Caméra d'intelligence artificielle">كاميرا الذكاء الاصطناعي</p>
-                                            <p class="text-gray-500 text-sm mt-2" data-lang-ar="جاهزة لمسح المخزون وتتبع المنتجات" data-lang-fr="Prête à scanner le stock et suivre les produits">جاهزة لمسح المخزون وتتبع المنتجات</p>
-                                            <button id="gotoCameraBtn" class="gradient-btn mt-4 px-8 py-3">
-                                                <i class="fas fa-camera mr-2"></i> 
-                                                <span data-lang-ar="فتح كاميرا الذكاء" data-lang-fr="Ouvrir la caméra intelligente">فتح كاميرا الذكاء</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="absolute top-4 right-4">
-                                        <span class="badge badge-success" data-lang-ar="جاهزة للعمل" data-lang-fr="Prête à fonctionner">جاهزة للعمل</span>
-                                    </div>
-                                </div>
-                                <div class="p-4 bg-gray-800 text-white">
-                                    <div class="flex flex-wrap items-center justify-between">
-                                        <div>
-                                            <p class="font-bold" data-lang-ar="نظام المخزون الذكي" data-lang-fr="Système de stock intelligent">نظام المخزون الذكي</p>
-                                            <p class="text-sm text-gray-300" data-lang-ar="مسح الرفوف تلقائياً وتحديث المخزون" data-lang-fr="Scan automatique des rayons et mise à jour du stock">مسح الرفوف تلقائياً وتحديث المخزون</p>
-                                        </div>
-                                        <div class="flex gap-2 mt-2 md:mt-0">
-                                            <button id="quickScanBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-bold">
-                                                <i class="fas fa-search mr-1"></i> 
-                                                <span data-lang-ar="مسح سريع" data-lang-fr="Scan rapide">مسح سريع</span>
-                                            </button>
-                                            <button id="autoScanToggle" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold">
-                                                <i class="fas fa-robot mr-1"></i> 
-                                                <span data-lang-ar="تفعيل المسح الآلي" data-lang-fr="Activer scan auto">تفعيل المسح الآلي</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- إدارة المخزون الذكي -->
-                        <div id="tabInventory" class="tab-content hidden">
-                            <div class="mb-6">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-2" data-lang-ar="إدارة المخزون الذكي" data-lang-fr="Gestion de stock intelligent">إدارة المخزون الذكي</h2>
-                                <p class="text-gray-600" data-lang-ar="نظام مخزون ذكي يتتبع المنتجات تلقائياً ويدير الكميات" data-lang-fr="Système de stock intelligent qui suit les produits automatiquement">نظام مخزون ذكي يتتبع المنتجات تلقائياً ويدير الكميات</p>
-                            </div>
-                            
-                            <!-- إحصاءات المخزون -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="إجمالي المنتجات" data-lang-fr="Total produits">إجمالي المنتجات</p>
-                                    <p id="totalProducts" class="text-2xl font-black text-gray-800">0</p>
-                                </div>
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="قيمة المخزون" data-lang-fr="Valeur du stock">قيمة المخزون</p>
-                                    <p id="inventoryValue" class="text-2xl font-black text-gray-800">0 دج</p>
-                                </div>
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="المنتجات المنخفضة" data-lang-fr="Produits bas">المنتجات المنخفضة</p>
-                                    <p id="lowStockCount" class="text-2xl font-black text-red-600">0</p>
-                                </div>
-                            </div>
-                            
-                            <!-- التحكم في المخزون -->
-                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                                <!-- إضافة منتج يدوياً -->
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="إضافة منتج جديد" data-lang-fr="Ajouter un produit">إضافة منتج جديد</h3>
-                                    <div class="space-y-4">
-                                        <input type="text" id="newProductName" placeholder="اسم المنتج" class="form-input">
-                                        <div class="grid grid-cols-2 gap-4">
-                                            <input type="number" id="newProductQuantity" placeholder="الكمية" class="form-input" min="0">
-                                            <input type="number" id="newProductPrice" placeholder="السعر (دج)" class="form-input" min="0">
-                                        </div>
-                                        <div class="grid grid-cols-2 gap-4">
-                                            <input type="number" id="newProductMinStock" placeholder="الحد الأدنى" class="form-input" min="1" value="5">
-                                            <select id="newProductCategory" class="form-input">
-                                                <option value="">الفئة</option>
-                                                <option value="clothing">ملابس</option>
-                                                <option value="food">مواد غذائية</option>
-                                                <option value="electronics">إلكترونيات</option>
-                                                <option value="other">أخرى</option>
-                                            </select>
-                                        </div>
-                                        <button id="addProductBtn" class="gradient-btn w-full">
-                                            <i class="fas fa-plus mr-2"></i> 
-                                            <span data-lang-ar="إضافة للمخزون" data-lang-fr="Ajouter au stock">إضافة للمخزون</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <!-- تحميل المنتجات -->
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="تحميل قائمة منتجات" data-lang-fr="Importer liste produits">تحميل قائمة منتجات</h3>
-                                    <div class="space-y-4">
-                                        <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center">
-                                            <i class="fas fa-file-excel text-4xl text-green-600 mb-3"></i>
-                                            <p class="text-gray-700 font-bold mb-2" data-lang-ar="رفع ملف Excel أو CSV" data-lang-fr="Importer fichier Excel ou CSV">رفع ملف Excel أو CSV</p>
-                                            <p class="text-sm text-gray-500 mb-4" data-lang-ar="يمكنك تحميل قائمة منتجاتك دفعة واحدة" data-lang-fr="Importez votre liste de produits en une fois">يمكنك تحميل قائمة منتجاتك دفعة واحدة</p>
-                                            <label for="fileUpload" class="gradient-btn cursor-pointer inline-block">
-                                                <i class="fas fa-upload mr-2"></i> 
-                                                <span data-lang-ar="اختر ملف" data-lang-fr="Choisir fichier">اختر ملف</span>
-                                            </label>
-                                            <input type="file" id="fileUpload" class="hidden" accept=".csv,.xlsx,.xls">
-                                        </div>
-                                        <button id="downloadTemplateBtn" class="w-full py-3 border-2 border-gray-300 rounded-xl hover:bg-gray-50 font-bold">
-                                            <i class="fas fa-download mr-2"></i> 
-                                            <span data-lang-ar="تحميل نموذج" data-lang-fr="Télécharger modèle">تحميل نموذج</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <!-- المسح الذكي -->
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="المسح الذكي للمخزون" data-lang-fr="Scan intelligent du stock">المسح الذكي للمخزون</h3>
-                                    <div class="space-y-4">
-                                        <div class="p-4 bg-blue-50 rounded-xl">
-                                            <div class="flex items-center mb-2">
-                                                <i class="fas fa-robot text-2xl text-blue-600 mr-3"></i>
-                                                <div>
-                                                    <p class="font-bold text-gray-800" data-lang-ar="المسح التلقائي" data-lang-fr="Scan automatique">المسح التلقائي</p>
-                                                    <p class="text-sm text-gray-600" data-lang-ar="تحديث المخزون تلقائياً" data-lang-fr="Mise à jour automatique du stock">تحديث المخزون تلقائياً</p>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-center justify-between mt-4">
-                                                <span class="text-gray-700 font-bold" data-lang-ar="الحالة:" data-lang-fr="Statut:">الحالة:</span>
-                                                <span id="autoScanStatus" class="badge badge-danger" data-lang-ar="معطل" data-lang-fr="Désactivé">معطل</span>
-                                            </div>
-                                        </div>
-                                        <div class="space-y-3">
-                                            <button id="startInventoryScan" class="gradient-btn w-full">
-                                                <i class="fas fa-camera mr-2"></i> 
-                                                <span data-lang-ar="بدء مسح المخزون" data-lang-fr="Démarrer scan du stock">بدء مسح المخزون</span>
-                                            </button>
-                                            <button id="adjustInventoryBtn" class="w-full py-3 bg-gray-100 hover:bg-gray-200 rounded-xl font-bold">
-                                                <i class="fas fa-sliders-h mr-2"></i> 
-                                                <span data-lang-ar="تعديل المخزون يدوياً" data-lang-fr="Ajuster stock manuellement">تعديل المخزون يدوياً</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- جدول المخزون -->
-                            <div class="dashboard-card">
-                                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4 md:mb-0" data-lang-ar="قائمة المنتجات" data-lang-fr="Liste des produits">قائمة المنتجات</h3>
-                                    <div class="flex gap-2">
-                                        <input type="text" placeholder="بحث عن منتج..." class="form-input w-full md:w-auto">
-                                        <select class="form-input w-full md:w-auto">
-                                            <option data-lang-ar="جميع الفئات" data-lang-fr="Toutes catégories">جميع الفئات</option>
-                                            <option data-lang-ar="ملابس" data-lang-fr="Vêtements">ملابس</option>
-                                            <option data-lang-ar="مواد غذائية" data-lang-fr="Aliments">مواد غذائية</option>
-                                            <option data-lang-ar="إلكترونيات" data-lang-fr="Électronique">إلكترونيات</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="overflow-x-auto">
-                                    <table class="w-full">
-                                        <thead>
-                                            <tr class="bg-gray-50">
-                                                <th class="text-right p-3 font-bold text-gray-700" data-lang-ar="المنتج" data-lang-fr="Produit">المنتج</th>
-                                                <th class="text-right p-3 font-bold text-gray-700" data-lang-ar="الكمية" data-lang-fr="Quantité">الكمية</th>
-                                                <th class="text-right p-3 font-bold text-gray-700" data-lang-ar="السعر" data-lang-fr="Prix">السعر</th>
-                                                <th class="text-right p-3 font-bold text-gray-700" data-lang-ar="القيمة" data-lang-fr="Valeur">القيمة</th>
-                                                <th class="text-right p-3 font-bold text-gray-700" data-lang-ar="آخر تحديث" data-lang-fr="Dernière mise à jour">آخر تحديث</th>
-                                                <th class="text-right p-3 font-bold text-gray-700" data-lang-ar="الإجراءات" data-lang-fr="Actions">الإجراءات</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="inventoryTable">
-                                            <!-- سيتم ملؤها ديناميكياً -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                                
-                                <div id="emptyInventoryMessage" class="text-center py-10">
-                                    <i class="fas fa-box-open text-4xl text-gray-300 mb-3"></i>
-                                    <p class="text-gray-500" data-lang-ar="لا توجد منتجات في المخزون بعد" data-lang-fr="Aucun produit en stock pour le moment">لا توجد منتجات في المخزون بعد</p>
-                                    <p class="text-sm text-gray-400 mt-2" data-lang-ar="ابدأ بإضافة منتجات أو مسح الرفوف" data-lang-fr="Commencez par ajouter des produits ou scanner les rayons">ابدأ بإضافة منتجات أو مسح الرفوف</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- الطلبات والزبائن -->
-                        <div id="tabOrders" class="tab-content hidden">
-                            <div class="mb-6">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-2" data-lang-ar="إدارة الطلبات والزبائن" data-lang-fr="Gestion des commandes et clients">إدارة الطلبات والزبائن</h2>
-                                <p class="text-gray-600" data-lang-ar="تتبع ومعالجة جميع طلبات الزبائن عبر كل وسائل التواصل" data-lang-fr="Suivre et traiter toutes les commandes via tous les canaux">تتبع ومعالجة جميع طلبات الزبائن عبر كل وسائل التواصل</p>
-                            </div>
-                            
-                            <!-- إحصائيات الطلبات -->
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="الطلبات الجديدة" data-lang-fr="Nouvelles commandes">الطلبات الجديدة</p>
-                                    <p id="newOrdersCount" class="text-2xl font-black text-blue-600">0</p>
-                                </div>
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="قيد المعالجة" data-lang-fr="En traitement">قيد المعالجة</p>
-                                    <p id="processingOrdersCount" class="text-2xl font-black text-yellow-600">0</p>
-                                </div>
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="مكتملة" data-lang-fr="Complétées">مكتملة</p>
-                                    <p id="completedOrdersCount" class="text-2xl font-black text-green-600">0</p>
-                                </div>
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="ملغاة" data-lang-fr="Annulées">ملغاة</p>
-                                    <p id="cancelledOrdersCount" class="text-2xl font-black text-red-600">0</p>
-                                </div>
-                            </div>
-                            
-                            <!-- فلاتر الطلبات -->
-                            <div class="dashboard-card mb-6">
-                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                    <select id="orderFilterStatus" class="form-input">
-                                        <option value="all" data-lang-ar="جميع الحالات" data-lang-fr="Tous les statuts">جميع الحالات</option>
-                                        <option value="new" data-lang-ar="جديدة" data-lang-fr="Nouveau">جديدة</option>
-                                        <option value="processing" data-lang-ar="قيد المعالجة" data-lang-fr="En traitement">قيد المعالجة</option>
-                                        <option value="shipping" data-lang-ar="قيد التوصيل" data-lang-fr="En livraison">قيد التوصيل</option>
-                                        <option value="completed" data-lang-ar="مكتملة" data-lang-fr="Complété">مكتملة</option>
-                                        <option value="cancelled" data-lang-ar="ملغاة" data-lang-fr="Annulé">ملغاة</option>
-                                    </select>
-                                    
-                                    <select id="orderFilterChannel" class="form-input">
-                                        <option value="all" data-lang-ar="جميع القنوات" data-lang-fr="Tous les canaux">جميع القنوات</option>
-                                        <option value="whatsapp" data-lang-ar="واتساب" data-lang-fr="WhatsApp">واتساب</option>
-                                        <option value="telegram" data-lang-ar="تلغرام" data-lang-fr="Telegram">تلغرام</option>
-                                        <option value="facebook" data-lang-ar="فايسبوك" data-lang-fr="Facebook">فايسبوك</option>
-                                        <option value="instagram" data-lang-ar="انستغرام" data-lang-fr="Instagram">انستغرام</option>
-                                        <option value="tiktok" data-lang-ar="تيكتوك" data-lang-fr="TikTok">تيكتوك</option>
-                                        <option value="phone" data-lang-ar="هاتف" data-lang-fr="Téléphone">هاتف</option>
-                                    </select>
-                                    
-                                    <input type="date" id="orderFilterDate" class="form-input">
-                                    
-                                    <button id="applyOrderFilters" class="gradient-btn">
-                                        <i class="fas fa-filter mr-2"></i> 
-                                        <span data-lang-ar="تصفية" data-lang-fr="Filtrer">تصفية</span>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- قائمة الطلبات -->
-                            <div class="dashboard-card">
-                                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4 md:mb-0" data-lang-ar="قائمة الطلبات" data-lang-fr="Liste des commandes">قائمة الطلبات</h3>
-                                    <div class="flex gap-2">
-                                        <button id="newOrderBtn" class="gradient-btn px-4">
-                                            <i class="fas fa-plus mr-2"></i> 
-                                            <span data-lang-ar="طلب جديد" data-lang-fr="Nouvelle commande">طلب جديد</span>
-                                        </button>
-                                        <button id="refreshOrdersBtn" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold">
-                                            <i class="fas fa-sync-alt"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div id="ordersList" class="space-y-4">
-                                    <!-- سيتم ملؤها ديناميكياً -->
-                                    <div class="text-center py-12 text-gray-400">
-                                        <i class="fas fa-shopping-bag text-4xl mb-3"></i>
-                                        <p class="text-gray-500" data-lang-ar="لا توجد طلبات بعد" data-lang-fr="Aucune commande pour le moment">لا توجد طلبات بعد</p>
-                                        <p class="text-sm text-gray-400 mt-2" data-lang-ar="سيتم عرض الطلبات الجديدة من وسائل التواصل هنا" data-lang-fr="Les nouvelles commandes des réseaux sociaux apparaîtront ici">سيتم عرض الطلبات الجديدة من وسائل التواصل هنا</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- كاميرا الذكاء -->
-                        <div id="tabCamera" class="tab-content hidden">
-                            <div class="mb-6">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-2" data-lang-ar="كاميرا الذكاء الاصطناعي" data-lang-fr="Caméra d'intelligence artificielle">كاميرا الذكاء الاصطناعي</h2>
-                                <p class="text-gray-600" data-lang-ar="مسح المخزون الذكي وتحديث الكميات تلقائياً" data-lang-fr="Scan intelligent du stock et mise à jour automatique des quantités">مسح المخزون الذكي وتحديث الكميات تلقائياً</p>
-                            </div>
-                            
-                            <!-- منطقة الكاميرا الرئيسية -->
-                            <div class="camera-container mb-6">
-                                <div class="relative">
-                                    <div id="cameraView" class="relative w-full h-96 bg-black">
-                                        <!-- الفيديو الحقيقي -->
-                                        <video id="liveCamera" class="w-full h-full object-cover hidden" autoplay playsinline muted></video>
-                                        
-                                        <!-- العرض الافتراضي -->
-                                        <div id="cameraPlaceholder" class="w-full h-full flex flex-col items-center justify-center">
-                                            <div class="relative mb-6">
-                                                <div class="w-32 h-32 border-4 border-dashed border-gray-600 rounded-full flex items-center justify-center">
-                                                    <i class="fas fa-camera text-gray-500 text-4xl"></i>
-                                                </div>
-                                                <div class="absolute -top-2 -right-2 w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
-                                                    <i class="fas fa-robot text-white text-xl"></i>
-                                                </div>
-                                            </div>
-                                            <p class="text-white text-xl font-bold mb-2" data-lang-ar="كاميرا المخزون الذكي" data-lang-fr="Caméra de stock intelligent">كاميرا المخزون الذكي</p>
-                                            <p class="text-gray-400 text-center max-w-md" data-lang-ar="وجه الكاميرا نحو رفوف المتجر لمسح المنتجات وتحديث المخزون تلقائياً" data-lang-fr="Dirigez la caméra vers les rayons du magasin pour scanner les produits et mettre à jour le stock automatiquement">
-                                                وجه الكاميرا نحو رفوف المتجر لمسح المنتجات وتحديث المخزون تلقائياً
-                                            </p>
-                                        </div>
-                                        
-                                        <!-- علامات الاكتشاف -->
-                                        <div id="detectionOverlay" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
-                                    </div>
-                                    
-                                    <!-- شريط التحكم بالكاميرا -->
-                                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3">
-                                        <button id="startCameraBtn" class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-bold flex items-center">
-                                            <i class="fas fa-video mr-2"></i> 
-                                            <span data-lang-ar="تشغيل الكاميرا" data-lang-fr="Activer caméra">تشغيل الكاميرا</span>
-                                        </button>
-                                        <button id="captureImageBtn" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold flex items-center">
-                                            <i class="fas fa-camera mr-2"></i> 
-                                            <span data-lang-ar="التقاط صورة" data-lang-fr="Prendre photo">التقاط صورة</span>
-                                        </button>
-                                        <button id="toggleAutoScan" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-bold flex items-center">
-                                            <i class="fas fa-robot mr-2"></i> 
-                                            <span data-lang-ar="المسح التلقائي" data-lang-fr="Scan auto">المسح التلقائي</span>
-                                        </button>
-                                    </div>
-                                    
-                                    <!-- حالة الكاميرا -->
-                                    <div class="absolute top-4 right-4 flex flex-col gap-2">
-                                        <span id="cameraStatus" class="badge badge-success" data-lang-ar="جاهزة" data-lang-fr="Prête">جاهزة</span>
-                                        <span id="scanMode" class="badge bg-blue-100 text-blue-800" data-lang-ar="يدوي" data-lang-fr="Manuel">يدوي</span>
-                                    </div>
-                                </div>
-                                
-                                <!-- معلومات المسح -->
-                                <div class="p-4 bg-gray-800 text-white">
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        <div>
-                                            <p class="text-sm text-gray-300" data-lang-ar="وضع المسح" data-lang-fr="Mode scan">وضع المسح</p>
-                                            <p id="scanModeText" class="font-bold" data-lang-ar="يدوي - اضغط لبدء المسح" data-lang-fr="Manuel - Appuyez pour scanner">يدوي - اضغط لبدء المسح</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm text-gray-300" data-lang-ar="المنتجات المكتشفة" data-lang-fr="Produits détectés">المنتجات المكتشفة</p>
-                                            <p id="detectedCount" class="font-bold">0</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm text-gray-300" data-lang-ar="دقة الاكتشاف" data-lang-fr="Précision détection">دقة الاكتشاف</p>
-                                            <p id="detectionAccuracy" class="font-bold">0%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- نتائج المسح والتحكم -->
-                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                                <!-- المنتجات المكتشفة -->
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="المنتجات المكتشفة" data-lang-fr="Produits détectés">المنتجات المكتشفة</h3>
-                                    <div id="detectedProducts" class="space-y-3 max-h-96 overflow-y-auto scrollbar-custom">
-                                        <div class="text-center py-8 text-gray-400">
-                                            <i class="fas fa-search text-3xl mb-3"></i>
-                                            <p data-lang-ar="لم يتم اكتشاف منتجات بعد" data-lang-fr="Aucun produit détecté">لم يتم اكتشاف منتجات بعد</p>
-                                            <p class="text-sm mt-2" data-lang-ar="ابدأ المسح باكتشاف المنتجات" data-lang-fr="Commencez à scanner pour détecter">ابدأ المسح باكتشاف المنتجات</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- التحكم في المسح -->
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="إعدادات المسح" data-lang-fr="Paramètres scan">إعدادات المسح</h3>
-                                    <div class="space-y-4">
-                                        <div>
-                                            <label class="flex items-center justify-between mb-2">
-                                                <span class="font-bold text-gray-700" data-lang-ar="المسح التلقائي" data-lang-fr="Scan automatique">المسح التلقائي</span>
-                                                <div class="toggle-switch">
-                                                    <input type="checkbox" id="autoScanSetting">
-                                                    <span class="toggle-slider"></span>
-                                                </div>
-                                            </label>
-                                            <p class="text-sm text-gray-500" data-lang-ar="تحديث المخزون تلقائياً عند المسح" data-lang-fr="Mise à jour automatique du stock">تحديث المخزون تلقائياً عند المسح</p>
-                                        </div>
-                                        
-                                        <div>
-                                            <label class="flex items-center justify-between mb-2">
-                                                <span class="font-bold text-gray-700" data-lang-ar="اكتشاف الباركود" data-lang-fr="Détection code-barres">اكتشاف الباركود</span>
-                                                <div class="toggle-switch">
-                                                    <input type="checkbox" id="barcodeDetection" checked>
-                                                    <span class="toggle-slider"></span>
-                                                </div>
-                                            </label>
-                                            <p class="text-sm text-gray-500" data-lang-ar="قراءة الباركود للمنتجات" data-lang-fr="Lire les codes-barres des produits">قراءة الباركود للمنتجات</p>
-                                        </div>
-                                        
-                                        <div>
-                                            <label class="flex items-center justify-between mb-2">
-                                                <span class="font-bold text-gray-700" data-lang-ar="التنبيه بالاختلافات" data-lang-fr="Alerte différences">التنبيه بالاختلافات</span>
-                                                <div class="toggle-switch">
-                                                    <input type="checkbox" id="differenceAlerts" checked>
-                                                    <span class="toggle-slider"></span>
-                                                </div>
-                                            </label>
-                                            <p class="text-sm text-gray-500" data-lang-ar="إشعار عند اختلاف الكميات" data-lang-fr="Alerte en cas de différence de quantité">إشعار عند اختلاف الكميات</p>
-                                        </div>
-                                        
-                                        <button id="startScanBtn" class="gradient-btn w-full">
-                                            <i class="fas fa-play mr-2"></i> 
-                                            <span data-lang-ar="بدء مسح المخزون" data-lang-fr="Démarrer scan du stock">بدء مسح المخزون</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <!-- تحديث المخزون -->
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="تحديث المخزون" data-lang-fr="Mise à jour stock">تحديث المخزون</h3>
-                                    <div class="space-y-4">
-                                        <div class="p-4 bg-green-50 rounded-xl">
-                                            <div class="flex items-center mb-2">
-                                                <i class="fas fa-sync-alt text-2xl text-green-600 mr-3"></i>
-                                                <div>
-                                                    <p class="font-bold text-gray-800" data-lang-ar="التحديث التلقائي" data-lang-fr="Mise à jour automatique">التحديث التلقائي</p>
-                                                    <p class="text-sm text-gray-600" data-lang-ar="تحديث المخزون بعد المسح" data-lang-fr="Mise à jour après scan">تحديث المخزون بعد المسح</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-3">
-                                                <div class="flex justify-between mb-1">
-                                                    <span class="text-sm text-gray-600" data-lang-ar="جاهزية النظام" data-lang-fr="Prêt système">جاهزية النظام</span>
-                                                    <span class="text-sm font-bold text-green-600">100%</span>
-                                                </div>
-                                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                                    <div class="bg-green-600 h-2 rounded-full" style="width: 100%"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div id="updateSummary" class="space-y-3">
-                                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                                                <span data-lang-ar="المنتجات المضافة" data-lang-fr="Produits ajoutés">المنتجات المضافة</span>
-                                                <span id="addedProducts" class="font-bold text-green-600">0</span>
-                                            </div>
-                                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                                                <span data-lang-ar="الكميات المحدثة" data-lang-fr="Quantités mises à jour">الكميات المحدثة</span>
-                                                <span id="updatedQuantities" class="font-bold text-blue-600">0</span>
-                                            </div>
-                                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                                                <span data-lang-ar="الاختلافات" data-lang-fr="Différences">الاختلافات</span>
-                                                <span id="differencesCount" class="font-bold text-yellow-600">0</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <button id="updateInventoryFromScan" class="gradient-btn w-full" disabled>
-                                            <i class="fas fa-database mr-2"></i> 
-                                            <span data-lang-ar="تحديث المخزون الآن" data-lang-fr="Mettre à jour le stock">تحديث المخزون الآن</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- وسائل التواصل -->
-                        <div id="tabSocial" class="tab-content hidden">
-                            <div class="mb-6">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-2" data-lang-ar="وسائل التواصل والاتصال" data-lang-fr="Réseaux sociaux et communication">وسائل التواصل والاتصال</h2>
-                                <p class="text-gray-600" data-lang-ar="إدارة جميع قنوات التواصل مع الزبائن من مكان واحد" data-lang-fr="Gérez tous vos canaux de communication avec les clients depuis un seul endroit">إدارة جميع قنوات التواصل مع الزبائن من مكان واحد</p>
-                            </div>
-                            
-                            <!-- إحصاءات التواصل -->
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="رسائل جديدة" data-lang-fr="Nouveaux messages">رسائل جديدة</p>
-                                    <p id="newMessages" class="text-2xl font-black text-blue-600">0</p>
-                                </div>
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="المحادثات النشطة" data-lang-fr="Conversations actives">المحادثات النشطة</p>
-                                    <p id="activeConversations" class="text-2xl font-black text-green-600">0</p>
-                                </div>
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="متوسط الرد" data-lang-fr="Temps réponse moyen">متوسط الرد</p>
-                                    <p id="avgResponseTime" class="text-2xl font-black text-purple-600">0 ث</p>
-                                </div>
-                                <div class="stat-card">
-                                    <p class="text-xs text-gray-500 font-bold mb-1" data-lang-ar="رضا الزبائن" data-lang-fr="Satisfaction clients">رضا الزبائن</p>
-                                    <p id="customerSatisfaction" class="text-2xl font-black text-yellow-600">0%</p>
-                                </div>
-                            </div>
-                            
-                            <!-- قنوات التواصل -->
-                            <div class="dashboard-card mb-6">
-                                <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="قنوات التواصل المتصلة" data-lang-fr="Canaux connectés">قنوات التواصل المتصلة</h3>
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    <div class="social-card social-whatsapp active">
-                                        <div class="text-center">
-                                            <i class="fab fa-whatsapp text-4xl mb-3"></i>
-                                            <p class="font-bold">WhatsApp</p>
-                                            <p class="text-sm opacity-90" data-lang-ar="متصل" data-lang-fr="Connecté">متصل</p>
-                                            <div class="mt-3">
-                                                <span class="bg-white text-green-800 text-xs font-bold px-2 py-1 rounded-full">15 رسالة جديدة</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="social-card social-facebook active">
-                                        <div class="text-center">
-                                            <i class="fab fa-facebook text-4xl mb-3"></i>
-                                            <p class="font-bold">Facebook</p>
-                                            <p class="text-sm opacity-90" data-lang-ar="متصل" data-lang-fr="Connecté">متصل</p>
-                                            <div class="mt-3">
-                                                <span class="bg-white text-blue-800 text-xs font-bold px-2 py-1 rounded-full">8 رسالة جديدة</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="social-card social-instagram">
-                                        <div class="text-center">
-                                            <i class="fab fa-instagram text-4xl mb-3"></i>
-                                            <p class="font-bold">Instagram</p>
-                                            <p class="text-sm opacity-90" data-lang-ar="غير متصل" data-lang-fr="Déconnecté">غير متصل</p>
-                                            <div class="mt-3">
-                                                <button class="bg-white text-pink-800 text-xs font-bold px-3 py-1 rounded-full hover:bg-gray-100" data-lang-ar="توصيل" data-lang-fr="Connecter">توصيل</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="social-card social-telegram">
-                                        <div class="text-center">
-                                            <i class="fab fa-telegram text-4xl mb-3"></i>
-                                            <p class="font-bold">Telegram</p>
-                                            <p class="text-sm opacity-90" data-lang-ar="غير متصل" data-lang-fr="Déconnecté">غير متصل</p>
-                                            <div class="mt-3">
-                                                <button class="bg-white text-blue-800 text-xs font-bold px-3 py-1 rounded-full hover:bg-gray-100" data-lang-ar="توصيل" data-lang-fr="Connecter">توصيل</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- المحادثات النشطة -->
-                            <div class="dashboard-card">
-                                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4 md:mb-0" data-lang-ar="المحادثات النشطة" data-lang-fr="Conversations actives">المحادثات النشطة</h3>
-                                    <div class="flex gap-2">
-                                        <select class="form-input w-full md:w-auto">
-                                            <option data-lang-ar="جميع القنوات" data-lang-fr="Tous les canaux">جميع القنوات</option>
-                                            <option data-lang-ar="واتساب فقط" data-lang-fr="WhatsApp seulement">واتساب فقط</option>
-                                            <option data-lang-ar="فايسبوك فقط" data-lang-fr="Facebook seulement">فايسبوك فقط</option>
-                                        </select>
-                                        <button class="gradient-btn px-4">
-                                            <i class="fas fa-plus mr-2"></i> 
-                                            <span data-lang-ar="محادثة جديدة" data-lang-fr="Nouvelle conversation">محادثة جديدة</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div id="activeChats" class="space-y-4">
-                                    <!-- سيتم ملؤها ديناميكياً -->
-                                    <div class="text-center py-12 text-gray-400">
-                                        <i class="fas fa-comments text-4xl mb-3"></i>
-                                        <p class="text-gray-500" data-lang-ar="لا توجد محادثات نشطة" data-lang-fr="Aucune conversation active">لا توجد محادثات نشطة</p>
-                                        <p class="text-sm text-gray-400 mt-2" data-lang-ar="سيتم عرض المحادثات من وسائل التواصل هنا" data-lang-fr="Les conversations des réseaux sociaux apparaîtront ici">سيتم عرض المحادثات من وسائل التواصل هنا</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- التقارير والتحليلات -->
-                        <div id="tabAnalytics" class="tab-content hidden">
-                            <div class="mb-6">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-2" data-lang-ar="التقارير والتحليلات المتقدمة" data-lang-fr="Rapports et analyses avancés">التقارير والتحليلات المتقدمة</h2>
-                                <p class="text-gray-600" data-lang-ar="تحليل أداء متجرك وتوقعات المبيعات والمخزون" data-lang-fr="Analysez les performances de votre magasin et prévoyez les ventes et le stock">تحليل أداء متجرك وتوقعات المبيعات والمخزون</p>
-                            </div>
-                            
-                            <!-- المخططات البيانية -->
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="مبيعات الأسبوع" data-lang-fr="Ventes de la semaine">مبيعات الأسبوع</h3>
-                                    <div class="h-64">
-                                        <canvas id="salesChart"></canvas>
-                                    </div>
-                                </div>
-                                
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="المنتجات الأكثر مبيعاً" data-lang-fr="Produits les plus vendus">المنتجات الأكثر مبيعاً</h3>
-                                    <div class="h-64">
-                                        <canvas id="topProductsChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- تقارير متقدمة -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="تحليل الزبائن" data-lang-fr="Analyse clients">تحليل الزبائن</h3>
-                                    <div class="space-y-4">
-                                        <div class="p-4 bg-blue-50 rounded-xl">
-                                            <div class="flex items-center justify-between mb-3">
-                                                <i class="fas fa-users text-2xl text-blue-600"></i>
-                                                <span class="badge badge-success">+15%</span>
-                                            </div>
-                                            <p class="font-bold text-gray-800" data-lang-ar="الزبائن الجدد" data-lang-fr="Nouveaux clients">الزبائن الجدد</p>
-                                            <p class="text-sm text-gray-600" data-lang-ar="زيادة 15% هذا الشهر" data-lang-fr="Augmentation de 15% ce mois">زيادة 15% هذا الشهر</p>
-                                        </div>
-                                        
-                                        <div class="space-y-3">
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-gray-700" data-lang-ar="متوسط المشتريات" data-lang-fr="Achats moyens">متوسط المشتريات</span>
-                                                <span class="font-bold text-green-600">2.4</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-gray-700" data-lang-ar="معدل العودة" data-lang-fr="Taux de retour">معدل العودة</span>
-                                                <span class="font-bold text-blue-600">42%</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-gray-700" data-lang-ar="قيمة الزبون" data-lang-fr="Valeur client">قيمة الزبون</span>
-                                                <span class="font-bold text-purple-600">8,500 دج</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="تحليل الطلبات" data-lang-fr="Analyse commandes">تحليل الطلبات</h3>
-                                    <div class="space-y-4">
-                                        <div class="p-4 bg-green-50 rounded-xl">
-                                            <div class="flex items-center justify-between mb-3">
-                                                <i class="fas fa-shopping-cart text-2xl text-green-600"></i>
-                                                <span class="badge badge-success">+22%</span>
-                                            </div>
-                                            <p class="font-bold text-gray-800" data-lang-ar="معدل الطلبات" data-lang-fr="Taux de commandes">معدل الطلبات</p>
-                                            <p class="text-sm text-gray-600" data-lang-ar="زيادة 22% عن الشهر الماضي" data-lang-fr="Augmentation de 22% par rapport au mois dernier">زيادة 22% عن الشهر الماضي</p>
-                                        </div>
-                                        
-                                        <div class="space-y-3">
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-gray-700" data-lang-ar="متوسط سلة الشراء" data-lang-fr="Panier moyen">متوسط سلة الشراء</span>
-                                                <span class="font-bold text-green-600">12,450 دج</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-gray-700" data-lang-ar="وقت المعالجة" data-lang-fr="Temps traitement">وقت المعالجة</span>
-                                                <span class="font-bold text-yellow-600">2.3 ساعة</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-gray-700" data-lang-ar="معدل الإلغاء" data-lang-fr="Taux annulation">معدل الإلغاء</span>
-                                                <span class="font-bold text-red-600">4.2%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="تنبؤات المخزون" data-lang-fr="Prévisions stock">تنبؤات المخزون</h3>
-                                    <div class="space-y-4">
-                                        <div class="p-4 bg-purple-50 rounded-xl">
-                                            <div class="flex items-center justify-between mb-3">
-                                                <i class="fas fa-chart-line text-2xl text-purple-600"></i>
-                                                <span class="badge badge-success">دقة 89%</span>
-                                            </div>
-                                            <p class="font-bold text-gray-800" data-lang-ar="التنبؤ بالطلب" data-lang-fr="Prévision demande">التنبؤ بالطلب</p>
-                                            <p class="text-sm text-gray-600" data-lang-ar="بناءً على البيانات التاريخية" data-lang-fr="Basé sur les données historiques">بناءً على البيانات التاريخية</p>
-                                        </div>
-                                        
-                                        <div class="space-y-3">
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-gray-700" data-lang-ar="الأسبوع القادم" data-lang-fr="Semaine prochaine">الأسبوع القادم</span>
-                                                <span class="font-bold text-purple-600">+18%</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-gray-700" data-lang-ar="المخزون المطلوب" data-lang-fr="Stock requis">المخزون المطلوب</span>
-                                                <span class="font-bold text-blue-600">45 منتج</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-gray-700" data-lang-ar="مخاطر النفاد" data-lang-fr="Risque rupture">مخاطر النفاد</span>
-                                                <span class="font-bold text-red-600">متوسط</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- تقارير قابلة للتحميل -->
-                            <div class="dashboard-card">
-                                <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="التقارير القابلة للتحميل" data-lang-fr="Rapports téléchargeables">التقارير القابلة للتحميل</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <button class="p-4 border-2 border-gray-200 rounded-xl hover:bg-gray-50 text-left">
-                                        <div class="flex items-center mb-3">
-                                            <i class="fas fa-file-excel text-2xl text-green-600 mr-3"></i>
-                                            <div>
-                                                <p class="font-bold text-gray-800" data-lang-ar="تقرير المبيعات" data-lang-fr="Rapport ventes">تقرير المبيعات</p>
-                                                <p class="text-sm text-gray-500" data-lang-ar="شهري - Excel" data-lang-fr="Mensuel - Excel">شهري - Excel</p>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-download text-gray-400"></i>
-                                    </button>
-                                    
-                                    <button class="p-4 border-2 border-gray-200 rounded-xl hover:bg-gray-50 text-left">
-                                        <div class="flex items-center mb-3">
-                                            <i class="fas fa-file-pdf text-2xl text-red-600 mr-3"></i>
-                                            <div>
-                                                <p class="font-bold text-gray-800" data-lang-ar="تقرير المخزون" data-lang-fr="Rapport stock">تقرير المخزون</p>
-                                                <p class="text-sm text-gray-500" data-lang-ar="أسبوعي - PDF" data-lang-fr="Hebdomadaire - PDF">أسبوعي - PDF</p>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-download text-gray-400"></i>
-                                    </button>
-                                    
-                                    <button class="p-4 border-2 border-gray-200 rounded-xl hover:bg-gray-50 text-left">
-                                        <div class="flex items-center mb-3">
-                                            <i class="fas fa-file-csv text-2xl text-blue-600 mr-3"></i>
-                                            <div>
-                                                <p class="font-bold text-gray-800" data-lang-ar="تقرير الزبائن" data-lang-fr="Rapport clients">تقرير الزبائن</p>
-                                                <p class="text-sm text-gray-500" data-lang-ar="كامل - CSV" data-lang-fr="Complet - CSV">كامل - CSV</p>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-download text-gray-400"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- الإعدادات -->
-                        <div id="tabSettings" class="tab-content hidden">
-                            <div class="mb-6">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-2" data-lang-ar="إعدادات المتجر والنظام" data-lang-fr="Paramètres magasin et système">إعدادات المتجر والنظام</h2>
-                                <p class="text-gray-600" data-lang-ar="تخصيص إعدادات الوكيل الذكي لمتجرك وبياناتك" data-lang-fr="Personnalisez les paramètres de l'agent intelligent pour votre magasin">تخصيص إعدادات الوكيل الذكي لمتجرك وبياناتك</p>
-                            </div>
-                            
-                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                                <!-- معلومات المتجر -->
-                                <div class="dashboard-card lg:col-span-2">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="معلومات المتجر الأساسية" data-lang-fr="Informations magasin">معلومات المتجر الأساسية</h3>
-                                    <div class="space-y-4">
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div>
-                                                <label class="block text-sm font-bold text-gray-700 mb-2" data-lang-ar="اسم المتجر" data-lang-fr="Nom du magasin">اسم المتجر</label>
-                                                <input type="text" id="settingShopName" class="form-input" value="">
-                                            </div>
-                                            <div>
-                                                <label class="block text-sm font-bold text-gray-700 mb-2" data-lang-ar="صاحب المتجر" data-lang-fr="Propriétaire">صاحب المتجر</label>
-                                                <input type="text" id="settingOwnerName" class="form-input" value="">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div>
-                                                <label class="block text-sm font-bold text-gray-700 mb-2" data-lang-ar="البريد الإلكتروني" data-lang-fr="Email">البريد الإلكتروني</label>
-                                                <input type="email" id="settingEmail" class="form-input" value="">
-                                            </div>
-                                            <div>
-                                                <label class="block text-sm font-bold text-gray-700 mb-2" data-lang-ar="رقم الهاتف" data-lang-fr="Téléphone">رقم الهاتف</label>
-                                                <input type="tel" id="settingPhone" class="form-input" value="">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div>
-                                                <label class="block text-sm font-bold text-gray-700 mb-2" data-lang-ar="نوع النشاط" data-lang-fr="Type d'activité">نوع النشاط</label>
-                                                <select id="settingBusinessType" class="form-input">
-                                                    <option value="clothing">ملابس وأزياء</option>
-                                                    <option value="food">مواد غذائية</option>
-                                                    <option value="electronics">هواتف وإلكترونيات</option>
-                                                    <option value="ecommerce">تجارة إلكترونية</option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label class="block text-sm font-bold text-gray-700 mb-2" data-lang-ar="العملة" data-lang-fr="Devise">العملة</label>
-                                                <select id="settingCurrency" class="form-input">
-                                                    <option value="DZD">دينار جزائري (دج)</option>
-                                                    <option value="USD">دولار أمريكي ($)</option>
-                                                    <option value="EUR">يورو (€)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        
-                                        <div>
-                                            <label class="block text-sm font-bold text-gray-700 mb-2" data-lang-ar="عنوان المتجر" data-lang-fr="Adresse magasin">عنوان المتجر</label>
-                                            <textarea id="settingAddress" class="form-input h-24" placeholder="العنوان الكامل للمتجر"></textarea>
-                                        </div>
-                                        
-                                        <button id="saveShopSettings" class="gradient-btn">
-                                            <i class="fas fa-save mr-2"></i> 
-                                            <span data-lang-ar="حفظ معلومات المتجر" data-lang-fr="Enregistrer informations">حفظ معلومات المتجر</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <!-- إعدادات النظام -->
-                                <div class="dashboard-card">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-4" data-lang-ar="إعدادات النظام" data-lang-fr="Paramètres système">إعدادات النظام</h3>
-                                    <div class="space-y-4">
-                                        <div>
-                                            <label class="flex items-center justify-between cursor-pointer mb-3">
-                                                <span class="text-gray-700 font-bold" data-lang-ar="الرد التلقائي" data-lang-fr="Réponse automatique">الرد التلقائي</span>
-                                                <div class="toggle-switch">
-                                                    <input type="checkbox" id="autoReplySetting" checked>
-                                                    <span class="toggle-slider"></span>
-                                                </div>
-                                            </label>
-                                            <p class="text-sm text-gray-500" data-lang-ar="الرد التلقائي على رسائل الزبائن" data-lang-fr="Répondre automatiquement aux clients">الرد التلقائي على رسائل الزبائن</p>
-                                        </div>
-                                        
-                                        <div>
-                                            <label class="flex items-center justify-between cursor-pointer mb-3">
-                                                <span class="text-gray-700 font-bold" data-lang-ar="تنبيهات المخزون" data-lang-fr="Alertes stock">تنبيهات المخزون</span>
-                                                <div class="toggle-switch">
-                                                    <input type="checkbox" id="inventoryAlertsSetting" checked>
-                                                    <span class="toggle-slider"></span>
-                                                </div>
-                                            </label>
-                                            <p class="text-sm text-gray-500" data-lang-ar="إشعارات عند انخفاض المخزون" data-lang-fr="Notifications en cas de stock bas">إشعارات عند انخفاض المخزون</p>
-                                        </div>
-                                        
-                                        <div>
-                                            <label class="flex items-center justify-between cursor-pointer mb-3">
-                                                <span class="text-gray-700 font-bold" data-lang-ar="المسح التلقائي" data-lang-fr="Scan automatique">المسح التلقائي</span>
-                                                <div class="toggle-switch">
-                                                    <input type="checkbox" id="autoScanSettingGlobal">
-                                                    <span class="toggle-slider"></span>
-                                                </div>
-                                            </label>
-                                            <p class="text-sm text-gray-500" data-lang-ar="مسح المخزون تلقائياً" data-lang-fr="Scanner le stock automatiquement">مسح المخزون تلقائياً</p>
-                                        </div>
-                                        
-                                        <div>
-                                            <label class="flex items-center justify-between cursor-pointer mb-3">
-                                                <span class="text-gray-700 font-bold" data-lang-ar="تحديث المخزون الآلي" data-lang-fr="Mise à jour auto stock">تحديث المخزون الآلي</span>
-                                                <div class="toggle-switch">
-                                                    <input type="checkbox" id="autoInventoryUpdate" checked>
-                                                    <span class="toggle-slider"></span>
-                                                </div>
-                                            </label>
-                                            <p class="text-sm text-gray-500" data-lang-ar="تحديث المخزون بعد المسح" data-lang-fr="Mettre à jour après scan">تحديث المخزون بعد المسح</p>
-                                        </div>
-                                        
-                                        <div>
-                                            <label class="flex items-center justify-between cursor-pointer mb-3">
-                                                <span class="text-gray-700 font-bold" data-lang-ar="تقارير يومية" data-lang-fr="Rapports quotidiens">تقارير يومية</span>
-                                                <div class="toggle-switch">
-                                                    <input type="checkbox" id="dailyReports" checked>
-                                                    <span class="toggle-slider"></span>
-                                                </div>
-                                            </label>
-                                            <p class="text-sm text-gray-500" data-lang-ar="إرسال تقارير يومية على البريد" data-lang-fr="Envoyer rapports quotidiens par email">إرسال تقارير يومية على البريد</p>
-                                        </div>
-                                        
-                                        <button id="saveSystemSettings" class="gradient-btn w-full mt-6">
-                                            <i class="fas fa-cog mr-2"></i> 
-                                            <span data-lang-ar="حفظ إعدادات النظام" data-lang-fr="Enregistrer paramètres">حفظ إعدادات النظام</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- تذييل الصفحة -->
-            <div class="mt-10 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
-                <p data-lang-ar="MANY.AI ® 2023 - نظام الوكيل الذكي المتكامل - جميع الحقوق محفوظة" data-lang-fr="MANY.AI ® 2023 - Système d'agent intelligent intégré - Tous droits réservés">
-                    MANY.AI ® 2023 - نظام الوكيل الذكي المتكامل - جميع الحقوق محفوظة
-                </p>
-                <p class="mt-1" data-lang-ar="الدعم الفني: 0550-123-456 | البريد: support@manyai.dz" data-lang-fr="Support technique: 0550-123-456 | Email: support@manyai.dz">
-                    الدعم الفني: 0550-123-456 | البريد: support@manyai.dz
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript -->
-    <script>
-        // ============================================
-        // نظام MANY.AI - النسخة المتطورة
-        // ============================================
-        
-        // البيانات الأساسية للتطبيق
-        const MANY_AI = {
-            // إعدادات النظام
-            settings: {
-                language: 'ar',
-                autoScan: false,
-                autoInventoryUpdate: true,
-                businessType: '',
-                isEcommerce: false,
-                socialChannels: ['whatsapp', 'facebook', 'email']
-            },
-            
-            // بيانات المخزون الحقيقية
-            inventory: {
-                products: [],
-                lastUpdate: null,
-                totalValue: 0,
-                scanHistory: []
-            },
-            
-            // بيانات الطلبات
-            orders: {
-                list: [],
-                stats: {
-                    total: 0,
-                    new: 0,
-                    processing: 0,
-                    completed: 0,
-                    cancelled: 0
-                }
-            },
-            
-            // بيانات التواصل
-            communications: {
-                messages: [],
-                conversations: [],
-                channels: {}
-            },
-            
-            // بيانات المسح
-            scanning: {
-                isActive: false,
-                isAuto: false,
-                detectedItems: [],
-                lastScan: null
-            },
-            
-            // بيانات المتجر
-            shop: {
-                name: '',
-                owner: '',
-                email: '',
-                phone: '',
-                address: '',
-                businessType: '',
-                plan: 'pro',
-                remainingCalls: 65,
-                totalCalls: 100
-            },
-            
-            // إحصائيات
-            stats: {
-                totalSales: 0,
-                totalOrders: 0,
-                activeCustomers: 0,
-                availableProducts: 0,
-                lowStockCount: 0,
-                todaySales: 0,
-                todayOrders: 0
-            }
-        };
-
-        // ============================================
-        // تهيئة النظام عند تحميل الصفحة
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 MANY.AI - نظام الوكيل الذكي المتكامل يعمل الآن');
-            
-            // تهيئة الأنظمة
-            initLanguageSystem();
-            initRegistrationForm();
-            initPlanSelection();
-            initSocialChannels();
-            initDashboard();
-            initInventorySystem();
-            initCameraSystem();
-            initCharts();
-            
-            // تحميل البيانات من التخزين المحلي إن وجدت
-            loadFromLocalStorage();
-            
-            // تحديث العرض
-            updateAllDisplays();
-        });
-
-        // ============================================
-        // نظام اللغات (عربي/فرنسي)
-        // ============================================
-        function initLanguageSystem() {
-            const langArBtn = document.getElementById('langAr');
-            const langFrBtn = document.getElementById('langFr');
-            
-            // زر العربية
-            langArBtn.addEventListener('click', function() {
-                MANY_AI.settings.language = 'ar';
-                updateLanguage('ar');
-                langArBtn.classList.remove('bg-gray-200', 'text-gray-800');
-                langArBtn.classList.add('bg-primary-green', 'text-white');
-                langFrBtn.classList.remove('bg-primary-green', 'text-white');
-                langFrBtn.classList.add('bg-gray-200', 'text-gray-800');
-            });
-            
-            // زر الفرنسية
-            langFrBtn.addEventListener('click', function() {
-                MANY_AI.settings.language = 'fr';
-                updateLanguage('fr');
-                langFrBtn.classList.remove('bg-gray-200', 'text-gray-800');
-                langFrBtn.classList.add('bg-primary-green', 'text-white');
-                langArBtn.classList.remove('bg-primary-green', 'text-white');
-                langArBtn.classList.add('bg-gray-200', 'text-gray-800');
-            });
-        }
-
-        function updateLanguage(lang) {
-            // تحديث جميع العناصر التي لها خاصية data-lang
-            document.querySelectorAll('[data-lang-ar], [data-lang-fr]').forEach(element => {
-                if (lang === 'ar') {
-                    const arabicText = element.getAttribute('data-lang-ar');
-                    if (arabicText) element.textContent = arabicText;
-                } else if (lang === 'fr') {
-                    const frenchText = element.getAttribute('data-lang-fr');
-                    if (frenchText) element.textContent = frenchText;
-                }
-            });
-            
-            // تحديث العناصر الأخرى
-            document.querySelectorAll('[placeholder]').forEach(element => {
-                const placeholder = element.getAttribute('placeholder');
-                if (placeholder.includes('أدخل') || placeholder.includes('اختر')) {
-                    // يمكن إضافة ترجمة للنصوص الأخرى هنا
-                }
-            });
-            
-            console.log(`🌐 تم تغيير اللغة إلى: ${lang === 'ar' ? 'العربية' : 'الفرنسية'}`);
-        }
-
-        // ============================================
-        // نظام التسجيل والتفعيل
-        // ============================================
-        function initRegistrationForm() {
-            const businessTypeSelect = document.getElementById('businessType');
-            const ecommerceSection = document.getElementById('ecommerceSection');
-            const activateButton = document.getElementById('activateButton');
-            
-            // اكتشاف نوع التجارة
-            businessTypeSelect.addEventListener('change', function() {
-                const selectedValue = this.value;
-                MANY_AI.settings.businessType = selectedValue;
-                
-                // التحقق إذا كانت تجارة إلكترونية
-                const isEcommerce = selectedValue.startsWith('ecommerce') || 
-                                   selectedValue.includes('dropshipping') || 
-                                   selectedValue.includes('digital');
-                
-                MANY_AI.settings.isEcommerce = isEcommerce;
-                
-                // إظهار/إخفاء قسم التجارة الإلكترونية
-                if (isEcommerce) {
-                    ecommerceSection.classList.remove('hidden');
-                } else {
-                    ecommerceSection.classList.add('hidden');
-                }
-            });
-            
-            // زر التفعيل
-            activateButton.addEventListener('click', function() {
-                console.log('تم النقر على زر التفعيل');
-                activateShopRegistration();
-            });
-        }
-
-        // دالة تفعيل المتجر
-        function activateShopRegistration() {
-            const ownerName = document.getElementById('ownerName').value.trim();
-            const shopName = document.getElementById('shopName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phoneNumber').value.trim();
-            const businessType = document.getElementById('businessType').value;
-            const transactionId = document.getElementById('transactionId').value.trim();
-            
-            console.log('بيانات التسجيل:', { ownerName, shopName, email, phone, businessType, transactionId });
-            
-            // التحقق من الحقول المطلوبة
-            if (!ownerName || !shopName || !email || !phone || !businessType || !transactionId) {
-                showAlert('يرجى ملء جميع الحقول المطلوبة', 'error');
-                return;
-            }
-            
-            // التحقق من صحة البريد الإلكتروني
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showAlert('يرجى إدخال بريد إلكتروني صحيح', 'error');
-                return;
-            }
-            
-            // التحقق من صحة رقم الهاتف
-            const phoneRegex = /^(\+213|0)[5-7]\d{8}$/;
-            if (!phoneRegex.test(phone)) {
-                showAlert('يرجى إدخال رقم هاتف جزائري صحيح (مثال: 0551234567)', 'error');
-                return;
-            }
-            
-            // ✅ التحقق من رقم المعاملة
-            if (!validateTransactionId(transactionId)) {
-                showAlert('رقم المعاملة غير صحيح. استخدم 555 للنسخة التجريبية أو TEST123456 لاختبار النظام', 'error');
-                return;
-            }
-            
-            // حفظ بيانات المتجر
-            MANY_AI.shop = {
-                name: shopName,
-                owner: ownerName,
-                email: email,
-                phone: phone,
-                businessType: businessType,
-                plan: MANY_AI.shop.plan || 'pro',
-                remainingCalls: 65,
-                totalCalls: 100,
-                transactionId: transactionId
-            };
-            
-            // حفظ إعدادات التواصل
-            const socialCards = document.querySelectorAll('.social-card');
-            MANY_AI.settings.socialChannels = [];
-            socialCards.forEach(card => {
-                const toggle = card.querySelector('input[type="checkbox"]');
-                if (toggle && toggle.checked) {
-                    const socialType = card.getAttribute('data-social');
-                    MANY_AI.settings.socialChannels.push(socialType);
-                }
-            });
-            
-            console.log('بيانات المتجر:', MANY_AI.shop);
-            console.log('قنوات التواصل:', MANY_AI.settings.socialChannels);
-            
-            showAlert('جاري تفعيل الاشتراك وإنشاء متجرك...', 'info');
-            
-            // محاكاة الاتصال بالخادم
-            setTimeout(() => {
-                // حفظ البيانات محلياً
-                saveToLocalStorage();
-                
-                // إظهار رسالة نجاح
-                showAlert('تم تفعيل متجرك بنجاح! جاري تحميل لوحة التحكم...', 'success');
-                
-                // الانتقال إلى لوحة التحكم
-                setTimeout(() => {
-                    switchToDashboard();
-                    
-                    // إضافة منتجات افتراضية للمخزون
-                    initializeSampleInventory();
-                    
-                    // تحديث جميع العروض
-                    updateAllDisplays();
-                    
-                    // إظهار رسالة ترحيب
-                    showAlert(`مرحباً ${MANY_AI.shop.owner}! متجر ${MANY_AI.shop.name} جاهز للعمل`, 'success');
-                }, 1500);
-            }, 2000);
-        }
-
-        // دالة التحقق من رقم المعاملة
-        function validateTransactionId(transactionId) {
-            // للنسخة التجريبية: قبول 555 فقط
-            if (transactionId === '555') {
-                return true;
-            }
-            
-            // للاختبار: قبول TEST123456
-            if (transactionId === 'TEST123456') {
-                return true;
-            }
-            
-            // في الإصدار الحقيقي:
-            // 1. يبدأ بـ BM أو BR (لـ BaridiMob أو Baridi)
-            // 2. يتكون من 10-15 حرفاً وأرقام
-            // 3. لا يحتوي على رموز خاصة
-            const realPattern = /^(BM|BR)[A-Z0-9]{8,13}$/;
-            
-            // إذا كان المستخدم يختبر النظام، يمكنه استخدام هذا النمط
-            if (realPattern.test(transactionId)) {
-                return true;
-            }
-            
-            return false;
-        }
-
-        // ============================================
-        // نظام وسائل التواصل الاجتماعي
-        // ============================================
-        function initSocialChannels() {
-            const socialCards = document.querySelectorAll('.social-card');
-            
-            console.log(`تم العثور على ${socialCards.length} بطاقة تواصل`);
-            
-            socialCards.forEach(card => {
-                const toggle = card.querySelector('input[type="checkbox"]');
-                const socialType = card.getAttribute('data-social');
-                
-                // ✅ إضافة حدث النقر على البطاقة نفسها
-                card.addEventListener('click', function(e) {
-                    // منع النقر على التبديل من تنفيذ الحدث مرتين
-                    if (e.target.closest('.toggle-switch')) return;
-                    
-                    const toggle = this.querySelector('input[type="checkbox"]');
-                    toggle.checked = !toggle.checked;
-                    
-                    // تشغيل حدث التغيير يدوياً
-                    toggle.dispatchEvent(new Event('change'));
-                });
-                
-                // حدث التغيير على التبديل
-                if (toggle) {
-                    toggle.addEventListener('change', function() {
-                        console.log(`تم تغيير حالة ${socialType} إلى: ${this.checked}`);
-                        
-                        if (this.checked) {
-                            card.classList.remove('inactive');
-                            card.classList.add('active');
-                            if (!MANY_AI.settings.socialChannels.includes(socialType)) {
-                                MANY_AI.settings.socialChannels.push(socialType);
-                            }
-                        } else {
-                            card.classList.remove('active');
-                            card.classList.add('inactive');
-                            const index = MANY_AI.settings.socialChannels.indexOf(socialType);
-                            if (index > -1) {
-                                MANY_AI.settings.socialChannels.splice(index, 1);
-                            }
-                        }
-                        
-                        // حفظ الإعدادات
-                        saveToLocalStorage();
-                        showAlert(`${socialType}: ${this.checked ? 'تم التفعيل' : 'تم التعطيل'}`, 'info');
-                    });
-                    
-                    // ✅ تحديث الحالة الأولية
-                    const isActive = MANY_AI.settings.socialChannels.includes(socialType);
-                    toggle.checked = isActive;
-                    
-                    if (isActive) {
-                        card.classList.remove('inactive');
-                        card.classList.add('active');
-                    } else {
-                        card.classList.remove('active');
-                        card.classList.add('inactive');
-                    }
-                }
-            });
-        }
-
-        // ============================================
-        // بقية الدوال تبقى كما هي...
-        // ============================================
-
-        // دالة إظهار التنبيه
-        function showAlert(message, type = 'info') {
-            // إنشاء عنصر التنبيه
-            const alertDiv = document.createElement('div');
-            
-            // تحديد الألوان حسب النوع
-            let bgColor = 'bg-blue-50';
-            let textColor = 'text-blue-800';
-            let borderColor = 'border-blue-200';
-            let icon = 'info-circle';
-            
-            if (type === 'success') {
-                bgColor = 'bg-green-50';
-                textColor = 'text-green-800';
-                borderColor = 'border-green-200';
-                icon = 'check-circle';
-            } else if (type === 'error') {
-                bgColor = 'bg-red-50';
-                textColor = 'text-red-800';
-                borderColor = 'border-red-200';
-                icon = 'exclamation-circle';
-            } else if (type === 'warning') {
-                bgColor = 'bg-yellow-50';
-                textColor = 'text-yellow-800';
-                borderColor = 'border-yellow-200';
-                icon = 'exclamation-triangle';
-            }
-            
-            alertDiv.className = `fixed top-4 right-4 z-50 ${bgColor} ${borderColor} border-l-4 ${textColor} p-4 rounded-r-lg shadow-lg max-w-md transform transition-transform duration-300 translate-x-0 alert-message`;
-            alertDiv.innerHTML = `
-                <div class="flex items-center">
-                    <i class="fas fa-${icon} text-lg mr-3"></i>
-                    <div class="flex-1">
-                        <p class="font-bold">${type === 'success' ? 'نجاح' : type === 'error' ? 'خطأ' : type === 'warning' ? 'تحذير' : 'ملاحظة'}</p>
-                        <p class="text-sm mt-1">${message}</p>
-                    </div>
-                    <button class="text-gray-500 hover:text-gray-700 ml-3" onclick="this.parentElement.parentElement.remove()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            `;
-            
-            // إضافة التنبيه للصفحة
-            document.body.appendChild(alertDiv);
-            
-            // إزالة التنبيه تلقائياً بعد 5 ثوانٍ
-            setTimeout(() => {
-                if (alertDiv.parentNode) {
-                    alertDiv.style.transform = 'translateX(100%)';
-                    setTimeout(() => {
-                        if (alertDiv.parentNode) {
-                            alertDiv.parentNode.removeChild(alertDiv);
-                        }
-                    }, 300);
-                }
-            }, 5000);
-        }
-
-        // ... (بقية الدوال تبقى كما هي في النسخة السابقة)
-        // يمكنك إضافة بقية الدوال هنا
-        // ============================================
-
-        // ============================================
-        // بقية النظام (يجب إضافة باقي الدوال هنا)
-        // ============================================
-        // ملاحظة: باقي الدوال مثل initPlanSelection, initDashboard, initInventorySystem, etc.
-        // يجب إضافتها هنا كاملة كما في النسخة السابقة
-        // ============================================
-
-        // ============================================
-        // النظام جاهز
-        // ============================================
-        console.log('✅ نظام MANY.AI جاهز للعمل!');
-    </script>
-</body>
-</html>
+                                    <p class="text-2xl font-black text-green-600 mt-1">2000 دج<span class="text-sm text-gray-500 font-normal" data-lang-ar
