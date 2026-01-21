@@ -3,105 +3,837 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANY.AI | لوحة التحكم الذكية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>MANY.AI | الوكيل الذكي المتكامل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root { --primary-green: #006633; }
-        * { font-family: 'Tajawal', sans-serif; }
-        body { background: #f8fafc; }
-        .dashboard-card { background: white; border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
-        .ai-pulse { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 102, 51, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 102, 51, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 102, 51, 0); } }
+        :root { 
+            --algeria-green: #006633; 
+            --cyber-blue: #1e40af; 
+            --primary-gradient: linear-gradient(135deg, #006633 0%, #1e40af 100%);
+        }
+        * { 
+            font-family: 'Cairo', sans-serif; 
+            transition: all 0.3s ease; 
+        }
+        .hidden { display: none; }
+        .glass { 
+            background: rgba(255, 255, 255, 0.98); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        .active-ring { 
+            border: 3px solid var(--algeria-green) !important; 
+            background: #f0fdf4 !important; 
+            transform: scale(1.05);
+        }
+        input, select { 
+            border: 2px solid #e2e8f0; 
+            outline: none; 
+            transition: all 0.3s;
+        }
+        input:focus, select:focus { 
+            border-color: var(--algeria-green);
+            box-shadow: 0 0 0 3px rgba(0, 102, 51, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #006633 0%, #008044 100%);
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 102, 51, 0.2);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 102, 51, 0.3);
+        }
+        .counter-animation {
+            animation: pulse 0.5s ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #10b981 0%, #3b82f6 100%);
+            transition: width 1s ease-in-out;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
-<body class="p-4 md:p-6">
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
 
-    <div class="max-w-6xl mx-auto">
-        <header class="flex justify-between items-center mb-8 bg-white p-4 rounded-3xl shadow-sm">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-green-700 rounded-2xl flex items-center justify-center text-white text-2xl font-black">M</div>
-                <div>
-                    <h2 class="font-black text-xl text-gray-900">MANY<span class="text-green-700">.AI</span></h2>
-                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Store Intelligence</p>
+    <!-- إشعارات -->
+    <div id="notification" class="notification hidden"></div>
+
+    <!-- قسم التسجيل -->
+    <section id="regSection" class="p-4 max-w-5xl mx-auto py-10 fade-in">
+        <div class="glass p-8 md:p-12 rounded-[45px] shadow-2xl">
+            <!-- تقدم التسجيل -->
+            <div class="mb-10">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-xs font-bold text-gray-500">تقدم التسجيل</span>
+                    <span id="progressPercent" class="text-xs font-bold text-green-600">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                    <div id="progressBar" class="progress-bar h-full" style="width: 0%"></div>
                 </div>
             </div>
+
+            <div class="text-center mb-10">
+                <h1 class="text-5xl font-black text-gray-900 tracking-tighter">MANY<span class="text-green-700">.AI</span></h1>
+                <p class="text-gray-400 font-bold mt-2 uppercase text-xs tracking-widest">الوكيل الذكي الأول في الجزائر</p>
+                <p class="text-gray-600 mt-4 max-w-xl mx-auto text-sm">نظام ذكي متكامل لإدارة متجرك والرد على العملاء تلقائياً بـ 6 وسائل اتصال مختلفة مع دعم للهجات الجزائرية</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 text-right">
+                <div class="space-y-2">
+                    <label class="text-xs font-black text-gray-600 mr-2">صاحب المحل</label>
+                    <input type="text" id="owner" placeholder="الاسم الكامل" class="w-full p-4 rounded-2xl bg-gray-50" oninput="updateProgress()">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-black text-gray-600 mr-2">اسم المحل</label>
+                    <input type="text" id="shop" placeholder="مثال: متجر البركة" class="w-full p-4 rounded-2xl bg-gray-50" oninput="updateProgress()">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-black text-gray-600 mr-2">نوع النشاط</label>
+                    <select id="bizType" class="w-full p-4 rounded-2xl bg-gray-50 font-bold text-gray-500 text-sm" onchange="updateProgress()">
+                        <option value="" selected disabled>اختر نشاط متجرك</option>
+                        <option value="clothing">ملابس وأحذية</option>
+                        <option value="electronics">إلكترونيات وهواتف</option>
+                        <option value="furniture">أثاث وديكور</option>
+                        <option value="grocery">مواد غذائية</option>
+                        <option value="other">نشاط آخر</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-black text-gray-600 mr-2">البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="email@example.com" class="w-full p-4 rounded-2xl bg-gray-50" oninput="updateProgress()">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-black text-gray-600 mr-2">رقم الهاتف</label>
+                    <input type="tel" id="phone" placeholder="06 / 07 / 05" class="w-full p-4 rounded-2xl bg-gray-50" oninput="updateProgress()">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-black text-gray-600 mr-2">نوع الاشتراك</label>
+                    <select id="plan" class="w-full p-4 rounded-2xl bg-green-50 font-black text-green-800" onchange="updateProgress()">
+                        <option value="" selected disabled>اختر نوع الاشتراك</option>
+                        <option value="1000">أساسي (1000 دج/شهر)</option>
+                        <option value="2000">احترافي (2000 دج/شهر)</option>
+                        <option value="5000">متميز (5000 دج/شهر)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <p class="text-[10px] font-black text-gray-400 mb-4 uppercase">وسائل تواصل المتجر (اضغط لتفعيلها):</p>
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
+                    <button data-channel="whatsapp" onclick="toggleChannel(this)" class="p-3 border rounded-xl text-[10px] font-bold bg-white hover:scale-105 transition-transform">
+                        <i class="fab fa-whatsapp text-green-500 block text-lg mb-1"></i>واتساب
+                    </button>
+                    <button data-channel="messenger" onclick="toggleChannel(this)" class="p-3 border rounded-xl text-[10px] font-bold bg-white hover:scale-105 transition-transform">
+                        <i class="fab fa-facebook-messenger text-blue-500 block text-lg mb-1"></i>مسانجر
+                    </button>
+                    <button data-channel="telegram" onclick="toggleChannel(this)" class="p-3 border rounded-xl text-[10px] font-bold bg-white hover:scale-105 transition-transform">
+                        <i class="fab fa-telegram text-blue-400 block text-lg mb-1"></i>تليغرام
+                    </button>
+                    <button data-channel="viber" onclick="toggleChannel(this)" class="p-3 border rounded-xl text-[10px] font-bold bg-white hover:scale-105 transition-transform">
+                        <i class="fab fa-viber text-purple-500 block text-lg mb-1"></i>فايبر
+                    </button>
+                    <button data-channel="sms" onclick="toggleChannel(this)" class="p-3 border rounded-xl text-[10px] font-bold bg-white hover:scale-105 transition-transform">
+                        <i class="fas fa-sms text-gray-500 block text-lg mb-1"></i>SMS
+                    </button>
+                    <button data-channel="facebook" onclick="toggleChannel(this)" class="p-3 border rounded-xl text-[10px] font-bold bg-white hover:scale-105 transition-transform">
+                        <i class="fab fa-facebook text-blue-700 block text-lg mb-1"></i>فايسبوك
+                    </button>
+                </div>
+                <p id="channelsCount" class="text-xs text-gray-500 mt-3 text-center">0/6 وسائل اتصال مفعلة</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-gray-900 to-gray-800 p-8 rounded-[35px] text-white shadow-2xl">
+                <div class="flex flex-col md:flex-row gap-6 items-end">
+                    <div class="flex-1 w-full">
+                        <label class="text-xs font-bold text-gray-400 mb-2 block">رمز التفعيل (المرسل بعد الدفع):</label>
+                        <div class="relative">
+                            <input type="text" id="actCode" maxlength="6" placeholder="000000" 
+                                   class="w-full p-4 bg-white/10 rounded-2xl text-center text-3xl font-black tracking-[10px] border border-white/20 outline-none focus:border-green-500">
+                            <button onclick="generateCode()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-xs font-bold text-green-400 hover:text-green-300">
+                                توليد رقم تجريبي
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3">ملاحظة: في النسخة التجريبية يمكنك استخدام الرقم <span class="font-bold text-green-400">123456</span></p>
+                    </div>
+                    <div class="flex flex-col gap-3 w-full md:w-auto">
+                        <button onclick="validateForm()" class="btn-primary px-10 py-5 rounded-2xl text-xl w-full">
+                            <i class="fas fa-lock mr-2"></i>تفعيل المنصة
+                        </button>
+                        <button onclick="showDemo()" class="text-xs text-gray-400 hover:text-white font-bold">
+                            <i class="fas fa-play-circle mr-1"></i> مشاهدة عرض تجريبي (30 ثانية)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم لوحة التحكم -->
+    <section id="dashSection" class="hidden p-4 md:p-8 max-w-7xl mx-auto fade-in">
+        <!-- رأس لوحة التحكم -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 bg-white p-6 rounded-[30px] shadow-sm border border-gray-100">
             <div class="flex items-center gap-4">
-                <div class="hidden md:block text-left">
-                    <p class="text-xs text-gray-500 font-bold">حالة الوكيل</p>
-                    <p class="text-sm text-green-700 font-black">نشط الآن</p>
+                <div class="w-14 h-14 bg-gradient-to-br from-green-800 to-blue-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg">
+                    <i class="fas fa-robot"></i>
                 </div>
-                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border-2 border-green-500 ai-pulse cursor-pointer">
-                    <i class="fas fa-robot text-green-700"></i>
+                <div>
+                    <h2 id="shopName" class="text-2xl font-black text-gray-800">مركز التحكم الذكي</h2>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[10px] text-green-600 font-bold bg-green-50 px-2 py-1 rounded-full">
+                            <i class="fas fa-shield-virus ml-1"></i> نظام الحماية السيبرانية نشط
+                        </span>
+                        <span id="activeSince" class="text-[10px] text-gray-500">تم التفعيل اليوم</span>
+                    </div>
                 </div>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <div class="bg-blue-50 px-4 py-2 rounded-2xl text-center border border-blue-100">
+                    <p class="text-[10px] text-blue-600 font-bold">اللهجة الحالية</p>
+                    <p id="dialectLabel" class="text-sm font-black italic">عاصمية / وسط</p>
+                </div>
+                <button onclick="logout()" class="bg-red-50 px-4 py-2 rounded-2xl text-center border border-red-100 hover:bg-red-100 transition-colors">
+                    <p class="text-[10px] text-red-600 font-bold">تسجيل الخروج</p>
+                    <p class="text-xs font-black"><i class="fas fa-sign-out-alt ml-1"></i></p>
+                </button>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="dashboard-card p-6 border-r-8 border-green-700">
-                <p class="text-gray-500 text-sm font-bold mb-2">عداد المكالمات (اليوم)</p>
-                <div class="flex justify-between items-end">
-                    <h3 class="text-4xl font-black text-gray-900">42</h3>
-                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-lg font-bold">باقي 8 مكالمات للفئة 1</span>
+        <!-- بطاقات الإحصائيات -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <div class="glass p-6 rounded-3xl border-r-8 border-green-700 hover:shadow-lg cursor-pointer" onclick="simCall()">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">المكالمات اليومية</p>
+                        <h3 id="cCount" class="text-4xl font-black mt-1">0</h3>
+                        <p id="tierText" class="text-[10px] font-bold text-green-600 mt-2">الفئة الأولى: محلي</p>
+                    </div>
+                    <i class="fas fa-phone-alt text-green-600 text-2xl"></i>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>هدف اليوم: 50 مكالمة</span>
+                        <span id="callProgress">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-100 h-2 rounded-full mt-1">
+                        <div id="callProgressBar" class="h-2 rounded-full bg-green-500" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass p-6 rounded-3xl border-r-8 border-red-600">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">استشعار الأعطاب</p>
+                        <h3 class="text-lg font-black mt-1 text-green-600">النظام مستقر</h3>
+                        <p class="text-[10px] text-gray-500 mt-1">آخر فحص: <span id="lastCheck">منذ 5 دقائق</span></p>
+                    </div>
+                    <i class="fas fa-heartbeat text-red-500 text-2xl"></i>
                 </div>
                 <div class="w-full bg-gray-100 h-2 rounded-full mt-4">
-                    <div class="bg-green-700 h-2 rounded-full" style="width: 84%"></div>
+                    <div class="h-2 rounded-full bg-green-500 w-full"></div>
                 </div>
             </div>
-
-            <div class="dashboard-card p-6 border-r-8 border-blue-600">
-                <p class="text-gray-500 text-sm font-bold mb-2">طلبات التوصيل النشطة</p>
-                <h3 class="text-4xl font-black text-gray-900">05</h3>
-                <div class="flex gap-2 mt-4">
-                    <span class="text-[10px] bg-blue-50 text-blue-700 border border-blue-200 px-2 py-1 rounded font-bold">Yassir: 3</span>
-                    <span class="text-[10px] bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-bold">TemTem: 2</span>
+            
+            <div class="glass p-6 rounded-3xl border-r-8 border-blue-600">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">تأكيد الطلبيات</p>
+                        <h3 class="text-4xl font-black mt-1">08</h3>
+                        <p class="text-[10px] text-gray-500 mt-1">+2 منذ الصباح</p>
+                    </div>
+                    <i class="fas fa-shopping-cart text-blue-600 text-2xl"></i>
                 </div>
+                <button onclick="simulateOrder()" class="mt-4 text-xs font-bold bg-blue-50 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-100">
+                    <i class="fas fa-plus ml-1"></i> محاكاة طلب جديد
+                </button>
             </div>
-
-            <div class="dashboard-card p-6 border-r-8 border-orange-500">
-                <p class="text-gray-500 text-sm font-bold mb-2">تنبيهات المخزون</p>
-                <h3 class="text-4xl font-black text-gray-900 text-orange-600">02</h3>
-                <p class="text-xs text-gray-400 mt-4 italic font-medium">الذكاء الاصطناعي ينصح بطلب: "زيت 5 لتر"</p>
+            
+            <div class="glass p-6 rounded-3xl border-r-8 border-orange-500">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">المساهمة الإنسانية</p>
+                        <h3 class="text-4xl font-black mt-1 text-orange-600">10%</h3>
+                        <p class="text-[10px] text-gray-500 mt-1">من أرباح المكالمات</p>
+                    </div>
+                    <i class="fas fa-hands-helping text-orange-500 text-2xl"></i>
+                </div>
+                <p class="text-xs text-gray-600 mt-4">تذهب لدعم التعليم الرقمي في المناطق النائية</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
-            <div class="dashboard-card p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h4 class="font-black text-lg text-gray-800">سجل المكالمات الذكية</h4>
-                    <button class="text-green-700 text-xs font-bold underline">عرض الكل</button>
-                </div>
-                <div class="space-y-4">
-                    <div class="p-4 bg-gray-50 rounded-2xl flex items-center justify-between border border-transparent hover:border-green-200 transition-all cursor-pointer">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center text-green-600">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div>
-                                <p class="font-bold text-sm">0661xxxx88 (وهران)</p>
-                                <p class="text-[10px] text-gray-500 italic">"يسأل عن توفر المقاس 42 في الحذاء الرياضي"</p>
-                            </div>
+            <!-- منطق الرد -->
+            <div class="bg-white p-8 rounded-[45px] shadow-lg border border-gray-100">
+                <h4 class="text-2xl font-black mb-6 flex items-center gap-3">
+                    <i class="fas fa-brain text-green-700"></i> منطق الرد (Chat Logic)
+                </h4>
+                <div class="space-y-6">
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 block mb-3 uppercase">تغيير اللهجة حسب المنطقة:</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="setDialect('عاصمية')" class="p-3 border rounded-xl text-xs font-bold hover:bg-green-50 hover:border-green-300 transition-colors">
+                                <i class="fas fa-city ml-1"></i> العاصمة / الوسط
+                            </button>
+                            <button onclick="setDialect('وهرانية')" class="p-3 border rounded-xl text-xs font-bold hover:bg-green-50 hover:border-green-300 transition-colors">
+                                <i class="fas fa-umbrella-beach ml-1"></i> الغرب (وهرانية)
+                            </button>
+                            <button onclick="setDialect('قسنطينية')" class="p-3 border rounded-xl text-xs font-bold hover:bg-green-50 hover:border-green-300 transition-colors">
+                                <i class="fas fa-mountain ml-1"></i> الشرق (قسنطينية)
+                            </button>
+                            <button onclick="setDialect('صحراوية')" class="p-3 border rounded-xl text-xs font-bold hover:bg-green-50 hover:border-green-300 transition-colors">
+                                <i class="fas fa-sun ml-1"></i> الجنوب (صحراوية)
+                            </button>
                         </div>
-                        <span class="text-[10px] font-black text-green-700 uppercase">تم التأكيد</span>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 block mb-3 uppercase">أسلوب الرد الاحترافي:</label>
+                        <select id="replyStyle" class="w-full p-4 rounded-2xl bg-gray-50 font-bold outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" onchange="updateReplyStyle()">
+                            <option value="formal">وكيل رسمي ومنضبط (مُوصى به)</option>
+                            <option value="friendly">ودود وقريب من الزبون</option>
+                            <option value="technical">تقني ومختصر</option>
+                            <option value="promotional">ترويجي ومتحمس</option>
+                        </select>
+                    </div>
+                    <div class="pt-4 border-t border-gray-100">
+                        <label class="text-xs font-bold text-gray-400 block mb-3 uppercase">جرب الرد الذكي:</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="testMessage" placeholder="اكتب رسالة كأنك عميل..." class="flex-1 p-3 border rounded-2xl bg-gray-50 text-sm">
+                            <button onclick="testAIResponse()" class="btn-primary px-6 py-3 rounded-2xl text-sm">
+                                <i class="fas fa-paper-plane ml-1"></i> اختبر
+                            </button>
+                        </div>
+                        <div id="aiResponse" class="mt-4 p-4 bg-green-50 border border-green-200 rounded-2xl hidden">
+                            <p class="text-sm font-bold text-green-800" id="responseText"></p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="dashboard-card p-6 flex flex-col items-center justify-center text-center bg-green-900 text-white">
-                <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-4 text-2xl">
-                    <i class="fas fa-camera"></i>
+            <!-- المسح الآلي للمخزون -->
+            <div class="bg-gradient-to-br from-green-900 to-green-800 rounded-[45px] p-10 text-white text-center shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
+                        <i class="fas fa-camera-retro text-3xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-black mb-4">المسح الآلي للمخزون</h4>
+                    <p class="text-sm text-green-200 mb-8 opacity-90 leading-relaxed">صور الرفوف ليقوم الوكيل بضبط الكميات المتوفرة آلياً وتحديث المتجر. يدعم التعرف على 500+ منتج.</p>
+                    
+                    <div class="relative mb-6">
+                        <video id="v-stream" autoplay playsinline class="hidden w-full max-w-xs mx-auto rounded-3xl border-4 border-white/20 shadow-xl"></video>
+                        <canvas id="canvas" class="hidden absolute top-0 left-0 w-full max-w-xs mx-auto"></canvas>
+                        
+                        <div id="scanner-placeholder" class="w-full max-w-xs h-48 mx-auto bg-white/10 rounded-3xl border-4 border-dashed border-white/20 flex items-center justify-center">
+                            <i class="fas fa-camera text-4xl opacity-50"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button id="cam-btn" onclick="openScanner()" class="bg-white text-green-900 px-8 py-4 rounded-2xl font-black text-lg hover:scale-105 transition-all shadow-lg">
+                            <i class="fas fa-camera mr-2"></i> بدء المسح البصري
+                        </button>
+                        <button onclick="simulateScan()" class="bg-white/20 text-white px-6 py-4 rounded-2xl font-bold hover:bg-white/30 transition-all">
+                            <i class="fas fa-vial mr-2"></i> تجربة محاكاة
+                        </button>
+                    </div>
+                    
+                    <div id="scanResult" class="mt-6 p-4 bg-white/10 rounded-2xl hidden">
+                        <p class="font-bold text-lg mb-2" id="scanResultTitle"></p>
+                        <p class="text-sm text-green-200" id="scanResultText"></p>
+                    </div>
                 </div>
-                <h4 class="font-black text-xl mb-2">المسح البصري الذكي</h4>
-                <p class="text-xs text-green-200 mb-6 max-w-[250px]">قم بتصوير الرفوف لتحديث كمية السلع تلقائياً في قاعدة البيانات</p>
-                <button class="bg-white text-green-900 px-8 py-3 rounded-2xl font-bold hover:scale-105 transition-all shadow-xl">
-                    إفتح الكاميرا الآن
-                </button>
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
+                <div class="absolute -bottom-10 -left-10 w-60 h-60 bg-white/3 rounded-full"></div>
             </div>
+        </div>
+        
+        <!-- قسم النشاطات الأخيرة -->
+        <div class="mt-10 bg-white p-8 rounded-[45px] shadow-lg border border-gray-100">
+            <h4 class="text-2xl font-black mb-6 flex items-center gap-3">
+                <i class="fas fa-history text-green-700"></i> النشاطات الأخيرة
+            </h4>
+            <div class="overflow-x-auto">
+                <table class="w-full text-right">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="p-4 text-xs font-black text-gray-500 uppercase">الوقت</th>
+                            <th class="p-4 text-xs font-black text-gray-500 uppercase">النشاط</th>
+                            <th class="p-4 text-xs font-black text-gray-500 uppercase">التفاصيل</th>
+                            <th class="p-4 text-xs font-black text-gray-500 uppercase">الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activityLog">
+                        <!-- سيتم ملؤها ديناميكياً -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
+    <!-- نموذج العرض التجريبي -->
+    <div id="demoModal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-[35px] max-w-2xl w-full p-8 relative">
+            <button onclick="closeDemo()" class="absolute left-6 top-6 text-gray-500 hover:text-gray-800 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="text-2xl font-black text-center mb-6">عرض توضيحي لـ MANY.AI</h3>
+            <div class="aspect-video bg-gray-900 rounded-2xl mb-6 flex items-center justify-center">
+                <div class="text-white text-center">
+                    <i class="fas fa-play-circle text-6xl mb-4 opacity-50"></i>
+                    <p class="text-xl font-bold">جاري تشغيل العرض التوضيحي...</p>
+                </div>
+            </div>
+            <p class="text-gray-600 text-center text-sm">شاهد كيف يعمل الوكيل الذكي على الرد تلقائياً على عملائك عبر 6 قنوات اتصال مختلفة مع فهم اللهجات المحلية</p>
         </div>
     </div>
 
+    <script>
+        // حالة التطبيق
+        let appState = {
+            activeChannels: [],
+            calls: 0,
+            orders: 8,
+            dialect: 'عاصمية',
+            replyStyle: 'formal',
+            lastHealthCheck: new Date(),
+            activities: []
+        };
+
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            startHealthMonitoring();
+        });
+
+        // تحديث شريط التقدم
+        function updateProgress() {
+            const fields = ['owner', 'shop', 'bizType', 'email', 'phone', 'plan'];
+            let filled = 0;
+            
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field && field.value && field.value.trim() !== '') {
+                    filled++;
+                }
+            });
+            
+            // إضافة قنوات التواصل المفعلة
+            filled += Math.min(appState.activeChannels.length / 2, 1);
+            
+            const totalFields = fields.length + 1; // +1 لقنوات التواصل
+            const percentage = Math.min(Math.round((filled / totalFields) * 100), 100);
+            
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressPercent').textContent = percentage + '%';
+        }
+
+        // تبديل قناة التواصل
+        function toggleChannel(button) {
+            button.classList.toggle('active-ring');
+            const channel = button.getAttribute('data-channel');
+            
+            if (button.classList.contains('active-ring')) {
+                if (!appState.activeChannels.includes(channel)) {
+                    appState.activeChannels.push(channel);
+                }
+            } else {
+                const index = appState.activeChannels.indexOf(channel);
+                if (index > -1) {
+                    appState.activeChannels.splice(index, 1);
+                }
+            }
+            
+            document.getElementById('channelsCount').textContent = 
+                `${appState.activeChannels.length}/6 وسائل اتصال مفعلة`;
+            updateProgress();
+        }
+
+        // توليد كود تجريبي
+        function generateCode() {
+            document.getElementById('actCode').value = '123456';
+            showNotification('تم توليد كود تجريبي: 123456', 'success');
+        }
+
+        // التحقق من النموذج
+        function validateForm() {
+            const owner = document.getElementById('owner').value.trim();
+            const shop = document.getElementById('shop').value.trim();
+            const bizType = document.getElementById('bizType').value;
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const plan = document.getElementById('plan').value;
+            const code = document.getElementById('actCode').value.trim();
+            
+            if (!owner || !shop || !bizType || !email || !phone || !plan) {
+                showNotification('يرجى ملء كافة الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            if (code.length !== 6 || isNaN(code)) {
+                showNotification('كود التفعيل يجب أن يتكون من 6 أرقام', 'error');
+                return;
+            }
+            
+            if (appState.activeChannels.length === 0) {
+                showNotification('يرجى تفعيل وسيلة اتصال واحدة على الأقل', 'warning');
+                return;
+            }
+            
+            // في حال نجاح التحقق
+            fullActivation();
+        }
+
+        // تفعيل النظام
+        function fullActivation() {
+            const owner = document.getElementById('owner').value;
+            const shop = document.getElementById('shop').value;
+            
+            document.getElementById('regSection').classList.add('hidden');
+            document.getElementById('dashSection').classList.remove('hidden');
+            document.getElementById('shopName').textContent = `مركز تحكم ${shop}`;
+            
+            // تسجيل نشاط التفعيل
+            logActivity('تفعيل النظام', `تم تفعيل MANY.AI لصالح ${owner} - ${shop}`, 'success');
+            
+            // تحديث وقت التفعيل
+            const now = new Date();
+            document.getElementById('activeSince').textContent = 
+                `مفعل منذ ${now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'})}`;
+            
+            window.scrollTo(0,0);
+            showNotification('تم تفعيل النظام بنجاح! يمكنك الآن استخدام جميع الميزات.', 'success');
+        }
+
+        // تغيير اللهجة
+        function setDialect(d) {
+            appState.dialect = d;
+            document.getElementById('dialectLabel').innerText = d;
+            
+            const dialectNames = {
+                'عاصمية': 'اللهجة العاصمية / الوسط',
+                'وهرانية': 'لهجة الغرب (وهرانية)',
+                'قسنطينية': 'لهجة الشرق (قسنطينية)',
+                'صحراوية': 'لهجة الجنوب (صحراوية)'
+            };
+            
+            logActivity('تغيير اللهجة', `تم تغيير لهجة الرد إلى ${dialectNames[d]}`, 'info');
+            showNotification(`تم تحديث قاموس الردود إلى اللهجة: ${d}`, 'success');
+        }
+
+        // تحديث أسلوب الرد
+        function updateReplyStyle() {
+            const styleSelect = document.getElementById('replyStyle');
+            appState.replyStyle = styleSelect.value;
+            
+            const styleNames = {
+                'formal': 'رسمي ومنضبط',
+                'friendly': 'ودود وقريب من الزبون',
+                'technical': 'تقني ومختصر',
+                'promotional': 'ترويجي ومتحمس'
+            };
+            
+            logActivity('تغيير أسلوب الرد', `تم تغيير أسلوب الرد إلى ${styleNames[appState.replyStyle]}`, 'info');
+        }
+
+        // اختبار رد الذكاء الاصطناعي
+        function testAIResponse() {
+            const message = document.getElementById('testMessage').value.trim();
+            if (!message) {
+                showNotification('يرجى كتابة رسالة لاختبار الرد الذكي', 'warning');
+                return;
+            }
+            
+            const responses = {
+                'عاصمية': {
+                    'formal': 'آهلا بيك، شنو لقيت؟ نقدر نخدمك بكيف؟',
+                    'friendly': 'مرحبااا! كيفاش راك؟ شكون تحب نتا؟',
+                    'technical': 'نعم، تفضل. شنو الخدمة لي تحبيها؟',
+                    'promotional': 'آهلا وسهلا! عندنا عروض حصرية اليوم، تفضل شوف!'
+                },
+                'وهرانية': {
+                    'formal': 'الله يحييك، شني بغيتي؟',
+                    'friendly': 'هاوي! كي داير؟ شكون كي تحب نتاني؟',
+                    'technical': 'نعم حاضر، شنو الحاجة؟',
+                    'promotional': 'مرحبا بيك! عندنا بزاف د البضاعة الجديدة، تفضل!'
+                }
+            };
+            
+            let response = "شكراً على تواصلكم. كيف يمكنني مساعدتك اليوم؟";
+            
+            if (responses[appState.dialect] && responses[appState.dialect][appState.replyStyle]) {
+                response = responses[appState.dialect][appState.replyStyle];
+            }
+            
+            document.getElementById('responseText').textContent = response;
+            document.getElementById('aiResponse').classList.remove('hidden');
+            
+            logActivity('اختبار الذكاء الاصطناعي', `تم اختبار الرد على رسالة: "${message.substring(0, 30)}..."`, 'info');
+        }
+
+        // محاكاة المكالمات
+        function simCall() {
+            appState.calls++;
+            document.getElementById('cCount').innerText = appState.calls;
+            document.getElementById('cCount').classList.add('counter-animation');
+            
+            // تحديث شريط التقدم
+            const progress = Math.min((appState.calls / 50) * 100, 100);
+            document.getElementById('callProgressBar').style.width = progress + '%';
+            document.getElementById('callProgress').textContent = Math.round(progress) + '%';
+            
+            setTimeout(() => {
+                document.getElementById('cCount').classList.remove('counter-animation');
+            }, 500);
+            
+            if (appState.calls > 50) {
+                document.getElementById('tierText').innerText = "تم الترقية للفئة 2 (دولي)";
+                document.getElementById('tierText').className = "text-[10px] font-bold text-blue-600 mt-2";
+                logActivity('ترقية الخدمة', 'تم ترقية حسابك إلى الفئة الدولية بعد تجاوز 50 مكالمة', 'success');
+            }
+            
+            logActivity('مكالمة واردة', `تم تسجيل مكالمة واردة جديدة (الإجمالي: ${appState.calls})`, 'info');
+        }
+
+        // محاكاة طلب جديد
+        function simulateOrder() {
+            appState.orders++;
+            document.querySelector('.glass.border-r-8.border-blue-600 h3').textContent = 
+                appState.orders < 10 ? '0' + appState.orders : appState.orders;
+            
+            logActivity('طلب جديد', 'تم تأكيد طلب جديد من عميل عبر الواتساب', 'success');
+            showNotification('تم استلام طلب جديد وتأكيده تلقائياً!', 'success');
+        }
+
+        // فتح الماسح البصري
+        let scannerActive = false;
+        let stream = null;
+        
+        async function openScanner() {
+            if (scannerActive) {
+                // إيقاف المسح
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                }
+                document.getElementById('v-stream').classList.add('hidden');
+                document.getElementById('scanner-placeholder').classList.remove('hidden');
+                document.getElementById('cam-btn').innerHTML = '<i class="fas fa-camera mr-2"></i> بدء المسح البصري';
+                scannerActive = false;
+                return;
+            }
+            
+            const v = document.getElementById('v-stream');
+            const btn = document.getElementById('cam-btn');
+            const placeholder = document.getElementById('scanner-placeholder');
+            
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'environment' } 
+                });
+                
+                v.srcObject = stream;
+                v.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+                btn.innerHTML = '<i class="fas fa-stop mr-2"></i> إيقاف المسح';
+                scannerActive = true;
+                
+                logActivity('مسح المخزون', 'بدء المسح البصري لمخزون المتجر', 'info');
+                
+                // محاكاة اكتشاف المنتجات بعد 3 ثوان
+                setTimeout(() => {
+                    if (scannerActive) {
+                        simulateScan();
+                    }
+                }, 3000);
+                
+            } catch(e) { 
+                showNotification("الكاميرا غير متوفرة أو غير مسموح بالوصول إليها", 'error');
+                console.error("Camera error:", e);
+            }
+        }
+
+        // محاكاة المسح
+        function simulateScan() {
+            const products = [
+                { name: 'قلم حبر أزرق', count: 24, change: '+2' },
+                { name: 'دفتر ملاحظات', count: 12, change: '-3' },
+                { name: 'علبة أوراق', count: 5, change: '+1' },
+                { name: 'حافظة مستندات', count: 8, change: '0' }
+            ];
+            
+            const randomProduct = products[Math.floor(Math.random() * products.length)];
+            
+            document.getElementById('scanResultTitle').textContent = `تم تحديث: ${randomProduct.name}`;
+            document.getElementById('scanResultText').textContent = 
+                `الكمية الجديدة: ${randomProduct.count} (${randomProduct.change} عن آخر جرد)`;
+            document.getElementById('scanResult').classList.remove('hidden');
+            
+            logActivity('تحديث المخزون', `تم تحديث كمية ${randomProduct.name} إلى ${randomProduct.count} وحدة`, 'success');
+            showNotification('تم مسح الرفوف وتحديث المخزون تلقائياً!', 'success');
+        }
+
+        // مراقبة صحة النظام
+        function startHealthMonitoring() {
+            setInterval(() => {
+                appState.lastHealthCheck = new Date();
+                const minutesAgo = Math.floor((new Date() - appState.lastHealthCheck) / 60000);
+                document.getElementById('lastCheck').textContent = 
+                    minutesAgo === 0 ? 'الآن' : `منذ ${minutesAgo} دقيقة`;
+            }, 60000);
+        }
+
+        // تسجيل نشاط
+        function logActivity(title, description, type) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+            
+            const activity = {
+                time: timeString,
+                title: title,
+                description: description,
+                type: type // success, error, warning, info
+            };
+            
+            appState.activities.unshift(activity);
+            
+            // تحديث جدول النشاطات
+            updateActivityLog();
+        }
+
+        // تحديث سجل النشاطات
+        function updateActivityLog() {
+            const logContainer = document.getElementById('activityLog');
+            logContainer.innerHTML = '';
+            
+            // عرض آخر 5 نشاطات فقط
+            const recentActivities = appState.activities.slice(0, 5);
+            
+            recentActivities.forEach(activity => {
+                const typeColors = {
+                    'success': 'text-green-600 bg-green-50',
+                    'error': 'text-red-600 bg-red-50',
+                    'warning': 'text-yellow-600 bg-yellow-50',
+                    'info': 'text-blue-600 bg-blue-50'
+                };
+                
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-100 hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="p-4 text-sm font-bold">${activity.time}</td>
+                    <td class="p-4 text-sm">${activity.title}</td>
+                    <td class="p-4 text-sm text-gray-600">${activity.description}</td>
+                    <td class="p-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold ${typeColors[activity.type]}">
+                            ${activity.type === 'success' ? 'نجاح' : 
+                              activity.type === 'error' ? 'خطأ' : 
+                              activity.type === 'warning' ? 'تحذير' : 'معلومة'}
+                        </span>
+                    </td>
+                `;
+                logContainer.appendChild(row);
+            });
+        }
+
+        // عرض إشعار
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            const typeColors = {
+                'success': 'border-green-200 bg-green-50 text-green-800',
+                'error': 'border-red-200 bg-red-50 text-red-800',
+                'warning': 'border-yellow-200 bg-yellow-50 text-yellow-800',
+                'info': 'border-blue-200 bg-blue-50 text-blue-800'
+            };
+            
+            const icons = {
+                'success': 'fas fa-check-circle',
+                'error': 'fas fa-exclamation-circle',
+                'warning': 'fas fa-exclamation-triangle',
+                'info': 'fas fa-info-circle'
+            };
+            
+            notification.className = `notification ${typeColors[type]}`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="${icons[type]} ml-3 text-xl"></i>
+                    <span class="font-bold">${message}</span>
+                </div>
+                <button onclick="this.parentElement.classList.add('hidden')" class="text-gray-500 hover:text-gray-800">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            notification.classList.remove('hidden');
+            
+            // إخفاء الإشعار بعد 5 ثوانٍ
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 5000);
+        }
+
+        // عرض التجريبي
+        function showDemo() {
+            document.getElementById('demoModal').classList.remove('hidden');
+            logActivity('عرض توضيحي', 'بدأ تشغيل العرض التوضيحي للنظام', 'info');
+        }
+
+        function closeDemo() {
+            document.getElementById('demoModal').classList.add('hidden');
+        }
+
+        // تسجيل الخروج
+        function logout() {
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                document.getElementById('dashSection').classList.add('hidden');
+                document.getElementById('regSection').classList.remove('hidden');
+                
+                // إعادة تعيين النموذج جزئياً
+                document.getElementById('actCode').value = '';
+                
+                showNotification('تم تسجيل الخروج بنجاح', 'info');
+                logActivity('تسجيل الخروج', 'تم تسجيل خروج المستخدم من النظام', 'info');
+            }
+        }
+    </script>
 </body>
 </html>
