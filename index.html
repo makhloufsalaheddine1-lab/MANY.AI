@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANY.AI | الوكيل الذكي المتكامل</title>
+    <title>MANY.AI | الذكاء التجاري المتكامل</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -94,6 +94,38 @@
             from { transform: translateY(-100px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+        .call-badge {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .call-record {
+            border-right: 4px solid;
+            transition: all 0.3s;
+        }
+        .call-record:hover {
+            transform: translateX(-5px);
+            background: #f8fafc;
+        }
+        .incoming { border-right-color: #10b981; }
+        .outgoing { border-right-color: #3b82f6; }
+        .order { border-right-color: #f59e0b; }
+        .dialect-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .dialect-algiers { background: #dbeafe; color: #1e40af; }
+        .dialect-oran { background: #fef3c7; color: #d97706; }
+        .dialect-constantine { background: #fce7f3; color: #be185d; }
+        .dialect-south { background: #dcfce7; color: #15803d; }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
@@ -117,8 +149,8 @@
 
             <div class="text-center mb-10">
                 <h1 class="text-5xl font-black text-gray-900 tracking-tighter">MANY<span class="text-green-700">.AI</span></h1>
-                <p class="text-gray-400 font-bold mt-2 uppercase text-xs tracking-widest">الوكيل الذكي الأول في الجزائر</p>
-                <p class="text-gray-600 mt-4 max-w-xl mx-auto text-sm">نظام ذكي متكامل لإدارة متجرك والرد على العملاء تلقائياً بـ 6 وسائل اتصال مختلفة مع دعم للهجات الجزائرية</p>
+                <p class="text-gray-400 font-bold mt-2 uppercase text-xs tracking-widest">الذكاء التجاري المتكامل</p>
+                <p class="text-gray-600 mt-4 max-w-xl mx-auto text-sm">نظام ذكي متكامل لإدارة متجرك والرد على العملاء تلقائياً بـ 6 وسائل اتصال مختلفة مع دعم تلقائي للهجات الجزائرية</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 text-right">
@@ -136,8 +168,20 @@
                         <option value="" selected disabled>اختر نشاط متجرك</option>
                         <option value="clothing">ملابس وأحذية</option>
                         <option value="electronics">إلكترونيات وهواتف</option>
+                        <option value="computer">كمبيوتر وأجهزة مكتبية</option>
                         <option value="furniture">أثاث وديكور</option>
-                        <option value="grocery">مواد غذائية</option>
+                        <option value="grocery">مواد غذائية وسوبرماركت</option>
+                        <option value="cosmetics">مستحضرات تجميل</option>
+                        <option value="pharmacy">صيدلية وأدوية</option>
+                        <option value="hardware">عدد وأدوات</option>
+                        <option value="books">كتب ومكتبات</option>
+                        <option value="sports">معدات رياضية</option>
+                        <option value="cars">قطع غيار سيارات</option>
+                        <option value="construction">مواد بناء</option>
+                        <option value="textile">أقمشة وخياطة</option>
+                        <option value="jewelry">مجوهرات وساعات</option>
+                        <option value="restaurant">مطعم وكافيه</option>
+                        <option value="services">خدمات (تصليح، صيانة)</option>
                         <option value="other">نشاط آخر</option>
                     </select>
                 </div>
@@ -150,12 +194,22 @@
                     <input type="tel" id="phone" placeholder="06 / 07 / 05" class="w-full p-4 rounded-2xl bg-gray-50" oninput="updateProgress()">
                 </div>
                 <div class="space-y-2">
-                    <label class="text-xs font-black text-gray-600 mr-2">نوع الاشتراك</label>
-                    <select id="plan" class="w-full p-4 rounded-2xl bg-green-50 font-black text-green-800" onchange="updateProgress()">
-                        <option value="" selected disabled>اختر نوع الاشتراك</option>
-                        <option value="1000">أساسي (1000 دج/شهر)</option>
-                        <option value="2000">احترافي (2000 دج/شهر)</option>
-                        <option value="5000">متميز (5000 دج/شهر)</option>
+                    <label class="text-xs font-black text-gray-600 mr-2">المدينة والولاية</label>
+                    <select id="city" class="w-full p-4 rounded-2xl bg-gray-50 font-bold text-gray-500 text-sm" onchange="updateProgress()">
+                        <option value="" selected disabled>اختر مدينتك</option>
+                        <option value="algiers">الجزائر العاصمة</option>
+                        <option value="oran">وهران</option>
+                        <option value="constantine">قسنطينة</option>
+                        <option value="annaba">عنابة</option>
+                        <option value="blida">البليدة</option>
+                        <option value="setif">سطيف</option>
+                        <option value="batna">باتنة</option>
+                        <option value="djelfa">الجلفة</option>
+                        <option value="tlemcen">تلمسان</option>
+                        <option value="ghardaia">غرداية</option>
+                        <option value="tamanrasset">تمنراست</option>
+                        <option value="bechar">بشار</option>
+                        <option value="other">مدينة أخرى</option>
                     </select>
                 </div>
             </div>
@@ -217,13 +271,13 @@
         <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 bg-white p-6 rounded-[30px] shadow-sm border border-gray-100">
             <div class="flex items-center gap-4">
                 <div class="w-14 h-14 bg-gradient-to-br from-green-800 to-blue-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg">
-                    <i class="fas fa-robot"></i>
+                    <i class="fas fa-store"></i>
                 </div>
                 <div>
-                    <h2 id="shopName" class="text-2xl font-black text-gray-800">مركز التحكم الذكي</h2>
+                    <h2 id="shopName" class="text-2xl font-black text-gray-800">MANY.AI | STORE INTELLIGENCE</h2>
                     <div class="flex items-center gap-2 mt-1">
                         <span class="text-[10px] text-green-600 font-bold bg-green-50 px-2 py-1 rounded-full">
-                            <i class="fas fa-shield-virus ml-1"></i> نظام الحماية السيبرانية نشط
+                            <i class="fas fa-circle ml-1" style="font-size: 6px;"></i> حالة الوصول: نشط الآن
                         </span>
                         <span id="activeSince" class="text-[10px] text-gray-500">تم التفعيل اليوم</span>
                     </div>
@@ -232,7 +286,7 @@
             <div class="flex flex-wrap gap-3">
                 <div class="bg-blue-50 px-4 py-2 rounded-2xl text-center border border-blue-100">
                     <p class="text-[10px] text-blue-600 font-bold">اللهجة الحالية</p>
-                    <p id="dialectLabel" class="text-sm font-black italic">عاصمية / وسط</p>
+                    <p id="dialectLabel" class="text-sm font-black italic">جاري التعرف...</p>
                 </div>
                 <button onclick="logout()" class="bg-red-50 px-4 py-2 rounded-2xl text-center border border-red-100 hover:bg-red-100 transition-colors">
                     <p class="text-[10px] text-red-600 font-bold">تسجيل الخروج</p>
@@ -243,123 +297,155 @@
 
         <!-- بطاقات الإحصائيات -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <div class="glass p-6 rounded-3xl border-r-8 border-green-700 hover:shadow-lg cursor-pointer" onclick="simCall()">
+            <div class="glass p-6 rounded-3xl hover:shadow-lg cursor-pointer">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-[10px] font-black text-gray-400 uppercase">المكالمات اليومية</p>
-                        <h3 id="cCount" class="text-4xl font-black mt-1">0</h3>
-                        <p id="tierText" class="text-[10px] font-bold text-green-600 mt-2">الفئة الأولى: محلي</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">عدد المكالمات (اليوم)</p>
+                        <h3 id="cCount" class="text-4xl font-black mt-1">42</h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="call-badge">
+                                <i class="fas fa-phone"></i> باقة المكالمات لقطة 1
+                            </span>
+                            <button onclick="simCall()" class="text-xs font-bold text-green-600 hover:text-green-800">
+                                <i class="fas fa-plus ml-1"></i> إضافة مكالمة
+                            </button>
+                        </div>
                     </div>
                     <i class="fas fa-phone-alt text-green-600 text-2xl"></i>
                 </div>
                 <div class="mt-4">
                     <div class="flex justify-between text-xs text-gray-500">
-                        <span>هدف اليوم: 50 مكالمة</span>
-                        <span id="callProgress">0%</span>
-                    </div>
-                    <div class="w-full bg-gray-100 h-2 rounded-full mt-1">
-                        <div id="callProgressBar" class="h-2 rounded-full bg-green-500" style="width: 0%"></div>
+                        <span>المكالمات النشطة: <span id="activeCalls">3</span></span>
+                        <span id="confirmedCalls">5 طلبات مؤكدة</span>
                     </div>
                 </div>
             </div>
             
-            <div class="glass p-6 rounded-3xl border-r-8 border-red-600">
+            <div class="glass p-6 rounded-3xl">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-[10px] font-black text-gray-400 uppercase">استشعار الأعطاب</p>
-                        <h3 class="text-lg font-black mt-1 text-green-600">النظام مستقر</h3>
-                        <p class="text-[10px] text-gray-500 mt-1">آخر فحص: <span id="lastCheck">منذ 5 دقائق</span></p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">تغييرات المخزون</p>
+                        <h3 class="text-4xl font-black mt-1" id="stockChanges">02</h3>
+                        <p class="text-[10px] text-gray-500 mt-1">منذ آخر مسح</p>
                     </div>
-                    <i class="fas fa-heartbeat text-red-500 text-2xl"></i>
+                    <i class="fas fa-boxes text-blue-600 text-2xl"></i>
                 </div>
-                <div class="w-full bg-gray-100 h-2 rounded-full mt-4">
-                    <div class="h-2 rounded-full bg-green-500 w-full"></div>
-                </div>
-            </div>
-            
-            <div class="glass p-6 rounded-3xl border-r-8 border-blue-600">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-[10px] font-black text-gray-400 uppercase">تأكيد الطلبيات</p>
-                        <h3 class="text-4xl font-black mt-1">08</h3>
-                        <p class="text-[10px] text-gray-500 mt-1">+2 منذ الصباح</p>
-                    </div>
-                    <i class="fas fa-shopping-cart text-blue-600 text-2xl"></i>
-                </div>
-                <button onclick="simulateOrder()" class="mt-4 text-xs font-bold bg-blue-50 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-100">
-                    <i class="fas fa-plus ml-1"></i> محاكاة طلب جديد
+                <button onclick="openScanner()" class="mt-4 text-xs font-bold bg-blue-50 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-100 w-full">
+                    <i class="fas fa-camera ml-1"></i> تحديث بالماسح الضوئي
                 </button>
             </div>
             
-            <div class="glass p-6 rounded-3xl border-r-8 border-orange-500">
+            <div class="glass p-6 rounded-3xl">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-[10px] font-black text-gray-400 uppercase">المساهمة الإنسانية</p>
-                        <h3 class="text-4xl font-black mt-1 text-orange-600">10%</h3>
-                        <p class="text-[10px] text-gray-500 mt-1">من أرباح المكالمات</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">طلبات التوصيل النشطة</p>
+                        <h3 class="text-4xl font-black mt-1">05</h3>
+                        <p class="text-[10px] text-gray-500 mt-1">+2 منذ الصباح</p>
                     </div>
-                    <i class="fas fa-hands-helping text-orange-500 text-2xl"></i>
+                    <i class="fas fa-shipping-fast text-orange-600 text-2xl"></i>
                 </div>
-                <p class="text-xs text-gray-600 mt-4">تذهب لدعم التعليم الرقمي في المناطق النائية</p>
+                <div class="mt-4">
+                    <p class="text-xs text-gray-600">
+                        <i class="fas fa-info-circle ml-1"></i> 
+                        الخدمة الاستحقاقية تتضمن طلبات "رين" لايز
+                    </p>
+                </div>
+            </div>
+            
+            <div class="glass p-6 rounded-3xl">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">المساهمة المجتمعية</p>
+                        <h3 class="text-2xl font-black mt-1 text-green-600">TenTerm: 2</h3>
+                        <p class="text-xs text-gray-500 mt-1">Vasist: 3</p>
+                    </div>
+                    <i class="fas fa-hands-helping text-green-500 text-2xl"></i>
+                </div>
+                <p class="text-xs text-gray-600 mt-4">مساهمات في التعليم والتطوير المجتمعي</p>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- منطق الرد -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- سجل المكالمات الذكية -->
             <div class="bg-white p-8 rounded-[45px] shadow-lg border border-gray-100">
                 <h4 class="text-2xl font-black mb-6 flex items-center gap-3">
-                    <i class="fas fa-brain text-green-700"></i> منطق الرد (Chat Logic)
+                    <i class="fas fa-phone-volume text-green-700"></i> سجل المكالمات الذكية
                 </h4>
-                <div class="space-y-6">
-                    <div>
-                        <label class="text-xs font-bold text-gray-400 block mb-3 uppercase">تغيير اللهجة حسب المنطقة:</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="setDialect('عاصمية')" class="p-3 border rounded-xl text-xs font-bold hover:bg-green-50 hover:border-green-300 transition-colors">
-                                <i class="fas fa-city ml-1"></i> العاصمة / الوسط
-                            </button>
-                            <button onclick="setDialect('وهرانية')" class="p-3 border rounded-xl text-xs font-bold hover:bg-green-50 hover:border-green-300 transition-colors">
-                                <i class="fas fa-umbrella-beach ml-1"></i> الغرب (وهرانية)
-                            </button>
-                            <button onclick="setDialect('قسنطينية')" class="p-3 border rounded-xl text-xs font-bold hover:bg-green-50 hover:border-green-300 transition-colors">
-                                <i class="fas fa-mountain ml-1"></i> الشرق (قسنطينية)
-                            </button>
-                            <button onclick="setDialect('صحراوية')" class="p-3 border rounded-xl text-xs font-bold hover:bg-green-50 hover:border-green-300 transition-colors">
-                                <i class="fas fa-sun ml-1"></i> الجنوب (صحراوية)
-                            </button>
+                <div class="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                    <div class="call-record incoming p-4 rounded-2xl border bg-white">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-bold">0661xxx88</span>
+                            <span class="text-xs text-gray-500">11:45</span>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-2">(وهران) - استفسار عن سعر المنتج</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-green-600 font-bold">
+                                <i class="fas fa-check-circle ml-1"></i> تم الرد تلقائياً
+                            </span>
+                            <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">غير مؤكد</span>
                         </div>
                     </div>
-                    <div>
-                        <label class="text-xs font-bold text-gray-400 block mb-3 uppercase">أسلوب الرد الاحترافي:</label>
-                        <select id="replyStyle" class="w-full p-4 rounded-2xl bg-gray-50 font-bold outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" onchange="updateReplyStyle()">
-                            <option value="formal">وكيل رسمي ومنضبط (مُوصى به)</option>
-                            <option value="friendly">ودود وقريب من الزبون</option>
-                            <option value="technical">تقني ومختصر</option>
-                            <option value="promotional">ترويجي ومتحمس</option>
-                        </select>
-                    </div>
-                    <div class="pt-4 border-t border-gray-100">
-                        <label class="text-xs font-bold text-gray-400 block mb-3 uppercase">جرب الرد الذكي:</label>
-                        <div class="flex gap-2">
-                            <input type="text" id="testMessage" placeholder="اكتب رسالة كأنك عميل..." class="flex-1 p-3 border rounded-2xl bg-gray-50 text-sm">
-                            <button onclick="testAIResponse()" class="btn-primary px-6 py-3 rounded-2xl text-sm">
-                                <i class="fas fa-paper-plane ml-1"></i> اختبر
-                            </button>
+                    
+                    <div class="call-record order p-4 rounded-2xl border bg-white">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-bold">0552xxx45</span>
+                            <span class="text-xs text-gray-500">11:30</span>
                         </div>
-                        <div id="aiResponse" class="mt-4 p-4 bg-green-50 border border-green-200 rounded-2xl hidden">
-                            <p class="text-sm font-bold text-green-800" id="responseText"></p>
+                        <p class="text-xs text-gray-600 mb-2">طلب توصيل - منتج: جهاز لوحي</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-blue-600 font-bold">
+                                <i class="fas fa-shopping-cart ml-1"></i> طلبية مؤكدة
+                            </span>
+                            <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">+1 طلب</span>
+                        </div>
+                    </div>
+                    
+                    <div class="call-record outgoing p-4 rounded-2xl border bg-white">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-bold">0773xxx12</span>
+                            <span class="text-xs text-gray-500">11:15</span>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-2">مكالمة تتبع طلب - تم التأكيد</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-purple-600 font-bold">
+                                <i class="fas fa-headset ml-1"></i> مكالمة صادرة
+                            </span>
+                            <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">متابعة</span>
+                        </div>
+                    </div>
+                    
+                    <div class="call-record incoming p-4 rounded-2xl border bg-white">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-bold">0698xxx76</span>
+                            <span class="text-xs text-gray-500">11:00</span>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-2">استفسار عن وقت العمل</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-green-600 font-bold">
+                                <i class="fas fa-robot ml-1"></i> رد ذكي
+                            </span>
+                            <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">معلومة</span>
                         </div>
                     </div>
                 </div>
+                
+                <div class="mt-6 pt-6 border-t border-gray-100">
+                    <button onclick="addNewCall()" class="btn-primary px-6 py-3 rounded-2xl text-sm w-full">
+                        <i class="fas fa-plus ml-1"></i> إضافة مكالمة جديدة
+                    </button>
+                </div>
             </div>
 
-            <!-- المسح الآلي للمخزون -->
+            <!-- المسح البصري الذكي -->
             <div class="bg-gradient-to-br from-green-900 to-green-800 rounded-[45px] p-10 text-white text-center shadow-2xl relative overflow-hidden">
                 <div class="relative z-10">
                     <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
                         <i class="fas fa-camera-retro text-3xl"></i>
                     </div>
-                    <h4 class="text-2xl font-black mb-4">المسح الآلي للمخزون</h4>
-                    <p class="text-sm text-green-200 mb-8 opacity-90 leading-relaxed">صور الرفوف ليقوم الوكيل بضبط الكميات المتوفرة آلياً وتحديث المتجر. يدعم التعرف على 500+ منتج.</p>
+                    <h4 class="text-2xl font-black mb-4">المسح البصري الذكي</h4>
+                    <p class="text-sm text-green-200 mb-8 opacity-90 leading-relaxed">
+                        قم بتصوير الرفوف لتحديد كمية المخزون المتوفرة وتحديث قاعدة البيانات تلقائياً
+                    </p>
                     
                     <div class="relative mb-6">
                         <video id="v-stream" autoplay playsinline class="hidden w-full max-w-xs mx-auto rounded-3xl border-4 border-white/20 shadow-xl"></video>
@@ -372,7 +458,7 @@
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <button id="cam-btn" onclick="openScanner()" class="bg-white text-green-900 px-8 py-4 rounded-2xl font-black text-lg hover:scale-105 transition-all shadow-lg">
-                            <i class="fas fa-camera mr-2"></i> بدء المسح البصري
+                            <i class="fas fa-camera mr-2"></i> إفتح الكاميرا الآن
                         </button>
                         <button onclick="simulateScan()" class="bg-white/20 text-white px-6 py-4 rounded-2xl font-bold hover:bg-white/30 transition-all">
                             <i class="fas fa-vial mr-2"></i> تجربة محاكاة
@@ -382,6 +468,10 @@
                     <div id="scanResult" class="mt-6 p-4 bg-white/10 rounded-2xl hidden">
                         <p class="font-bold text-lg mb-2" id="scanResultTitle"></p>
                         <p class="text-sm text-green-200" id="scanResultText"></p>
+                        <div class="mt-3 flex items-center justify-center gap-4">
+                            <span class="text-xs px-3 py-1 bg-white/20 rounded-full" id="stockAdded"></span>
+                            <span class="text-xs px-3 py-1 bg-white/20 rounded-full" id="stockRemoved"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
@@ -389,451 +479,97 @@
             </div>
         </div>
         
-        <!-- قسم النشاطات الأخيرة -->
-        <div class="mt-10 bg-white p-8 rounded-[45px] shadow-lg border border-gray-100">
+        <!-- قسم إعدادات اللهجة التلقائية -->
+        <div class="mt-8 bg-white p-8 rounded-[45px] shadow-lg border border-gray-100">
             <h4 class="text-2xl font-black mb-6 flex items-center gap-3">
-                <i class="fas fa-history text-green-700"></i> النشاطات الأخيرة
+                <i class="fas fa-language text-green-700"></i> إعدادات اللهجة التلقائية
             </h4>
-            <div class="overflow-x-auto">
-                <table class="w-full text-right">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="p-4 text-xs font-black text-gray-500 uppercase">الوقت</th>
-                            <th class="p-4 text-xs font-black text-gray-500 uppercase">النشاط</th>
-                            <th class="p-4 text-xs font-black text-gray-500 uppercase">التفاصيل</th>
-                            <th class="p-4 text-xs font-black text-gray-500 uppercase">الحالة</th>
-                        </tr>
-                    </thead>
-                    <tbody id="activityLog">
-                        <!-- سيتم ملؤها ديناميكياً -->
-                    </tbody>
-                </table>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        يتم التعرف التلقائي على لهجة المتصل بناءً على رقم الهاتف والموقع الجغرافي.
+                        النظام يدعم 4 لهجات رئيسية في الجزائر:
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 border rounded-2xl">
+                            <span class="dialect-badge dialect-algiers">عاصمية</span>
+                            <div>
+                                <p class="text-sm font-bold">العاصمة والوسط</p>
+                                <p class="text-xs text-gray-500">اللهجة القياسية للمنطقة الوسطى</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 border rounded-2xl">
+                            <span class="dialect-badge dialect-oran">وهرانية</span>
+                            <div>
+                                <p class="text-sm font-bold">الغرب (وهران)</p>
+                                <p class="text-xs text-gray-500">لهجة مناطق الغرب الجزائري</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 border rounded-2xl">
+                            <span class="dialect-badge dialect-constantine">قسنطينية</span>
+                            <div>
+                                <p class="text-sm font-bold">الشرق (قسنطينة)</p>
+                                <p class="text-xs text-gray-500">لهجة مناطق الشرق الجزائري</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 border rounded-2xl">
+                            <span class="dialect-badge dialect-south">صحراوية</span>
+                            <div>
+                                <p class="text-sm font-bold">الجنوب والصحراء</p>
+                                <p class="text-xs text-gray-500">لهجة المناطق الجنوبية</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-3xl">
+                    <h5 class="font-bold text-lg mb-4">معلومات اللهجة الحالية</h5>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">اللهجة المفعلة:</p>
+                            <p id="currentDialectInfo" class="text-lg font-bold text-green-700">جاري التعرف التلقائي...</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">آخر تحديث:</p>
+                            <p class="text-sm">تلقائياً عند أول اتصال</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">مثال على الرد:</p>
+                            <div class="p-3 bg-white border rounded-2xl">
+                                <p class="text-sm" id="dialectExample">مرحبا، شنو لقيت؟ نقدر نخدمك</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- نموذج العرض التجريبي -->
-    <div id="demoModal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-[35px] max-w-2xl w-full p-8 relative">
-            <button onclick="closeDemo()" class="absolute left-6 top-6 text-gray-500 hover:text-gray-800 text-2xl">
+    <!-- نموذج إضافة مكالمة جديدة -->
+    <div id="callModal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-[35px] max-w-md w-full p-8 relative">
+            <button onclick="closeCallModal()" class="absolute left-6 top-6 text-gray-500 hover:text-gray-800 text-2xl">
                 <i class="fas fa-times"></i>
             </button>
-            <h3 class="text-2xl font-black text-center mb-6">عرض توضيحي لـ MANY.AI</h3>
-            <div class="aspect-video bg-gray-900 rounded-2xl mb-6 flex items-center justify-center">
-                <div class="text-white text-center">
-                    <i class="fas fa-play-circle text-6xl mb-4 opacity-50"></i>
-                    <p class="text-xl font-bold">جاري تشغيل العرض التوضيحي...</p>
+            <h3 class="text-2xl font-black text-center mb-6">إضافة مكالمة جديدة</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-sm font-bold text-gray-600 mb-2 block">رقم الهاتف</label>
+                    <input type="tel" id="newCallPhone" placeholder="06 / 07 / 05" class="w-full p-4 rounded-2xl bg-gray-50 border">
                 </div>
-            </div>
-            <p class="text-gray-600 text-center text-sm">شاهد كيف يعمل الوكيل الذكي على الرد تلقائياً على عملائك عبر 6 قنوات اتصال مختلفة مع فهم اللهجات المحلية</p>
-        </div>
-    </div>
-
-    <script>
-        // حالة التطبيق
-        let appState = {
-            activeChannels: [],
-            calls: 0,
-            orders: 8,
-            dialect: 'عاصمية',
-            replyStyle: 'formal',
-            lastHealthCheck: new Date(),
-            activities: []
-        };
-
-        // تهيئة التطبيق
-        document.addEventListener('DOMContentLoaded', function() {
-            updateProgress();
-            startHealthMonitoring();
-        });
-
-        // تحديث شريط التقدم
-        function updateProgress() {
-            const fields = ['owner', 'shop', 'bizType', 'email', 'phone', 'plan'];
-            let filled = 0;
-            
-            fields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                if (field && field.value && field.value.trim() !== '') {
-                    filled++;
-                }
-            });
-            
-            // إضافة قنوات التواصل المفعلة
-            filled += Math.min(appState.activeChannels.length / 2, 1);
-            
-            const totalFields = fields.length + 1; // +1 لقنوات التواصل
-            const percentage = Math.min(Math.round((filled / totalFields) * 100), 100);
-            
-            document.getElementById('progressBar').style.width = percentage + '%';
-            document.getElementById('progressPercent').textContent = percentage + '%';
-        }
-
-        // تبديل قناة التواصل
-        function toggleChannel(button) {
-            button.classList.toggle('active-ring');
-            const channel = button.getAttribute('data-channel');
-            
-            if (button.classList.contains('active-ring')) {
-                if (!appState.activeChannels.includes(channel)) {
-                    appState.activeChannels.push(channel);
-                }
-            } else {
-                const index = appState.activeChannels.indexOf(channel);
-                if (index > -1) {
-                    appState.activeChannels.splice(index, 1);
-                }
-            }
-            
-            document.getElementById('channelsCount').textContent = 
-                `${appState.activeChannels.length}/6 وسائل اتصال مفعلة`;
-            updateProgress();
-        }
-
-        // توليد كود تجريبي
-        function generateCode() {
-            document.getElementById('actCode').value = '123456';
-            showNotification('تم توليد كود تجريبي: 123456', 'success');
-        }
-
-        // التحقق من النموذج
-        function validateForm() {
-            const owner = document.getElementById('owner').value.trim();
-            const shop = document.getElementById('shop').value.trim();
-            const bizType = document.getElementById('bizType').value;
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const plan = document.getElementById('plan').value;
-            const code = document.getElementById('actCode').value.trim();
-            
-            if (!owner || !shop || !bizType || !email || !phone || !plan) {
-                showNotification('يرجى ملء كافة الحقول المطلوبة', 'error');
-                return;
-            }
-            
-            if (code.length !== 6 || isNaN(code)) {
-                showNotification('كود التفعيل يجب أن يتكون من 6 أرقام', 'error');
-                return;
-            }
-            
-            if (appState.activeChannels.length === 0) {
-                showNotification('يرجى تفعيل وسيلة اتصال واحدة على الأقل', 'warning');
-                return;
-            }
-            
-            // في حال نجاح التحقق
-            fullActivation();
-        }
-
-        // تفعيل النظام
-        function fullActivation() {
-            const owner = document.getElementById('owner').value;
-            const shop = document.getElementById('shop').value;
-            
-            document.getElementById('regSection').classList.add('hidden');
-            document.getElementById('dashSection').classList.remove('hidden');
-            document.getElementById('shopName').textContent = `مركز تحكم ${shop}`;
-            
-            // تسجيل نشاط التفعيل
-            logActivity('تفعيل النظام', `تم تفعيل MANY.AI لصالح ${owner} - ${shop}`, 'success');
-            
-            // تحديث وقت التفعيل
-            const now = new Date();
-            document.getElementById('activeSince').textContent = 
-                `مفعل منذ ${now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'})}`;
-            
-            window.scrollTo(0,0);
-            showNotification('تم تفعيل النظام بنجاح! يمكنك الآن استخدام جميع الميزات.', 'success');
-        }
-
-        // تغيير اللهجة
-        function setDialect(d) {
-            appState.dialect = d;
-            document.getElementById('dialectLabel').innerText = d;
-            
-            const dialectNames = {
-                'عاصمية': 'اللهجة العاصمية / الوسط',
-                'وهرانية': 'لهجة الغرب (وهرانية)',
-                'قسنطينية': 'لهجة الشرق (قسنطينية)',
-                'صحراوية': 'لهجة الجنوب (صحراوية)'
-            };
-            
-            logActivity('تغيير اللهجة', `تم تغيير لهجة الرد إلى ${dialectNames[d]}`, 'info');
-            showNotification(`تم تحديث قاموس الردود إلى اللهجة: ${d}`, 'success');
-        }
-
-        // تحديث أسلوب الرد
-        function updateReplyStyle() {
-            const styleSelect = document.getElementById('replyStyle');
-            appState.replyStyle = styleSelect.value;
-            
-            const styleNames = {
-                'formal': 'رسمي ومنضبط',
-                'friendly': 'ودود وقريب من الزبون',
-                'technical': 'تقني ومختصر',
-                'promotional': 'ترويجي ومتحمس'
-            };
-            
-            logActivity('تغيير أسلوب الرد', `تم تغيير أسلوب الرد إلى ${styleNames[appState.replyStyle]}`, 'info');
-        }
-
-        // اختبار رد الذكاء الاصطناعي
-        function testAIResponse() {
-            const message = document.getElementById('testMessage').value.trim();
-            if (!message) {
-                showNotification('يرجى كتابة رسالة لاختبار الرد الذكي', 'warning');
-                return;
-            }
-            
-            const responses = {
-                'عاصمية': {
-                    'formal': 'آهلا بيك، شنو لقيت؟ نقدر نخدمك بكيف؟',
-                    'friendly': 'مرحبااا! كيفاش راك؟ شكون تحب نتا؟',
-                    'technical': 'نعم، تفضل. شنو الخدمة لي تحبيها؟',
-                    'promotional': 'آهلا وسهلا! عندنا عروض حصرية اليوم، تفضل شوف!'
-                },
-                'وهرانية': {
-                    'formal': 'الله يحييك، شني بغيتي؟',
-                    'friendly': 'هاوي! كي داير؟ شكون كي تحب نتاني؟',
-                    'technical': 'نعم حاضر، شنو الحاجة؟',
-                    'promotional': 'مرحبا بيك! عندنا بزاف د البضاعة الجديدة، تفضل!'
-                }
-            };
-            
-            let response = "شكراً على تواصلكم. كيف يمكنني مساعدتك اليوم؟";
-            
-            if (responses[appState.dialect] && responses[appState.dialect][appState.replyStyle]) {
-                response = responses[appState.dialect][appState.replyStyle];
-            }
-            
-            document.getElementById('responseText').textContent = response;
-            document.getElementById('aiResponse').classList.remove('hidden');
-            
-            logActivity('اختبار الذكاء الاصطناعي', `تم اختبار الرد على رسالة: "${message.substring(0, 30)}..."`, 'info');
-        }
-
-        // محاكاة المكالمات
-        function simCall() {
-            appState.calls++;
-            document.getElementById('cCount').innerText = appState.calls;
-            document.getElementById('cCount').classList.add('counter-animation');
-            
-            // تحديث شريط التقدم
-            const progress = Math.min((appState.calls / 50) * 100, 100);
-            document.getElementById('callProgressBar').style.width = progress + '%';
-            document.getElementById('callProgress').textContent = Math.round(progress) + '%';
-            
-            setTimeout(() => {
-                document.getElementById('cCount').classList.remove('counter-animation');
-            }, 500);
-            
-            if (appState.calls > 50) {
-                document.getElementById('tierText').innerText = "تم الترقية للفئة 2 (دولي)";
-                document.getElementById('tierText').className = "text-[10px] font-bold text-blue-600 mt-2";
-                logActivity('ترقية الخدمة', 'تم ترقية حسابك إلى الفئة الدولية بعد تجاوز 50 مكالمة', 'success');
-            }
-            
-            logActivity('مكالمة واردة', `تم تسجيل مكالمة واردة جديدة (الإجمالي: ${appState.calls})`, 'info');
-        }
-
-        // محاكاة طلب جديد
-        function simulateOrder() {
-            appState.orders++;
-            document.querySelector('.glass.border-r-8.border-blue-600 h3').textContent = 
-                appState.orders < 10 ? '0' + appState.orders : appState.orders;
-            
-            logActivity('طلب جديد', 'تم تأكيد طلب جديد من عميل عبر الواتساب', 'success');
-            showNotification('تم استلام طلب جديد وتأكيده تلقائياً!', 'success');
-        }
-
-        // فتح الماسح البصري
-        let scannerActive = false;
-        let stream = null;
-        
-        async function openScanner() {
-            if (scannerActive) {
-                // إيقاف المسح
-                if (stream) {
-                    stream.getTracks().forEach(track => track.stop());
-                }
-                document.getElementById('v-stream').classList.add('hidden');
-                document.getElementById('scanner-placeholder').classList.remove('hidden');
-                document.getElementById('cam-btn').innerHTML = '<i class="fas fa-camera mr-2"></i> بدء المسح البصري';
-                scannerActive = false;
-                return;
-            }
-            
-            const v = document.getElementById('v-stream');
-            const btn = document.getElementById('cam-btn');
-            const placeholder = document.getElementById('scanner-placeholder');
-            
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { facingMode: 'environment' } 
-                });
-                
-                v.srcObject = stream;
-                v.classList.remove('hidden');
-                placeholder.classList.add('hidden');
-                btn.innerHTML = '<i class="fas fa-stop mr-2"></i> إيقاف المسح';
-                scannerActive = true;
-                
-                logActivity('مسح المخزون', 'بدء المسح البصري لمخزون المتجر', 'info');
-                
-                // محاكاة اكتشاف المنتجات بعد 3 ثوان
-                setTimeout(() => {
-                    if (scannerActive) {
-                        simulateScan();
-                    }
-                }, 3000);
-                
-            } catch(e) { 
-                showNotification("الكاميرا غير متوفرة أو غير مسموح بالوصول إليها", 'error');
-                console.error("Camera error:", e);
-            }
-        }
-
-        // محاكاة المسح
-        function simulateScan() {
-            const products = [
-                { name: 'قلم حبر أزرق', count: 24, change: '+2' },
-                { name: 'دفتر ملاحظات', count: 12, change: '-3' },
-                { name: 'علبة أوراق', count: 5, change: '+1' },
-                { name: 'حافظة مستندات', count: 8, change: '0' }
-            ];
-            
-            const randomProduct = products[Math.floor(Math.random() * products.length)];
-            
-            document.getElementById('scanResultTitle').textContent = `تم تحديث: ${randomProduct.name}`;
-            document.getElementById('scanResultText').textContent = 
-                `الكمية الجديدة: ${randomProduct.count} (${randomProduct.change} عن آخر جرد)`;
-            document.getElementById('scanResult').classList.remove('hidden');
-            
-            logActivity('تحديث المخزون', `تم تحديث كمية ${randomProduct.name} إلى ${randomProduct.count} وحدة`, 'success');
-            showNotification('تم مسح الرفوف وتحديث المخزون تلقائياً!', 'success');
-        }
-
-        // مراقبة صحة النظام
-        function startHealthMonitoring() {
-            setInterval(() => {
-                appState.lastHealthCheck = new Date();
-                const minutesAgo = Math.floor((new Date() - appState.lastHealthCheck) / 60000);
-                document.getElementById('lastCheck').textContent = 
-                    minutesAgo === 0 ? 'الآن' : `منذ ${minutesAgo} دقيقة`;
-            }, 60000);
-        }
-
-        // تسجيل نشاط
-        function logActivity(title, description, type) {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
-            
-            const activity = {
-                time: timeString,
-                title: title,
-                description: description,
-                type: type // success, error, warning, info
-            };
-            
-            appState.activities.unshift(activity);
-            
-            // تحديث جدول النشاطات
-            updateActivityLog();
-        }
-
-        // تحديث سجل النشاطات
-        function updateActivityLog() {
-            const logContainer = document.getElementById('activityLog');
-            logContainer.innerHTML = '';
-            
-            // عرض آخر 5 نشاطات فقط
-            const recentActivities = appState.activities.slice(0, 5);
-            
-            recentActivities.forEach(activity => {
-                const typeColors = {
-                    'success': 'text-green-600 bg-green-50',
-                    'error': 'text-red-600 bg-red-50',
-                    'warning': 'text-yellow-600 bg-yellow-50',
-                    'info': 'text-blue-600 bg-blue-50'
-                };
-                
-                const row = document.createElement('tr');
-                row.className = 'border-b border-gray-100 hover:bg-gray-50';
-                row.innerHTML = `
-                    <td class="p-4 text-sm font-bold">${activity.time}</td>
-                    <td class="p-4 text-sm">${activity.title}</td>
-                    <td class="p-4 text-sm text-gray-600">${activity.description}</td>
-                    <td class="p-4">
-                        <span class="px-3 py-1 rounded-full text-xs font-bold ${typeColors[activity.type]}">
-                            ${activity.type === 'success' ? 'نجاح' : 
-                              activity.type === 'error' ? 'خطأ' : 
-                              activity.type === 'warning' ? 'تحذير' : 'معلومة'}
-                        </span>
-                    </td>
-                `;
-                logContainer.appendChild(row);
-            });
-        }
-
-        // عرض إشعار
-        function showNotification(message, type) {
-            const notification = document.getElementById('notification');
-            const typeColors = {
-                'success': 'border-green-200 bg-green-50 text-green-800',
-                'error': 'border-red-200 bg-red-50 text-red-800',
-                'warning': 'border-yellow-200 bg-yellow-50 text-yellow-800',
-                'info': 'border-blue-200 bg-blue-50 text-blue-800'
-            };
-            
-            const icons = {
-                'success': 'fas fa-check-circle',
-                'error': 'fas fa-exclamation-circle',
-                'warning': 'fas fa-exclamation-triangle',
-                'info': 'fas fa-info-circle'
-            };
-            
-            notification.className = `notification ${typeColors[type]}`;
-            notification.innerHTML = `
-                <div class="flex items-center">
-                    <i class="${icons[type]} ml-3 text-xl"></i>
-                    <span class="font-bold">${message}</span>
+                <div>
+                    <label class="text-sm font-bold text-gray-600 mb-2 block">نوع المكالمة</label>
+                    <select id="callType" class="w-full p-4 rounded-2xl bg-gray-50 border">
+                        <option value="inquiry">استفسار عن سعر/منتج</option>
+                        <option value="order">طلب شراء</option>
+                        <option value="support">دعم فني/شكوى</option>
+                        <option value="info">معلومات عامة</option>
+                    </select>
                 </div>
-                <button onclick="this.parentElement.classList.add('hidden')" class="text-gray-500 hover:text-gray-800">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            
-            notification.classList.remove('hidden');
-            
-            // إخفاء الإشعار بعد 5 ثوانٍ
-            setTimeout(() => {
-                notification.classList.add('hidden');
-            }, 5000);
-        }
-
-        // عرض التجريبي
-        function showDemo() {
-            document.getElementById('demoModal').classList.remove('hidden');
-            logActivity('عرض توضيحي', 'بدأ تشغيل العرض التوضيحي للنظام', 'info');
-        }
-
-        function closeDemo() {
-            document.getElementById('demoModal').classList.add('hidden');
-        }
-
-        // تسجيل الخروج
-        function logout() {
-            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
-                document.getElementById('dashSection').classList.add('hidden');
-                document.getElementById('regSection').classList.remove('hidden');
-                
-                // إعادة تعيين النموذج جزئياً
-                document.getElementById('actCode').value = '';
-                
-                showNotification('تم تسجيل الخروج بنجاح', 'info');
-                logActivity('تسجيل الخروج', 'تم تسجيل خروج المستخدم من النظام', 'info');
-            }
-        }
-    </script>
-</body>
-</html>
+                <div>
+                    <label class="text-sm font-bold text-gray-600 mb-2 block">نتيجة المكالمة</label>
+                    <select id="callResult" class="w-full p-4 rounded-2xl bg-gray-50 border">
+                        <option value="auto-reply">تم الرد تلقائياً</option>
+                        <option value="confirmed-order">طلبية مؤكدة</option>
+                        <option value="pending">قيد الانتظار</option>
+                        <option value="info-sent">تم إرسال
