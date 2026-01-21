@@ -126,24 +126,258 @@
         .dialect-oran { background: #fef3c7; color: #d97706; }
         .dialect-constantine { background: #fce7f3; color: #be185d; }
         .dialect-south { background: #dcfce7; color: #15803d; }
+        /* أنماط جديدة للبطاقات ونظام الخطوات */
+        .subscription-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        .subscription-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .subscription-card.selected {
+            border-color: #006633;
+            background: linear-gradient(to bottom right, #f0fdf4, #dcfce7);
+            box-shadow: 0 10px 25px rgba(0, 102, 51, 0.15);
+        }
+        .subscription-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .subscription-basic .subscription-icon {
+            background: linear-gradient(135deg, #10b981, #34d399);
+        }
+        .subscription-pro .subscription-icon {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+        }
+        .subscription-premium .subscription-icon {
+            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+        }
+        .payment-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 30px 0;
+        }
+        .payment-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+        }
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+            color: #9ca3af;
+        }
+        .step.active .step-circle {
+            background: #006633;
+            border-color: #006633;
+            color: white;
+        }
+        .step.completed .step-circle {
+            background: #10b981;
+            border-color: #10b981;
+            color: white;
+        }
+        .step-text {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .step.active .step-text {
+            color: #006633;
+            font-weight: bold;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen p-4">
 
     <!-- إشعارات -->
     <div id="notification" class="notification hidden"></div>
 
-    <!-- قسم التسجيل -->
-    <section id="regSection" class="p-4 max-w-5xl mx-auto py-10 fade-in">
-        <div class="glass p-8 md:p-12 rounded-[45px] shadow-2xl">
-            <!-- تقدم التسجيل -->
-            <div class="mb-10">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-xs font-bold text-gray-500">تقدم التسجيل</span>
-                    <span id="progressPercent" class="text-xs font-bold text-green-600">0%</span>
+    <!-- نافذة تأكيد الدفع والتفعيل -->
+    <div id="paymentModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="text-center mb-8">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center">
+                    <i class="fas fa-credit-card text-green-600 text-4xl"></i>
                 </div>
-                <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
-                    <div id="progressBar" class="progress-bar h-full" style="width: 0%"></div>
+                <h3 class="text-3xl font-black mb-3">إتمام عملية الدفع</h3>
+                <p class="text-gray-600">لتفعيل اشتراكك، يرجى إتمام الدفع عبر إحدى الطرق أدناه</p>
+            </div>
+            
+            <div class="space-y-4 mb-8">
+                <div class="p-4 border-2 border-green-200 rounded-2xl bg-green-50">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-green-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-university text-white text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg">الدفع عبر CCP</h4>
+                            <p class="text-gray-600 text-sm">الحساب البريدي: <span class="font-bold">123-456-789</span></p>
+                            <p class="text-gray-600 text-sm">اسم المستفيد: <span class="font-bold">MANY.AI</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 border rounded-2xl hover:border-green-400 cursor-pointer" onclick="selectPayment('cib')">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-credit-card text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">بطاقة ائتمان</h4>
+                            <p class="text-gray-600 text-sm">Visa / Mastercard</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 border rounded-2xl hover:border-green-400 cursor-pointer" onclick="selectPayment('baridi')">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-red-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">بريدي موبايل</h4>
+                            <p class="text-gray-600 text-sm">*123#</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 p-6 rounded-2xl mb-8">
+                <h4 class="font-bold mb-3">بعد إتمام الدفع:</h4>
+                <ol class="list-decimal pr-4 space-y-2 text-gray-700">
+                    <li>احفظ رقم المرجع أو صورتك للتحويل</li>
+                    <li>أرسل المرجع إلى <span class="font-bold">contact@many.ai</span></li>
+                    <li>ستستلم رمز التفعيل خلال 15 دقيقة</li>
+                    <li>أدخل الرمز في الحقل المخصص لتفعيل حسابك</li>
+                </ol>
+            </div>
+            
+            <div class="flex gap-3">
+                <button onclick="closePaymentModal()" class="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-2xl font-bold hover:bg-gray-50">
+                    إلغاء
+                </button>
+                <button onclick="simulatePaymentAndActivation()" class="flex-1 py-4 bg-green-600 text-white rounded-2xl font-bold hover:bg-green-700">
+                    <i class="fas fa-play-circle mr-2"></i> تجربة محاكاة الدفع
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة إدخال رمز التفعيل -->
+    <div id="activationModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="text-center mb-8">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-yellow-100 flex items-center justify-center">
+                    <i class="fas fa-key text-yellow-600 text-4xl"></i>
+                </div>
+                <h3 class="text-3xl font-black mb-3">أدخل رمز التفعيل</h3>
+                <p class="text-gray-600">تم إرسال رمز مكون من 6 أرقام إلى بريدك الإلكتروني ورقم هاتفك</p>
+            </div>
+            
+            <div class="relative mb-8">
+                <input type="text" id="activationCodeInput" maxlength="6" 
+                       class="w-full p-6 text-4xl font-black text-center tracking-widest border-3 border-yellow-300 rounded-2xl bg-white focus:border-green-500 focus:outline-none"
+                       placeholder="000000">
+                <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+                    <button onclick="resendActivationCode()" class="text-sm text-yellow-600 hover:text-yellow-800">
+                        <i class="fas fa-redo mr-1"></i> إعادة الإرسال
+                    </button>
+                </div>
+            </div>
+            
+            <p class="text-center text-gray-500 text-sm mb-8">
+                <i class="fas fa-info-circle ml-1"></i>
+                في النسخة التجريبية، استخدم الرقم: <span class="font-bold text-green-600">123456</span>
+            </p>
+            
+            <div class="space-y-3">
+                <button onclick="activateAccount()" id="activateButton" class="w-full py-5 bg-green-600 text-white rounded-2xl font-bold text-xl hover:bg-green-700 relative">
+                    <span>تفعيل الحساب</span>
+                    <div id="activateSpinner" class="hidden absolute inset-0 bg-green-700 rounded-2xl flex items-center justify-center">
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            <span>جاري التفعيل...</span>
+                        </div>
+                    </div>
+                </button>
+                <button onclick="closeActivationModal()" class="w-full py-3 border-2 border-gray-300 text-gray-700 rounded-2xl font-bold hover:bg-gray-50">
+                    العودة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم التسجيل -->
+    <section id="regSection" class="max-w-6xl mx-auto py-8 fade-in">
+        <div class="glass p-8 rounded-[35px] shadow-xl">
+            
+            <!-- نظام الخطوات -->
+            <div class="payment-steps">
+                <div class="step active" id="step1">
+                    <div class="step-circle">1</div>
+                    <div class="step-text">بيانات المتجر</div>
+                </div>
+                <div class="step" id="step2">
+                    <div class="step-circle">2</div>
+                    <div class="step-text">اختر الاشتراك</div>
+                </div>
+                <div class="step" id="step3">
+                    <div class="step-circle">3</div>
+                    <div class="step-text">ادفع وأفعل</div>
                 </div>
             </div>
 
@@ -214,6 +448,123 @@
                 </div>
             </div>
 
+            <!-- ✅ قسم الاشتراك الجديد مع أيقونات -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-black mb-6 text-right">اختر باقة الاشتراك المناسبة</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="subscriptionCards">
+                    <!-- الباقة الأساسية -->
+                    <div class="subscription-card subscription-basic" onclick="selectSubscription('basic', 1000)">
+                        <div class="subscription-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="text-xl font-black mb-3 text-right">الأساسية</h3>
+                        <div class="text-3xl font-black text-green-700 mb-4 text-right">
+                            1000 <span class="text-sm text-gray-500">دج/شهر</span>
+                        </div>
+                        <ul class="space-y-2 mb-6 text-right">
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>200 مكالمة/شهر</span>
+                                <i class="fas fa-check-circle text-green-500"></i>
+                            </li>
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>3 قنوات اتصال</span>
+                                <i class="fas fa-check-circle text-green-500"></i>
+                            </li>
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>مسح 50 منتج</span>
+                                <i class="fas fa-check-circle text-green-500"></i>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-xs px-3 py-1 bg-green-100 text-green-800 rounded-full">مناسب للمتاجر الصغيرة</span>
+                        </div>
+                    </div>
+
+                    <!-- الباقة الاحترافية -->
+                    <div class="subscription-card subscription-pro selected" onclick="selectSubscription('pro', 2000)">
+                        <div class="subscription-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">الأكثر شيوعاً</span>
+                        </div>
+                        <h3 class="text-xl font-black mb-3 text-right">الاحترافية</h3>
+                        <div class="text-3xl font-black text-blue-700 mb-4 text-right">
+                            2000 <span class="text-sm text-gray-500">دج/شهر</span>
+                        </div>
+                        <ul class="space-y-2 mb-6 text-right">
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>500 مكالمة/شهر</span>
+                                <i class="fas fa-check-circle text-blue-500"></i>
+                            </li>
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>6 قنوات اتصال</span>
+                                <i class="fas fa-check-circle text-blue-500"></i>
+                            </li>
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>مسح غير محدود</span>
+                                <i class="fas fa-check-circle text-blue-500"></i>
+                            </li>
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>جميع اللهجات</span>
+                                <i class="fas fa-check-circle text-blue-500"></i>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-xs px-3 py-1 bg-blue-100 text-blue-800 rounded-full">مثالي للمتاجر المتوسطة</span>
+                        </div>
+                    </div>
+
+                    <!-- الباقة المتميزة -->
+                    <div class="subscription-card subscription-premium" onclick="selectSubscription('premium', 5000)">
+                        <div class="subscription-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3 class="text-xl font-black mb-3 text-right">المتميزة</h3>
+                        <div class="text-3xl font-black text-purple-700 mb-4 text-right">
+                            5000 <span class="text-sm text-gray-500">دج/شهر</span>
+                        </div>
+                        <ul class="space-y-2 mb-6 text-right">
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>مكالمات غير محدودة</span>
+                                <i class="fas fa-check-circle text-purple-500"></i>
+                            </li>
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>جميع الميزات</span>
+                                <i class="fas fa-check-circle text-purple-500"></i>
+                            </li>
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>دعم فني 24/7</span>
+                                <i class="fas fa-check-circle text-purple-500"></i>
+                            </li>
+                            <li class="flex items-center gap-2 justify-end">
+                                <span>متعدد الفروع</span>
+                                <i class="fas fa-check-circle text-purple-500"></i>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-xs px-3 py-1 bg-purple-100 text-purple-800 rounded-full">للمتاجر الكبيرة</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- تأكيد اختيار الاشتراك -->
+                <div id="subscriptionConfirm" class="mt-6 p-4 bg-green-50 border border-green-200 rounded-2xl">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            <div>
+                                <p class="font-bold">الباقة المختارة: <span id="selectedPlanName">الاحترافية</span></p>
+                                <p class="text-sm text-gray-600">السعر: <span id="selectedPlanPrice">2000</span> دج/شهر</p>
+                            </div>
+                        </div>
+                        <button onclick="validateAndProceedToPayment()" class="px-6 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 whitespace-nowrap">
+                            المتابعة إلى الدفع والتفعيل →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <div class="mb-10">
                 <p class="text-[10px] font-black text-gray-400 mb-4 uppercase">وسائل تواصل المتجر (اضغط لتفعيلها):</p>
                 <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
@@ -239,26 +590,36 @@
                 <p id="channelsCount" class="text-xs text-gray-500 mt-3 text-center">0/6 وسائل اتصال مفعلة</p>
             </div>
 
+            <!-- ✅ قسم الدفع والتفعيل الجديد -->
             <div class="bg-gradient-to-r from-gray-900 to-gray-800 p-8 rounded-[35px] text-white shadow-2xl">
-                <div class="flex flex-col md:flex-row gap-6 items-end">
+                <h3 class="text-xl font-black mb-6 text-center">الدفع والتفعيل</h3>
+                
+                <div class="flex flex-col md:flex-row gap-6 items-center">
                     <div class="flex-1 w-full">
-                        <label class="text-xs font-bold text-gray-400 mb-2 block">رمز التفعيل (المرسل بعد الدفع):</label>
-                        <div class="relative">
-                            <input type="text" id="actCode" maxlength="6" placeholder="000000" 
-                                   class="w-full p-4 bg-white/10 rounded-2xl text-center text-3xl font-black tracking-[10px] border border-white/20 outline-none focus:border-green-500">
-                            <button onclick="generateCode()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-xs font-bold text-green-400 hover:text-green-300">
-                                توليد رقم تجريبي
-                            </button>
+                        <div class="mb-6">
+                            <label class="text-sm font-bold text-gray-300 mb-3 block">رمز التفعيل:</label>
+                            <div class="relative">
+                                <input type="text" id="actCode" maxlength="6" placeholder="000000" 
+                                       class="w-full p-4 bg-white/10 rounded-2xl text-center text-3xl font-black tracking-[10px] text-white border border-white/20 outline-none focus:border-green-500"
+                                       disabled>
+                                <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+                                    <span class="text-xs text-gray-400">سيظهر بعد الدفع</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-3 text-center">
+                                ملاحظة: في النسخة التجريبية يمكنك استخدام الرقم <span class="font-bold text-green-400">123456</span>
+                            </p>
                         </div>
-                        <p class="text-xs text-gray-400 mt-3">ملاحظة: في النسخة التجريبية يمكنك استخدام الرقم <span class="font-bold text-green-400">123456</span></p>
                     </div>
-                    <div class="flex flex-col gap-3 w-full md:w-auto">
-                        <button onclick="validateForm()" class="btn-primary px-10 py-5 rounded-2xl text-xl w-full">
-                            <i class="fas fa-lock mr-2"></i>تفعيل المنصة
+                    
+                    <div class="w-full md:w-auto">
+                        <!-- ✅ زر التفعيل المعدل -->
+                        <button onclick="startPaymentProcess()" class="btn-primary px-12 py-6 rounded-2xl text-xl w-full">
+                            <i class="fas fa-lock mr-3"></i>بدء عملية الدفع والتفعيل
                         </button>
-                        <button onclick="showDemo()" class="text-xs text-gray-400 hover:text-white font-bold">
-                            <i class="fas fa-play-circle mr-1"></i> مشاهدة عرض تجريبي (30 ثانية)
-                        </button>
+                        <p class="text-xs text-center text-gray-400 mt-3">
+                            سيتم نقللك إلى عملية دفع آمنة
+                        </p>
                     </div>
                 </div>
             </div>
@@ -267,7 +628,6 @@
 
     <!-- قسم لوحة التحكم -->
     <section id="dashSection" class="hidden p-4 md:p-8 max-w-7xl mx-auto fade-in">
-        <!-- رأس لوحة التحكم -->
         <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 bg-white p-6 rounded-[30px] shadow-sm border border-gray-100">
             <div class="flex items-center gap-4">
                 <div class="w-14 h-14 bg-gradient-to-br from-green-800 to-blue-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg">
@@ -295,8 +655,9 @@
             </div>
         </header>
 
-        <!-- بطاقات الإحصائيات -->
+        <!-- 🚀 بطاقات الإحصائيات المحسنة (4 بطاقات) -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <!-- 1. بطاقة المكالمات (خضراء) -->
             <div class="glass p-6 rounded-3xl hover:shadow-lg cursor-pointer">
                 <div class="flex justify-between items-start">
                     <div>
@@ -306,9 +667,6 @@
                             <span class="call-badge">
                                 <i class="fas fa-phone"></i> باقة المكالمات لقطة 1
                             </span>
-                            <button onclick="simCall()" class="text-xs font-bold text-green-600 hover:text-green-800">
-                                <i class="fas fa-plus ml-1"></i> إضافة مكالمة
-                            </button>
                         </div>
                     </div>
                     <i class="fas fa-phone-alt text-green-600 text-2xl"></i>
@@ -321,6 +679,7 @@
                 </div>
             </div>
             
+            <!-- 2. بطاقة المخزون (زرقاء) -->
             <div class="glass p-6 rounded-3xl">
                 <div class="flex justify-between items-start">
                     <div>
@@ -335,33 +694,46 @@
                 </button>
             </div>
             
-            <div class="glass p-6 rounded-3xl">
+            <!-- 3. بطاقة وقت التجاوب (أرجوانية) -->
+            <div class="glass p-6 rounded-3xl border-r-8 border-purple-600">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-[10px] font-black text-gray-400 uppercase">طلبات التوصيل النشطة</p>
-                        <h3 class="text-4xl font-black mt-1">05</h3>
-                        <p class="text-[10px] text-gray-500 mt-1">+2 منذ الصباح</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">وقت التجاوب المتوسط</p>
+                        <h3 class="text-4xl font-black mt-1 text-purple-600">02:15</h3>
+                        <p class="text-[10px] text-gray-500 mt-1">ثانية/مكالمة</p>
                     </div>
-                    <i class="fas fa-shipping-fast text-orange-600 text-2xl"></i>
+                    <i class="fas fa-clock text-purple-500 text-2xl"></i>
                 </div>
                 <div class="mt-4">
-                    <p class="text-xs text-gray-600">
-                        <i class="fas fa-info-circle ml-1"></i> 
-                        الخدمة الاستحقاقية تتضمن طلبات "رين" لايز
+                    <div class="w-full bg-gray-100 h-2 rounded-full">
+                        <div class="h-2 rounded-full bg-purple-500" style="width: 85%"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">
+                        <i class="fas fa-arrow-down text-green-500 ml-1"></i>
+                        -15 ثانية عن الأسبوع الماضي
                     </p>
                 </div>
             </div>
             
-            <div class="glass p-6 rounded-3xl">
+            <!-- 4. بطاقة الطلبات المؤكدة (برتقالية) -->
+            <div class="glass p-6 rounded-3xl border-r-8 border-orange-500">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-[10px] font-black text-gray-400 uppercase">المساهمة المجتمعية</p>
-                        <h3 class="text-2xl font-black mt-1 text-green-600">TenTerm: 2</h3>
-                        <p class="text-xs text-gray-500 mt-1">Vasist: 3</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">الطلبات المؤكدة</p>
+                        <h3 class="text-4xl font-black mt-1 text-orange-600">18</h3>
+                        <p class="text-[10px] text-gray-500 mt-1">من أصل 42 مكالمة</p>
                     </div>
-                    <i class="fas fa-hands-helping text-green-500 text-2xl"></i>
+                    <i class="fas fa-check-circle text-orange-500 text-2xl"></i>
                 </div>
-                <p class="text-xs text-gray-600 mt-4">مساهمات في التعليم والتطوير المجتمعي</p>
+                <div class="mt-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-600">معدل التحويل:</span>
+                        <span class="text-xs font-bold text-green-600">43%</span>
+                    </div>
+                    <div class="w-full bg-gray-100 h-2 rounded-full mt-1">
+                        <div class="h-2 rounded-full bg-orange-500" style="width: 43%"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -545,31 +917,343 @@
         </div>
     </section>
 
-    <!-- نموذج إضافة مكالمة جديدة -->
-    <div id="callModal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-[35px] max-w-md w-full p-8 relative">
-            <button onclick="closeCallModal()" class="absolute left-6 top-6 text-gray-500 hover:text-gray-800 text-2xl">
-                <i class="fas fa-times"></i>
-            </button>
-            <h3 class="text-2xl font-black text-center mb-6">إضافة مكالمة جديدة</h3>
-            <div class="space-y-4">
-                <div>
-                    <label class="text-sm font-bold text-gray-600 mb-2 block">رقم الهاتف</label>
-                    <input type="tel" id="newCallPhone" placeholder="06 / 07 / 05" class="w-full p-4 rounded-2xl bg-gray-50 border">
+    <script>
+        // حالة التطبيق
+        let appState = {
+            activeChannels: [],
+            selectedPlan: { plan: 'pro', price: 2000, name: 'الاحترافية' },
+            paymentMethod: null,
+            activationCode: '123456',
+            shopData: null,
+            currentStep: 1,
+            // إحصائيات جديدة
+            confirmedOrders: 18,
+            responseTime: '02:15'
+        };
+
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            updateSteps();
+            // جعل الباقة الاحترافية مختارة افتراضياً
+            selectSubscription('pro', 2000);
+        });
+
+        // تحديث شريط التقدم
+        function updateProgress() {
+            const fields = ['owner', 'shop', 'bizType', 'email', 'phone', 'city'];
+            let filled = 0;
+            
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field && field.value && field.value.trim() !== '') {
+                    filled++;
+                }
+            });
+            
+            // إضافة قنوات التواصل المفعلة
+            filled += Math.min(appState.activeChannels.length / 2, 1);
+            
+            const totalFields = fields.length + 1; // +1 لقنوات التواصل
+            const percentage = Math.min(Math.round((filled / totalFields) * 100), 100);
+            
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressPercent').textContent = percentage + '%';
+        }
+
+        // تحديث عرض الخطوات
+        function updateSteps() {
+            // إزالة جميع الحالات
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active', 'completed');
+            });
+            
+            // تعيين الخطوات المكتملة
+            for (let i = 1; i < appState.currentStep; i++) {
+                const step = document.getElementById(`step${i}`);
+                if (step) step.classList.add('completed');
+            }
+            
+            // تعيين الخطوة النشطة
+            const activeStep = document.getElementById(`step${appState.currentStep}`);
+            if (activeStep) activeStep.classList.add('active');
+        }
+
+        // ✅ اختيار الاشتراك (التعديل الأول)
+        function selectSubscription(plan, price) {
+            // تحديث حالة التطبيق
+            const planNames = {
+                'basic': 'الأساسية',
+                'pro': 'الاحترافية',
+                'premium': 'المتميزة'
+            };
+            
+            appState.selectedPlan = { plan, price, name: planNames[plan] };
+            
+            // تحديث الواجهة
+            document.querySelectorAll('.subscription-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            const selectedCard = document.querySelector(`.subscription-${plan}`);
+            if (selectedCard) {
+                selectedCard.classList.add('selected');
+            }
+            
+            document.getElementById('selectedPlanName').textContent = planNames[plan];
+            document.getElementById('selectedPlanPrice').textContent = price;
+            
+            // تحديث الخطوة
+            appState.currentStep = 2;
+            updateSteps();
+            
+            showNotification(`تم اختيار الباقة ${planNames[plan]}`, 'success');
+        }
+
+        // تبديل قناة التواصل
+        function toggleChannel(button) {
+            button.classList.toggle('active-ring');
+            const channel = button.getAttribute('data-channel');
+            
+            if (button.classList.contains('active-ring')) {
+                if (!appState.activeChannels.includes(channel)) {
+                    appState.activeChannels.push(channel);
+                }
+            } else {
+                const index = appState.activeChannels.indexOf(channel);
+                if (index > -1) {
+                    appState.activeChannels.splice(index, 1);
+                }
+            }
+            
+            document.getElementById('channelsCount').textContent = 
+                `${appState.activeChannels.length}/6 وسائل اتصال مفعلة`;
+            updateProgress();
+        }
+
+        // ✅ التحقق والمتابعة للدفع (جزء من التعديل الثاني)
+        function validateAndProceedToPayment() {
+            // التحقق من البيانات الأساسية
+            const owner = document.getElementById('owner').value.trim();
+            const shop = document.getElementById('shop').value.trim();
+            const bizType = document.getElementById('bizType').value;
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const city = document.getElementById('city').value;
+            
+            if (!owner || !shop || !bizType || !email || !phone || !city) {
+                showNotification('يرجى ملء جميع البيانات الأساسية', 'error');
+                return;
+            }
+            
+            if (appState.activeChannels.length === 0) {
+                showNotification('يرجى تفعيل وسيلة اتصال واحدة على الأقل', 'warning');
+                return;
+            }
+            
+            // حفظ بيانات المتجر
+            appState.shopData = { owner, shop, bizType, email, phone, city };
+            
+            // تحديث الخطوة
+            appState.currentStep = 3;
+            updateSteps();
+            
+            // ✅ عرض نافذة الدفع (بدلاً من الانتقال المباشر)
+            openPaymentModal();
+        }
+
+        // ✅ فتح نافذة الدفع (جزء من التعديل الثاني)
+        function startPaymentProcess() {
+            // أولاً التحقق من البيانات
+            validateAndProceedToPayment();
+        }
+
+        function openPaymentModal() {
+            document.getElementById('paymentModal').classList.remove('hidden');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+        }
+
+        function selectPayment(method) {
+            appState.paymentMethod = method;
+            const methodNames = {
+                'ccp': 'الحساب البريدي',
+                'cib': 'بطاقة الائتمان',
+                'baridi': 'بريدي موبايل'
+            };
+            showNotification(`تم اختيار الدفع عبر ${methodNames[method]}`, 'info');
+        }
+
+        // ✅ محاكاة الدفع والتفعيل (التعديل الثاني)
+        function simulatePaymentAndActivation() {
+            closePaymentModal();
+            
+            // محاكاة عملية الدفع
+            showNotification('جاري محاكاة عملية الدفع...', 'info');
+            
+            setTimeout(() => {
+                showNotification('تمت محاكاة الدفع بنجاح!', 'success');
+                
+                // توليد رمز تفعيل
+                const code = '123456'; // كود تجريبي ثابت للاختبار
+                appState.activationCode = code;
+                
+                // بعد 1 ثانية، عرض نافذة إدخال رمز التفعيل
+                setTimeout(() => {
+                    openActivationModal();
+                }, 1000);
+                
+            }, 2000);
+        }
+
+        function openActivationModal() {
+            document.getElementById('activationModal').classList.remove('hidden');
+            document.getElementById('activationCodeInput').value = '';
+        }
+
+        function closeActivationModal() {
+            document.getElementById('activationModal').classList.add('hidden');
+        }
+
+        function resendActivationCode() {
+            // في النسخة الحقيقية، هنا نرسل الكود فعلياً
+            // في النسخة التجريبية، نعرض الكود فقط
+            document.getElementById('activationCodeInput').value = appState.activationCode;
+            showNotification('تم إعادة إرسال رمز التفعيل', 'info');
+        }
+
+        // ✅ تفعيل الحساب والانتقال للوحة التحكم (التعديل الثاني)
+        function activateAccount() {
+            const enteredCode = document.getElementById('activationCodeInput').value.trim();
+            
+            if (!enteredCode || enteredCode.length !== 6) {
+                showNotification('الرجاء إدخال رمز التفعيل المكون من 6 أرقام', 'error');
+                return;
+            }
+            
+            if (enteredCode !== appState.activationCode) {
+                showNotification('رمز التفعيل غير صحيح', 'error');
+                return;
+            }
+            
+            // إظهار مؤشر التحميل
+            document.getElementById('activateSpinner').classList.remove('hidden');
+            
+            // محاكاة عملية التفعيل
+            setTimeout(() => {
+                // إخفاء مؤشر التحميل
+                document.getElementById('activateSpinner').classList.add('hidden');
+                
+                // إغلاق نافذة التفعيل
+                closeActivationModal();
+                
+                // الانتقال الفعلي للوحة التحكم
+                showNotification('تم تفعيل حسابك بنجاح!', 'success');
+                
+                // تحديث لوحة التحكم ببيانات المتجر
+                document.getElementById('shopName').textContent = `MANY.AI | ${appState.shopData.shop}`;
+                document.getElementById('activeSince').textContent = 
+                    `تم التفعيل في ${new Date().toLocaleDateString('ar-EG')}`;
+                
+                // الانتقال للوحة التحكم
+                document.getElementById('regSection').classList.add('hidden');
+                document.getElementById('dashSection').classList.remove('hidden');
+                window.scrollTo(0, 0);
+                
+            }, 1500);
+        }
+
+        // وظائف لوحة التحكم
+        function logout() {
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                document.getElementById('dashSection').classList.add('hidden');
+                document.getElementById('regSection').classList.remove('hidden');
+                
+                // إعادة تعيين بعض الحالات
+                appState.currentStep = 1;
+                updateSteps();
+                
+                showNotification('تم تسجيل الخروج بنجاح', 'info');
+            }
+        }
+
+        let calls = 42;
+        function addNewCall() {
+            calls++;
+            document.getElementById('cCount').textContent = calls;
+            document.getElementById('cCount').classList.add('counter-animation');
+            
+            // تحديث معدل التحويل
+            const conversionRate = Math.round((appState.confirmedOrders / calls) * 100);
+            document.querySelector('.border-r-8.border-orange-500 .text-xs.font-bold.text-green-600').textContent = conversionRate + '%';
+            document.querySelector('.border-r-8.border-orange-500 .h-2.bg-orange-500').style.width = conversionRate + '%';
+            
+            setTimeout(() => {
+                document.getElementById('cCount').classList.remove('counter-animation');
+            }, 500);
+            showNotification('تمت إضافة مكالمة جديدة', 'success');
+        }
+
+        let stockChanges = 2;
+        function simulateScan() {
+            stockChanges++;
+            document.getElementById('stockChanges').textContent = stockChanges < 10 ? '0' + stockChanges : stockChanges;
+            showNotification('تم محاكاة المسح وتحديث المخزون', 'success');
+        }
+
+        async function openScanner() {
+            const v = document.getElementById('v-stream');
+            const btn = document.getElementById('cam-btn');
+            try {
+                const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                v.srcObject = s;
+                v.style.display = 'block';
+                document.getElementById('scanner-placeholder').style.display = 'none';
+                btn.innerHTML = '<i class="fas fa-stop mr-2"></i> إيقاف المسح';
+                showNotification('بدأ المسح البصري', 'info');
+            } catch(e) { 
+                showNotification("الكاميرا غير متوفرة", 'error');
+                simulateScan(); // محاكاة إذا لم تكن الكاميرا متاحة
+            }
+        }
+
+        function showNotification(message, type) {
+            // إنشاء إشعار مؤقت
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-white p-4 rounded-xl shadow-lg border-l-4 z-50 ${
+                type === 'success' ? 'border-green-500' :
+                type === 'error' ? 'border-red-500' :
+                type === 'info' ? 'border-blue-500' : 'border-gray-500'
+            }`;
+            
+            notification.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-${
+                        type === 'success' ? 'check-circle text-green-500' :
+                        type === 'error' ? 'exclamation-circle text-red-500' :
+                        type === 'info' ? 'info-circle text-blue-500' : 'bell text-gray-500'
+                    } text-xl"></i>
+                    <div class="flex-1">
+                        <p class="font-bold">${message}</p>
+                        <p class="text-xs text-gray-500 mt-1">${new Date().toLocaleTimeString('ar-EG')}</p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <div>
-                    <label class="text-sm font-bold text-gray-600 mb-2 block">نوع المكالمة</label>
-                    <select id="callType" class="w-full p-4 rounded-2xl bg-gray-50 border">
-                        <option value="inquiry">استفسار عن سعر/منتج</option>
-                        <option value="order">طلب شراء</option>
-                        <option value="support">دعم فني/شكوى</option>
-                        <option value="info">معلومات عامة</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-sm font-bold text-gray-600 mb-2 block">نتيجة المكالمة</label>
-                    <select id="callResult" class="w-full p-4 rounded-2xl bg-gray-50 border">
-                        <option value="auto-reply">تم الرد تلقائياً</option>
-                        <option value="confirmed-order">طلبية مؤكدة</option>
-                        <option value="pending">قيد الانتظار</option>
-                        <option value="info-sent">تم إرسال
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // إزالة الإشعار بعد 5 ثوانٍ
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
