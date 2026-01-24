@@ -187,4 +187,42 @@
                 email: document.getElementById('reg_email').value
             };
             
-            document
+            document.getElementById('registrationPage').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('activationPage').classList.add('active');
+                window.scrollTo(0,0);
+            }, 300);
+        }
+
+        // الانتقال من التفعيل إلى لوحة التحكم
+        function toDashboard() {
+            const code = document.getElementById('reg_code').value;
+            if(code.length < 4) { alert("من فضلك أدخل كود تفعيل صحيح."); return; }
+
+            // تحديث عناصر لوحة التحكم بالبيانات المخزنة
+            document.getElementById('dash_store').innerText = merchantData.store;
+            document.getElementById('dash_city').innerText = merchantData.city;
+            document.getElementById('dash_type').innerText = merchantData.type;
+            document.getElementById('dash_phone').innerText = merchantData.phone;
+
+            document.getElementById('activationPage').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('dashboardPage').classList.add('active');
+                window.scrollTo(0,0);
+            }, 300);
+        }
+
+        // تبديل التبويبات في لوحة التحكم
+        function switchTab(tabId, btn) {
+            // إخفاء المحتويات
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            // إظهار المحتوى المختار
+            document.getElementById('tab_' + tabId).classList.remove('hidden');
+            
+            // تحديث الأزرار
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>
