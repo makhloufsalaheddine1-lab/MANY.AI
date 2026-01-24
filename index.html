@@ -3,994 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANY.AI | رحلة الشريك الجزائري</title>
+    <title>MaNy-[AI] | النظام المتكامل</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { 
-            font-family: 'Tajawal', sans-serif; 
-            scroll-behavior: smooth; 
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        }
-        .step-content { 
-            display: none; 
-            animation: slideIn 0.4s ease-out; 
-        }
-        .step-content.active { 
-            display: block; 
-        }
-        @keyframes slideIn { 
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            } 
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            } 
-        }
-        .progress-bar { 
-            transition: width 0.5s ease-in-out; 
-        }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .plan-selected {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(30, 60, 114, 0.15);
-            border-color: #1e3c72;
-        }
-        .notification-badge {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-        .dashboard-card {
-            transition: all 0.3s ease;
-        }
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        .modal-content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        .dzd {
-            position: relative;
-        }
-        .dzd::after {
-            content: "د.ج";
-            margin-right: 4px;
-            font-size: 0.9em;
-        }
-        .flag-algeria {
-            background: linear-gradient(to right, #006233 33%, white 33%, white 66%, #d21034 66%);
-            width: 24px;
-            height: 16px;
-            display: inline-block;
-            margin-left: 5px;
-            border-radius: 2px;
-        }
+        body { font-family: 'Tajawal', sans-serif; background: #f8fafc; color: #1e293b; transition: all 0.5s; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.6s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .pricing-card.selected { border: 2px solid #3b82f6; background: #eff6ff; }
+        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .stat-card { transition: transform 0.3s ease; background: white; border: 1px solid #e2e8f0; }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
     </style>
 </head>
-<body class="min-h-screen">
+<body>
 
-    <!-- التدفق التوجيهي -->
-    <div id="onboarding-flow" class="min-h-screen flex flex-col items-center justify-center p-4">
-        
-        <!-- شريط التقدم -->
-        <div class="w-full max-w-md mb-8">
-            <div class="flex justify-between mb-2 text-xs font-bold text-white">
-                <span id="step-label">الخطوة 1: التسجيل</span>
-                <span id="step-percent">33%</span>
-            </div>
-            <div class="w-full bg-white/20 h-2 rounded-full overflow-hidden">
-                <div id="progress-line" class="progress-bar bg-white h-full w-1/3"></div>
-            </div>
-        </div>
+    <div id="onboarding-process" class="page-section active min-h-screen">
+        <nav class="p-4 flex justify-end gap-6 text-sm font-bold border-b bg-white">
+            <button class="text-blue-600 border-b-2 border-blue-600">العربية</button>
+            <button class="hover:text-blue-600">Français</button>
+            <button class="hover:text-blue-600">English</button>
+        </nav>
 
-        <!-- الخطوة 1: التسجيل -->
-        <div id="step1" class="step-content active w-full max-w-md glass-effect p-8 rounded-2xl shadow-2xl">
-            <div class="text-center mb-6">
-                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-store-alt text-2xl"></i>
+        <div class="max-w-6xl mx-auto px-4 py-12">
+            <div class="text-center mb-12">
+                <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg mb-4 bg-slate-200">
+                    <img src="1000018319.jpg" alt="Logo" class="w-full h-full object-cover">
                 </div>
-                <h2 class="text-2xl font-black text-gray-800">MANY.AI <span class="flag-algeria"></span></h2>
-                <p class="text-gray-600">سجل متجرك للانضمام إلى منظومة التجارة الذكية</p>
-                <div class="mt-2 text-sm text-green-600 font-medium">
-                    <i class="fas fa-dinar-sign ml-1"></i>
-                    جميع الأسعار بالدينار الجزائري
-                </div>
+                <h1 class="text-3xl font-black">الوكيل الذكي للتجارة الإلكترونية</h1>
+                <p class="text-blue-600 font-bold tracking-widest text-sm">MaNy-[AI]</p>
             </div>
-            
-            <form id="registration-form" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">اسم المتجر التجاري *</label>
-                    <input type="text" id="store-name" required placeholder="مثال: متجر الأمل للأزياء" 
-                           class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all">
-                    <p id="store-error" class="text-red-500 text-xs mt-1 hidden"></p>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني *</label>
-                    <input type="email" id="store-email" required placeholder="example@domain.dz" 
-                           class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all">
-                    <p id="email-error" class="text-red-500 text-xs mt-1 hidden"></p>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">رقم الهاتف *</label>
-                    <input type="tel" id="store-phone" required placeholder="05 XX XX XX XX" pattern="05[0-9]{8}" 
-                           class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all">
-                    <p id="phone-error" class="text-red-500 text-xs mt-1 hidden"></p>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">المدينة *</label>
-                    <select id="store-city" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all">
-                        <option value="">اختر مدينتك</option>
-                        <option value="algiers">الجزائر العاصمة</option>
-                        <option value="oran">وهران</option>
-                        <option value="constantine">قسنطينة</option>
-                        <option value="annaba">عنابة</option>
-                        <option value="blida">البليدة</option>
-                        <option value="setif">سطيف</option>
-                        <option value="batna">باتنة</option>
-                        <option value="djelfa">الجلفة</option>
-                        <option value="bejaia">بجاية</option>
-                        <option value="souk_ahras">سوق أهراس</option>
-                        <option value="tiaret">تيارت</option>
-                        <option value="other">مدينة أخرى</option>
-                    </select>
-                </div>
-                
-                <button type="button" onclick="validateStep1()" 
-                        class="w-full py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 shadow-lg shadow-green-200 transition-all">
-                    <i class="fas fa-arrow-left ml-2"></i>
-                    اختيار باقة الاشتراك
-                </button>
-            </form>
-            
-            <p class="text-xs text-gray-500 text-center mt-6">
-                بالتسجيل فإنك توافق على 
-                <a href="#" class="text-green-600 hover:underline">الشروط والأحكام</a>
-                و
-                <a href="#" class="text-green-600 hover:underline">سياسة الخصوصية</a>
-            </p>
-        </div>
 
-        <!-- الخطوة 2: اختيار الباقة -->
-        <div id="step2" class="step-content w-full max-w-4xl glass-effect p-8 rounded-2xl shadow-2xl">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-black text-gray-800">اختر باقة الاشتراك المناسبة <span class="flag-algeria"></span></h2>
-                <p class="text-gray-600">جميع الأسعار معروضة بالدينار الجزائري (د.ج)</p>
+            <div id="step1" class="step-sub active">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div onclick="selectPlan(this, 'الباقة الأساسية', 1000)" class="pricing-card bg-white p-8 rounded-3xl text-center cursor-pointer border hover:border-blue-400 transition">
+                        <h3 class="font-bold text-slate-400">الأساسية</h3>
+                        <div class="text-4xl font-black my-4">1000 <span class="text-sm font-normal">دج</span></div>
+                        <p class="text-xs text-slate-500">متجر واحد + دعم واتساب</p>
+                    </div>
+                    <div onclick="selectPlan(this, 'باقة المحترفين', 2000)" class="pricing-card bg-white p-8 rounded-3xl text-center cursor-pointer border border-blue-500 ring-2 ring-blue-50 relative">
+                        <span class="absolute top-0 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-b">الأكثر طلباً</span>
+                        <h3 class="font-bold text-blue-600">المحترفة</h3>
+                        <div class="text-4xl font-black my-4">2000 <span class="text-sm font-normal">دج</span></div>
+                        <p class="text-xs text-slate-500">منصات متعددة + أداء ذكي</p>
+                    </div>
+                    <div onclick="selectPlan(this, 'باقة الشركات', 4500)" class="pricing-card bg-white p-8 rounded-3xl text-center cursor-pointer border hover:border-blue-400 transition">
+                        <h3 class="font-bold text-slate-400">الشركات</h3>
+                        <div class="text-4xl font-black my-4">4500 <span class="text-sm font-normal">دج</span></div>
+                        <p class="text-xs text-slate-500">نظام متكامل + دعم فني 24/7</p>
+                    </div>
+                </div>
+                <button onclick="nextStep(2)" class="w-full max-w-md mx-auto block mt-10 py-4 bg-slate-900 text-white rounded-2xl font-black shadow-lg">متابعة التسجيل</button>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <!-- الباقة الأساسية -->
-                <div onclick="selectPlan('basic')" data-plan="basic" class="plan-card p-6 bg-white border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-green-300 transition-all relative">
-                    <div class="text-center mb-4">
-                        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
-                            <i class="fas fa-seedling text-xl"></i>
+
+            <div id="step2" class="step-sub hidden">
+                <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-[2rem] shadow-sm border">
+                    <h2 class="text-2xl font-black mb-8 border-r-4 border-blue-600 pr-4">بيانات المتجر</h2>
+                    <form onsubmit="nextStep(3); return false;" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <input type="text" id="merchant-name" placeholder="اسم التاجر" required class="p-4 bg-slate-50 border rounded-xl outline-none focus:border-blue-500">
+                        <input type="text" id="store-name" placeholder="اسم المحل" required class="p-4 bg-slate-50 border rounded-xl outline-none focus:border-blue-500">
+                        <input type="text" placeholder="نوع التجارة" required class="p-4 bg-slate-50 border rounded-xl outline-none focus:border-blue-500">
+                        <input type="text" placeholder="الولاية" required class="p-4 bg-slate-50 border rounded-xl outline-none focus:border-blue-500">
+                        <input type="tel" placeholder="رقم الهاتف" required class="p-4 bg-slate-50 border rounded-xl outline-none focus:border-blue-500 text-left">
+                        <input type="email" placeholder="البريد الإلكتروني" required class="p-4 bg-slate-50 border rounded-xl outline-none focus:border-blue-500 text-left">
+                        <div class="col-span-2 pt-4">
+                            <p class="text-xs font-bold text-slate-400 mb-3">وسيلة التواصل المعتمدة</p>
+                            <div class="flex gap-4">
+                                <label class="flex-1 p-4 border rounded-2xl text-center cursor-pointer hover:bg-blue-50 transition"><input type="checkbox" checked class="ml-2"> WhatsApp</label>
+                                <label class="flex-1 p-4 border rounded-2xl text-center cursor-pointer hover:bg-blue-50 transition"><input type="checkbox" class="ml-2"> Messenger</label>
+                            </div>
                         </div>
-                    </div>
-                    <h3 class="font-bold text-lg text-gray-800 text-center">الباقة الأساسية</h3>
-                    <div class="my-4 text-center">
-                        <span class="text-3xl font-black text-green-600 dzd">3,500</span>
-                        <span class="text-gray-500 block text-sm">/شهرياً</span>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-3 mb-6">
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> 500 محادثة ذكية</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> دعم واتساب فقط</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> تقرير أسبوعي</li>
-                        <li><i class="fas fa-times text-red-400 ml-2"></i> <span class="text-gray-400">لا يوجد نظام منع الهلوسة</span></li>
-                        <li><i class="fas fa-times text-red-400 ml-2"></i> <span class="text-gray-400">لا يوجد دعم فيسبوك</span></li>
-                    </ul>
-                    <div class="text-center mt-4">
-                        <span class="text-xs text-gray-500">مناسب للمتاجر الناشئة</span>
-                    </div>
-                </div>
-
-                <!-- الباقة المتوسطة (الأكثر شعبية) -->
-                <div onclick="selectPlan('pro')" data-plan="pro" class="plan-card p-6 bg-gradient-to-b from-blue-50 to-white border-2 border-blue-500 rounded-2xl cursor-pointer relative plan-selected">
-                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                        <span class="bg-blue-600 text-white text-xs px-3 py-1 rounded-full shadow-lg">الأكثر طلباً</span>
-                    </div>
-                    <div class="text-center mb-4">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto">
-                            <i class="fas fa-rocket text-xl"></i>
-                        </div>
-                    </div>
-                    <h3 class="font-bold text-lg text-gray-800 text-center">باقة المحترفين</h3>
-                    <div class="my-4 text-center">
-                        <span class="text-3xl font-black text-blue-600 dzd">8,500</span>
-                        <span class="text-gray-500 block text-sm">/شهرياً</span>
-                        <p class="text-xs text-green-600 mt-1 font-medium">وفر 15% عند الاشتراك السنوي</p>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-3 mb-6">
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> محادثات غير محدودة</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> دعم واتساب + فيسبوك</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> نظام منع الهلوسة المتقدم</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> تقرير يومي وأسبوعي</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> دعم فني 12/5</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> 3 مشرفين للمتجر</li>
-                    </ul>
-                    <div class="text-center mt-4">
-                        <span class="text-xs text-blue-600 font-medium">الأفضل للاستخدام التجاري</span>
-                    </div>
-                </div>
-
-                <!-- الباقة المتقدمة -->
-                <div onclick="selectPlan('enterprise')" data-plan="enterprise" class="plan-card p-6 bg-white border-2 border-purple-200 rounded-2xl cursor-pointer hover:border-purple-300 transition-all relative">
-                    <div class="text-center mb-4">
-                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto">
-                            <i class="fas fa-crown text-xl"></i>
-                        </div>
-                    </div>
-                    <h3 class="font-bold text-lg text-gray-800 text-center">الباقة المتقدمة</h3>
-                    <div class="my-4 text-center">
-                        <span class="text-3xl font-black text-purple-600 dzd">16,000</span>
-                        <span class="text-gray-500 block text-sm">/شهرياً</span>
-                        <p class="text-xs text-green-600 mt-1 font-medium">وفر 20% عند الاشتراك السنوي</p>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-3 mb-6">
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> جميع ميزات باقة المحترفين</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> دعم فني 24/7</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> 10 مشرفين للمتجر</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> تقارير مخصصة متقدمة</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> تكامل مع أنظمة ERP</li>
-                        <li><i class="fas fa-check text-green-500 ml-2"></i> تدريب فريق المتجر</li>
-                    </ul>
-                    <div class="text-center mt-4">
-                        <span class="text-xs text-purple-600 font-medium">للمتاجر الكبيرة والشركات</span>
-                    </div>
+                        <button type="submit" class="col-span-2 py-5 bg-blue-600 text-white rounded-2xl font-black text-lg shadow-xl shadow-blue-200 mt-4">الانتقال للتفعيل</button>
+                    </form>
                 </div>
             </div>
 
-            <!-- خيارات الدفع -->
-            <div class="bg-blue-50 p-6 rounded-xl mb-8">
-                <h4 class="font-bold text-gray-800 mb-4">طرق الدفع المتاحة في الجزائر:</h4>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="flex items-center p-3 bg-white rounded-lg">
-                        <i class="fas fa-credit-card text-blue-600 ml-3"></i>
-                        <span>بطاقات الخصم</span>
+            <div id="step3" class="step-sub hidden">
+                <div class="max-w-md mx-auto bg-white p-12 rounded-[2.5rem] shadow-2xl text-center border-b-8 border-blue-600">
+                    <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <i class="fas fa-key text-3xl"></i>
                     </div>
-                    <div class="flex items-center p-3 bg-white rounded-lg">
-                        <i class="fas fa-university text-green-600 ml-3"></i>
-                        <span>التحويل البنكي</span>
-                    </div>
-                    <div class="flex items-center p-3 bg-white rounded-lg">
-                        <i class="fab fa-cc-visa text-blue-800 ml-3"></i>
-                        <span>Visa/Mastercard</span>
-                    </div>
-                    <div class="flex items-center p-3 bg-white rounded-lg">
-                        <i class="fas fa-mobile-alt text-purple-600 ml-3"></i>
-                        <span>دفع إلكتروني</span>
-                    </div>
+                    <h2 class="text-2xl font-black mb-2">تنشيط النظام</h2>
+                    <p class="text-slate-500 text-sm mb-10">أدخل الرمز المستلم لتشغيل وكيلك الذكي</p>
+                    <input type="text" id="act-code" placeholder="XXXX - XXXX - XXXX" class="w-full p-5 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl text-center text-2xl font-black text-blue-600 outline-none mb-8 tracking-widest">
+                    <button onclick="activateSystem()" class="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-xl hover:bg-blue-600 transition-all">تشغيل لوحة التحكم</button>
                 </div>
-            </div>
-
-            <!-- خيار الفترة -->
-            <div class="mb-8">
-                <h4 class="font-bold text-gray-800 mb-4">فترة الاشتراك:</h4>
-                <div class="flex space-x-4 space-x-reverse">
-                    <button id="monthly-btn" onclick="selectPeriod('monthly')" 
-                            class="flex-1 py-3 bg-green-600 text-white rounded-lg font-medium shadow-md">
-                        اشتراك شهري
-                    </button>
-                    <button id="yearly-btn" onclick="selectPeriod('yearly')" 
-                            class="flex-1 py-3 bg-white border border-green-600 text-green-600 rounded-lg font-medium hover:bg-green-50">
-                        اشتراك سنوي (توفير 15-20%)
-                    </button>
-                </div>
-            </div>
-
-            <button onclick="validateStep2()" class="w-full py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 shadow-lg shadow-green-200 transition-all">
-                <i class="fas fa-lock ml-2"></i>
-                المتابعة للدفع الآمن
-            </button>
-        </div>
-
-        <!-- الخطوة 3: تفعيل الاشتراك -->
-        <div id="step3" class="step-content w-full max-w-md glass-effect p-10 rounded-2xl shadow-2xl text-center">
-            <div id="activating-ui">
-                <div class="relative w-24 h-24 mx-auto mb-6">
-                    <div class="absolute inset-0 border-4 border-green-200 rounded-full"></div>
-                    <div class="absolute inset-4 border-4 border-green-400 rounded-full animate-spin" style="border-top-color: transparent;"></div>
-                    <div class="absolute inset-8 border-4 border-green-600 rounded-full animate-ping"></div>
-                </div>
-                <h2 class="text-2xl font-black text-gray-800 mb-2">جاري تفعيل اشتراكك...</h2>
-                <p class="text-gray-600 mb-6">نقوم الآن بتهيئة نظام MANY.AI لمتجرك</p>
-                
-                <div class="space-y-3 text-sm text-gray-500 text-right max-w-xs mx-auto">
-                    <div class="flex items-center justify-between">
-                        <span>إنشاء قاعدة بيانات المتجر</span>
-                        <i class="fas fa-check text-green-500"></i>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span>ربط منصات التواصل</span>
-                        <i class="fas fa-spinner fa-spin text-blue-500"></i>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span>تفعيل نظام منع الهلوسة</span>
-                        <i class="fas fa-clock text-gray-400"></i>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span>إعداد لوحة التحكم</span>
-                        <i class="fas fa-clock text-gray-400"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="success-ui" class="hidden">
-                <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-check text-4xl"></i>
-                </div>
-                <h2 class="text-2xl font-black text-gray-800 mb-2">تم التفعيل بنجاح! <span class="flag-algeria"></span></h2>
-                <p class="text-gray-600 mb-6">مرحباً بك في منظومة MANY.AI للذكاء التجاري</p>
-                
-                <div class="bg-green-50 p-4 rounded-xl mb-6 text-sm text-gray-700">
-                    <p class="font-medium mb-2">تم إرسال تأكيد الاشتراك إلى بريدك الإلكتروني</p>
-                    <p>سوف تتلقى التقرير الأسبوعي الأول يوم الأحد القادم</p>
-                </div>
-                
-                <button onclick="launchDashboard()" class="w-full py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 shadow-lg shadow-green-200 transition-all">
-                    <i class="fas fa-tachometer-alt ml-2"></i>
-                    الدخول إلى لوحة التحكم
-                </button>
             </div>
         </div>
     </div>
 
-    <!-- لوحة التحكم الرئيسية -->
-    <div id="main-dashboard" class="hidden min-h-screen bg-gray-100">
-        <!-- شريط التنقل العلوي -->
-        <nav class="bg-white shadow-lg py-4 px-6 flex justify-between items-center">
-            <div class="flex items-center space-x-4 space-x-reverse">
-                <div class="flex items-center space-x-2 space-x-reverse">
-                    <div class="w-10 h-10 bg-gradient-to-r from-green-600 to-blue-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-robot text-white"></i>
-                    </div>
-                    <span class="font-bold text-xl text-gray-800">MANY.AI</span>
-                    <span class="flag-algeria"></span>
-                </div>
-                <div class="hidden md:block">
-                    <span id="user-store" class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-bold"></span>
+    <div id="merchant-dashboard" class="page-section min-h-screen bg-slate-50">
+        <nav class="glass-nav sticky top-0 z-50 px-8 py-4 border-b flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-4">
+                <img src="1000018319.jpg" class="w-12 h-12 rounded-full border-2 border-blue-500 shadow-sm">
+                <div>
+                    <h2 id="dash-store-name" class="font-black text-slate-800 text-lg leading-tight">اسم المتجر</h2>
+                    <span id="dash-plan-tag" class="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded-full font-bold uppercase">الوكيل نشط</span>
                 </div>
             </div>
-            
-            <div class="flex items-center space-x-4 space-x-reverse">
-                <!-- زر الإشعارات -->
-                <div class="relative">
-                    <button id="notification-btn" class="relative p-2 text-gray-600 hover:text-green-600 transition-colors">
-                        <i class="fas fa-bell text-xl"></i>
-                        <span id="notification-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
-                    </button>
+            <div class="flex items-center gap-6">
+                <div class="hidden lg:flex gap-5 text-xs font-black text-slate-400">
+                    <button class="text-blue-600 underline">الرئيسية</button>
+                    <button class="hover:text-slate-800">الطلبات</button>
+                    <button class="hover:text-slate-800">الإعدادات</button>
                 </div>
-                
-                <!-- معلومات الاشتراك -->
-                <div class="hidden md:block">
-                    <div class="bg-blue-50 px-4 py-2 rounded-lg">
-                        <span class="text-sm text-blue-800 font-medium" id="current-plan">باقة المحترفين</span>
-                        <span class="text-xs text-gray-500 mr-2" id="plan-expiry">ينتهي في 15/12/2023</span>
-                    </div>
-                </div>
-                
-                <!-- صورة المستخدم -->
-                <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">
-                    <span id="user-initials">م</span>
-                </div>
+                <button class="text-red-500 font-black text-sm hover:underline" onclick="location.reload()">تسجيل الخروج</button>
             </div>
         </nav>
 
-        <!-- المحتوى الرئيسي -->
-        <div class="container mx-auto p-4 md:p-6">
-            <!-- بطاقات الإحصائيات السريعة -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center ml-4">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">المحادثات اليوم</p>
-                            <h3 class="text-2xl font-bold">0</h3>
-                        </div>
+        <main class="max-w-7xl mx-auto p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                <div class="stat-card p-8 rounded-[2rem]">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fas fa-comments text-blue-500 text-2xl"></i>
+                        <span class="text-[10px] text-green-500 font-bold bg-green-50 px-2 py-1 rounded">+12% اليوم</span>
                     </div>
+                    <p class="text-slate-400 text-xs font-black uppercase">إجمالي الردود</p>
+                    <h3 class="text-4xl font-black text-slate-800 mt-2">1,540</h3>
                 </div>
-                
-                <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center ml-4">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">منع الهلوسة</p>
-                            <h3 class="text-lg font-bold text-green-600">مفعل</h3>
-                        </div>
+                <div class="stat-card p-8 rounded-[2rem]">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fas fa-shopping-bag text-purple-500 text-2xl"></i>
+                        <span class="text-[10px] text-blue-500 font-bold bg-blue-50 px-2 py-1 rounded">24 ساعة</span>
                     </div>
+                    <p class="text-slate-400 text-xs font-black uppercase">المبيعات المحققة</p>
+                    <h3 class="text-4xl font-black text-slate-800 mt-2">86</h3>
                 </div>
-                
-                <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center ml-4">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">الباقة الحالية</p>
-                            <h3 class="text-lg font-bold text-blue-600" id="dashboard-plan">محترفين</h3>
-                        </div>
+                <div class="stat-card p-8 rounded-[2rem] bg-slate-900 border-none">
+                    <div class="flex justify-between items-start mb-4 text-white">
+                        <i class="fas fa-robot text-blue-400 text-2xl"></i>
+                        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded animate-pulse">Live</span>
                     </div>
-                </div>
-                
-                <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-lg flex items-center justify-center ml-4">
-                            <i class="fas fa-dinar-sign"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">الاشتراك الشهري</p>
-                            <h3 class="text-lg font-bold dzd">2,500</h3>
-                        </div>
-                    </div>
+                    <p class="text-slate-400 text-xs font-black uppercase">حالة الذكاء</p>
+                    <h3 class="text-2xl font-black text-white mt-2">الوكيل يعمل بكفاءة</h3>
                 </div>
             </div>
 
-            <!-- المحتوى الرئيسي -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- العمود الأيسر: إدارة الاشتراك -->
-                <div class="lg:col-span-2 space-y-6">
-                    <!-- نظام منع الهلوسة -->
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-xl font-bold text-gray-800">
-                                <i class="fas fa-shield-alt text-green-600 ml-2"></i>
-                                نظام منع الهلوسة
-                            </h3>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" checked class="sr-only peer" id="hallucination-toggle">
-                                <div class="w-12 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
-                            </label>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-[2.5rem] border p-8 shadow-sm">
+                    <h3 class="text-xl font-black mb-8 flex items-center gap-3">
+                        <i class="fas fa-bolt text-yellow-500"></i> آخر نشاطات الوكيل
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 p-4 hover:bg-slate-50 rounded-2xl transition">
+                            <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">W</div>
+                            <div class="flex-1">
+                                <p class="text-sm font-black">طلب جديد عبر واتساب</p>
+                                <p class="text-xs text-slate-400">من العميل: أحمد (منذ 5 دقائق)</p>
+                            </div>
+                            <span class="text-xs font-bold text-slate-300">12:45 PM</span>
                         </div>
-                        
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <p class="font-medium">التحقق من الأسعار</p>
-                                    <p class="text-sm text-gray-600">التحقق من صحة الأسعار المذكورة</p>
-                                </div>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs">مفعل</span>
+                        <div class="flex items-center gap-4 p-4 hover:bg-slate-50 rounded-2xl transition">
+                            <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">M</div>
+                            <div class="flex-1">
+                                <p class="text-sm font-black">استفسار عن السعر</p>
+                                <p class="text-xs text-slate-400">تم الرد آلياً بدقة (منذ 15 دقيقة)</p>
                             </div>
-                            
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <p class="font-medium">التحقق من المخزون</p>
-                                    <p class="text-sm text-gray-600">التحقق من توفر المنتجات</p>
-                                </div>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs">مفعل</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- التقارير والإشعارات -->
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-6">
-                            <i class="fas fa-chart-line text-blue-600 ml-2"></i>
-                            التقارير والإشعارات
-                        </h3>
-                        
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
-                                <div>
-                                    <p class="font-medium">التقرير الأسبوعي</p>
-                                    <p class="text-sm text-gray-600">يتم إرساله تلقائياً كل يوم أحد</p>
-                                </div>
-                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                                    طلب تقرير فوري
-                                </button>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg">
-                                <div>
-                                    <p class="font-medium">إشعارات التجديد</p>
-                                    <p class="text-sm text-gray-600">إشعار قبل 7 أيام من انتهاء الاشتراك</p>
-                                </div>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs">مفعل</span>
-                            </div>
+                            <span class="text-xs font-bold text-slate-300">12:35 PM</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- العمود الأيمن: معلومات الاشتراك -->
-                <div class="space-y-6">
-                    <!-- معلومات الاشتراك -->
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">معلومات اشتراكك</h3>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <p class="text-sm text-gray-500">الباقة الحالية</p>
-                                <p class="font-bold text-lg" id="subscription-plan">باقة المحترفين</p>
-                            </div>
-                            
-                            <div>
-                                <p class="text-sm text-gray-500">القيمة الشهرية</p>
-                                <p class="font-bold text-xl text-green-600 dzd" id="subscription-price">2,500</p>
-                            </div>
-                            
-                            <div>
-                                <p class="text-sm text-gray-500">تاريخ التجديد</p>
-                                <p class="font-bold" id="renewal-date">15 ديسمبر 2023</p>
-                            </div>
-                            
-                            <div>
-                                <p class="text-sm text-gray-500">حالة الاشتراك</p>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">نشط</span>
-                            </div>
+                <div class="bg-blue-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-2xl shadow-blue-200">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-black mb-4">الدعم الفني المباشر</h3>
+                        <p class="text-blue-100 text-sm mb-10 leading-relaxed">فريق MaNy-[AI] الجزائري مستعد لمساعدتك في أي وقت لتحسين أداء مبيعاتك.</p>
+                        <div class="flex flex-col gap-4">
+                            <button class="bg-white text-blue-600 py-4 rounded-2xl font-black shadow-lg">تحدث مع خبير</button>
+                            <button class="bg-blue-700/50 text-white py-4 rounded-2xl font-black border border-blue-400">مركز المساعدة</button>
                         </div>
-                        
-                        <button onclick="showUpgradeModal()" class="w-full mt-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg font-medium hover:from-green-700 hover:to-blue-700 transition-all">
-                            <i class="fas fa-sync-alt ml-2"></i>
-                            ترقية الاشتراك
-                        </button>
                     </div>
-
-                    <!-- الدعم الفني -->
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">الدعم الفني الجزائري</h3>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                                <i class="fas fa-phone text-green-600 ml-3"></i>
-                                <span>0541-XX-XX-XX</span>
-                            </div>
-                            
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                                <i class="fas fa-envelope text-blue-600 ml-3"></i>
-                                <span>support@manyai.dz</span>
-                            </div>
-                            
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                                <i class="fab fa-whatsapp text-green-500 ml-3"></i>
-                                <span>واتساب الدعم</span>
-                            </div>
-                        </div>
-                        
-                        <button class="w-full mt-4 py-3 bg-blue-50 text-blue-600 border border-blue-200 rounded-lg font-medium hover:bg-blue-100 transition-all">
-                            <i class="fas fa-headset ml-2"></i>
-                            طلب دعم فني
-                        </button>
-                    </div>
+                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-500 rounded-full opacity-50"></div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- نافذة الإشعارات -->
-    <div id="notification-modal" class="modal">
-        <div class="modal-content">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-bold text-gray-900">الإشعارات</h3>
-                <button onclick="closeNotifications()" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="space-y-3 max-h-96 overflow-y-auto">
-                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-                    <div class="flex items-start">
-                        <i class="fas fa-exclamation-triangle text-yellow-600 mt-1 ml-3"></i>
-                        <div>
-                            <p class="font-medium text-yellow-800">ترقية مقترحة</p>
-                            <p class="text-sm text-yellow-600 mt-1">نقترح ترقية اشتراكك لباقة متقدمة</p>
-                            <p class="text-xs text-gray-500 mt-2">منذ ساعتين</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="p-4 bg-green-50 rounded-lg border border-green-100">
-                    <div class="flex items-start">
-                        <i class="fas fa-check-circle text-green-600 mt-1 ml-3"></i>
-                        <div>
-                            <p class="font-medium text-green-800">تم تفعيل الاشتراك</p>
-                            <p class="text-sm text-green-600 mt-1">تم تفعيل اشتراكك بنجاح</p>
-                            <p class="text-xs text-gray-500 mt-2">منذ 5 دقائق</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                    <div class="flex items-start">
-                        <i class="fas fa-brain text-blue-600 mt-1 ml-3"></i>
-                        <div>
-                            <p class="font-medium text-blue-800">نظام منع الهلوسة</p>
-                            <p class="text-sm text-blue-600 mt-1">تم تفعيل نظام منع الهلوسة لمتجرك</p>
-                            <p class="text-xs text-gray-500 mt-2">منذ 10 دقائق</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة ترقية الاشتراك -->
-    <div id="upgrade-modal" class="modal">
-        <div class="modal-content">
-            <div class="text-center mb-6">
-                <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-sync-alt text-2xl"></i>
-                </div>
-                
-                <h3 class="text-xl font-bold text-gray-900 mb-2">ترقية اشتراكك</h3>
-                <p class="text-gray-600">اختر الباقة الجديدة التي تناسب احتياجاتك</p>
-            </div>
-            
-            <div class="space-y-4 mb-6">
-                <div class="p-4 border-2 border-blue-500 bg-blue-50 rounded-lg">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-bold">باقة المحترفين</p>
-                            <p class="text-sm text-gray-600">الباقة الحالية</p>
-                        </div>
-                        <span class="dzd font-bold text-lg">8,500</span>
-                    </div>
-                </div>
-                
-                <div class="p-4 border border-gray-200 rounded-lg hover:border-purple-500 cursor-pointer" onclick="selectUpgrade('enterprise')">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-bold">الباقة المتقدمة</p>
-                            <p class="text-sm text-gray-600">مميزات إضافية</p>
-                        </div>
-                        <span class="dzd font-bold text-lg text-purple-600">16,000</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="flex space-x-4 space-x-reverse">
-                <button onclick="confirmUpgrade()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-colors">
-                    تأكيد الترقية
-                </button>
-                <button onclick="closeUpgradeModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg font-medium transition-colors">
-                    إلغاء
-                </button>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script>
-        // بيانات التطبيق
-        let userData = {
-            storeName: '',
-            storeEmail: '',
-            storePhone: '',
-            storeCity: '',
-            selectedPlan: 'pro',
-            selectedPeriod: 'monthly',
-            subscriptionPrice: 2500,
-            subscriptionEnd: '2023-12-15'
-        };
+        let selectedPlanName = "باقة المحترفين";
 
-        // تهيئة الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            // تعيين الخطة الافتراضية
-            selectPlan('pro');
-            selectPeriod('monthly');
-            
-            // تحديث عداد الإشعارات
-            updateNotificationCount();
-        });
-
-        function goToStep(stepNumber) {
-            // إخفاء كل الخطوات
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
-            // إظهار الخطوة المطلوبة
-            document.getElementById('step' + stepNumber).classList.add('active');
-            
-            // تحديث شريط التقدم
-            const progress = (stepNumber / 3) * 100;
-            document.getElementById('progress-line').style.width = progress + '%';
-            document.getElementById('step-percent').innerText = Math.round(progress) + '%';
-            
-            // تحديث نص الخطوة
-            const stepLabels = {
-                1: "الخطوة 1: التسجيل",
-                2: "الخطوة 2: اختيار الباقة",
-                3: "الخطوة 3: التفعيل"
-            };
-            document.getElementById('step-label').innerText = stepLabels[stepNumber];
-            
-            if(stepNumber === 3) {
-                simulateActivation();
-            }
+        function selectPlan(card, name) {
+            document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('selected', 'border-blue-500', 'ring-2', 'ring-blue-50'));
+            card.classList.add('selected');
+            selectedPlanName = name;
         }
 
-        function validateStep1() {
-            const storeName = document.getElementById('store-name').value.trim();
-            const storeEmail = document.getElementById('store-email').value.trim();
-            const storePhone = document.getElementById('store-phone').value.trim();
-            const storeCity = document.getElementById('store-city').value;
+        function nextStep(step) {
+            document.querySelectorAll('.step-sub').forEach(s => s.classList.add('hidden'));
+            document.getElementById('step' + step).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function activateSystem() {
+            const code = document.getElementById('act-code').value;
+            const store = document.getElementById('store-name').value || "متجري الذكي";
             
-            let isValid = true;
-            
-            // التحقق من الاسم
-            if (storeName.length < 2) {
-                showError('store-error', 'يرجى إدخال اسم متجر صحيح');
-                isValid = false;
+            if(code.length >= 4) {
+                document.getElementById('onboarding-process').classList.remove('active');
+                setTimeout(() => {
+                    document.getElementById('merchant-dashboard').classList.add('active');
+                    document.getElementById('dash-store-name').innerText = store;
+                }, 300);
             } else {
-                hideError('store-error');
-            }
-            
-            // التحقق من البريد الإلكتروني
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(storeEmail)) {
-                showError('email-error', 'يرجى إدخال بريد إلكتروني صحيح');
-                isValid = false;
-            } else {
-                hideError('email-error');
-            }
-            
-            // التحقق من رقم الهاتف
-            const phoneRegex = /^05[0-9]{8}$/;
-            if (!phoneRegex.test(storePhone.replace(/\s/g, ''))) {
-                showError('phone-error', 'يرجى إدخال رقم هاتف صحيح (05xxxxxxxx)');
-                isValid = false;
-            } else {
-                hideError('phone-error');
-            }
-            
-            // التحقق من المدينة
-            if (!storeCity) {
-                alert('يرجى اختيار المدينة');
-                isValid = false;
-            }
-            
-            if (isValid) {
-                userData.storeName = storeName;
-                userData.storeEmail = storeEmail;
-                userData.storePhone = storePhone;
-                userData.storeCity = storeCity;
-                goToStep(2);
+                alert("يرجى إدخال كود التفعيل.");
             }
         }
-
-        function showError(elementId, message) {
-            const element = document.getElementById(elementId);
-            element.textContent = message;
-            element.classList.remove('hidden');
-        }
-
-        function hideError(elementId) {
-            const element = document.getElementById(elementId);
-            element.classList.add('hidden');
-        }
-
-        function selectPlan(planType) {
-            // إزالة التحديد من جميع الباقات
-            document.querySelectorAll('.plan-card').forEach(card => {
-                card.classList.remove('plan-selected', 'border-blue-500', 'bg-gradient-to-b');
-                card.classList.add('border-gray-200');
-            });
-            
-            // تحديد الباقة المختارة
-            const selectedCard = document.querySelector(`[data-plan="${planType}"]`);
-            if (selectedCard) {
-                selectedCard.classList.add('plan-selected', 'border-blue-500');
-                selectedCard.classList.remove('border-gray-200');
-            }
-            
-            userData.selectedPlan = planType;
-            
-            // تحديث السعر بناء على الباقة
-            const prices = {
-                basic: 1500,
-                pro: 2500,
-                enterprise: 4900
-            };
-            
-            userData.subscriptionPrice = prices[planType];
-            
-            // إذا كان الاشتراك سنوي، تطبيق الخصم
-            if (userData.selectedPeriod === 'yearly') {
-                const discounts = {
-                    basic: 0.10, // 10% خصم
-                    pro: 0.15,   // 15% خصم
-                    enterprise: 0.20 // 20% خصم
-                };
-                userData.subscriptionPrice = Math.floor(userData.subscriptionPrice * 12 * (1 - discounts[planType]));
-            }
-        }
-
-        function selectPeriod(period) {
-            userData.selectedPeriod = period;
-            
-            // تحديث أزرار الفترة
-            const monthlyBtn = document.getElementById('monthly-btn');
-            const yearlyBtn = document.getElementById('yearly-btn');
-            
-            if (period === 'monthly') {
-                monthlyBtn.classList.add('bg-green-600', 'text-white', 'shadow-md');
-                monthlyBtn.classList.remove('bg-white', 'border', 'text-green-600');
-                yearlyBtn.classList.add('bg-white', 'border', 'border-green-600', 'text-green-600');
-                yearlyBtn.classList.remove('bg-green-600', 'text-white', 'shadow-md');
-                
-                // إعادة حساب السعر بدون خصم
-                const prices = {
-                    basic: 3500,
-                    pro: 8500,
-                    enterprise: 16000
-                };
-                userData.subscriptionPrice = prices[userData.selectedPlan];
-            } else {
-                yearlyBtn.classList.add('bg-green-600', 'text-white', 'shadow-md');
-                yearlyBtn.classList.remove('bg-white', 'border', 'text-green-600');
-                monthlyBtn.classList.add('bg-white', 'border', 'border-green-600', 'text-green-600');
-                monthlyBtn.classList.remove('bg-green-600', 'text-white', 'shadow-md');
-                
-                // تطبيق الخصم على السعر السنوي
-                const prices = {
-                    basic: 1500,
-                    pro: 2500,
-                    enterprise: 4900
-                };
-                
-                const discounts = {
-                    basic: 0.10,
-                    pro: 0.15,
-                    enterprise: 0.20
-                };
-                
-                userData.subscriptionPrice = Math.floor(prices[userData.selectedPlan] * 12 * (1 - discounts[userData.selectedPlan]));
-            }
-        }
-
-        function validateStep2() {
-            if (!userData.selectedPlan) {
-                alert('يرجى اختيار باقة الاشتراك');
-                return;
-            }
-            
-            goToStep(3);
-        }
-
-        function simulateActivation() {
-            setTimeout(() => {
-                document.getElementById('activating-ui').classList.add('hidden');
-                document.getElementById('success-ui').classList.remove('hidden');
-                
-                // محاكاة إرسال إشعار البريد الإلكتروني
-                sendWelcomeEmail();
-            }, 3000);
-        }
-
-        function sendWelcomeEmail() {
-            // محاكاة إرسال البريد الإلكتروني
-            console.log('جارٍ إرسال بريد ترحيبي إلى:', userData.storeEmail);
-            
-            // في التطبيق الحقيقي، هنا سيتم إرسال طلب إلى الخادم
-        }
-
-        function launchDashboard() {
-            // تحديث معلومات المستخدم في لوحة التحكم
-            document.getElementById('user-store').textContent = userData.storeName;
-            document.getElementById('user-initials').textContent = userData.storeName.charAt(0);
-            document.getElementById('dashboard-plan').textContent = 
-                userData.selectedPlan === 'basic' ? 'أساسية' : 
-                userData.selectedPlan === 'pro' ? 'محترفين' : 'متقدمة';
-            
-            // تحديث معلومات الاشتراك
-            document.getElementById('subscription-plan').textContent = 
-                userData.selectedPlan === 'basic' ? 'الباقة الأساسية' : 
-                userData.selectedPlan === 'pro' ? 'باقة المحترفين' : 'الباقة المتقدمة';
-            
-            document.getElementById('subscription-price').textContent = 
-                userData.selectedPeriod === 'monthly' ? 
-                formatDZD(userData.subscriptionPrice) : 
-                formatDZD(userData.subscriptionPrice) + ' (سنوي)';
-            
-            // الانتقال إلى لوحة التحكم
-            document.getElementById('onboarding-flow').classList.add('hidden');
-            document.getElementById('main-dashboard').classList.remove('hidden');
-            
-            // إرسال تقرير الاشتراك
-            sendSubscriptionReport();
-        }
-
-        function formatDZD(amount) {
-            return amount.toLocaleString('ar-DZ') + ' د.ج';
-        }
-
-        function updateNotificationCount() {
-            // محاكاة تحديث عدد الإشعارات
-            const notificationCount = document.getElementById('notification-count');
-            notificationCount.textContent = '3';
-        }
-
-        function showNotifications() {
-            document.getElementById('notification-modal').style.display = 'block';
-        }
-
-        function closeNotifications() {
-            document.getElementById('notification-modal').style.display = 'none';
-        }
-
-        function showUpgradeModal() {
-            document.getElementById('upgrade-modal').style.display = 'block';
-        }
-
-        function closeUpgradeModal() {
-            document.getElementById('upgrade-modal').style.display = 'none';
-        }
-
-        function selectUpgrade(planType) {
-            // تحديث الواجهة لترقية الخطة
-            const upgradeCards = document.querySelectorAll('#upgrade-modal .border');
-            upgradeCards.forEach(card => {
-                card.classList.remove('border-purple-500', 'bg-purple-50');
-                card.classList.add('border-gray-200');
-            });
-            
-            // تحديد الباقة المختارة
-            if (planType === 'enterprise') {
-                upgradeCards[1].classList.add('border-purple-500', 'bg-purple-50');
-                upgradeCards[1].classList.remove('border-gray-200');
-            }
-        }
-
-        function confirmUpgrade() {
-            alert('تم تأكيد طلب ترقية الاشتراك. سيتم التواصل معك قريباً.');
-            closeUpgradeModal();
-        }
-
-        function sendSubscriptionReport() {
-            // محاكاة إرسال تقرير الاشتراك الأسبوعي
-            setTimeout(() => {
-                console.log('تم إرسال تقرير الاشتراك الأسبوعي إلى:', userData.storeEmail);
-                console.log('تم إرسال قائمة المشتركين الجدد إلى: admin@manyai.dz');
-            }, 5000);
-        }
-
-        // إضافة مستمع للأحداث
-        document.getElementById('notification-btn').addEventListener('click', showNotifications);
-        document.getElementById('hallucination-toggle').addEventListener('change', function() {
-            if (this.checked) {
-                console.log('نظام منع الهلوسة مفعل');
-            } else {
-                console.log('نظام منع الهلوسة معطل');
-            }
-        });
-
-        // محاكاة إرسال التقارير الأسبوعية
-        function scheduleWeeklyReports() {
-            // إرسال تقرير أسبوعي كل يوم أحد
-            console.log('تم جدولة إرسال التقارير الأسبوعية يوم الأحد من كل أسبوع');
-        }
-
-        // تشغيل جدولة التقارير عند التحميل
-        scheduleWeeklyReports();
     </script>
 </body>
 </html>
