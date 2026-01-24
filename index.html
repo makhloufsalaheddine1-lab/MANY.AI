@@ -3,196 +3,935 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANY.AI | Unified Commerce OS</title>
+    <title>MANY.AI 2.0 | Enterprise AI Commerce Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Noto+Kufi+Arabic:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary: #2563eb; --slate-900: #0f172a; }
-        body { font-family: 'Plus Jakarta Sans', 'Noto Kufi Arabic', sans-serif; background: #f8fafc; color: var(--slate-900); }
-        .view { display: none; }
-        .view.active { display: block; animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(226, 232, 240, 0.8); }
-        .rtl { dir: rtl; font-family: 'Noto Kufi Arabic', sans-serif; }
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --ai-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .neural-node {
+            width: 8px;
+            height: 8px;
+            background: #00d2ff;
+            border-radius: 50%;
+            position: absolute;
+            animation: nodePulse 3s infinite;
+        }
+        
+        @keyframes nodePulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+        
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #00d2ff, transparent);
+            animation: stream 2s linear infinite;
+        }
+        
+        @keyframes stream {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+        
+        .pulse-ring {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            70% { transform: scale(1.1); opacity: 0.3; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .system-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+        
+        .module-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--ai-gradient);
+        }
+        
+        .live-badge {
+            position: relative;
+        }
+        
+        .live-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background: #43e97b;
+            border-radius: 50%;
+            animation: livePulse 1.5s infinite;
+        }
+        
+        @keyframes livePulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+        
+        /* Language switcher animations */
+        .language-switcher {
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        
+        /* RTL and LTL support */
+        .rtl { direction: rtl; text-align: right; }
+        .ltr { direction: ltr; text-align: left; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
     </style>
 </head>
-<body>
+<body class="min-h-screen">
 
-    <main id="view-auth" class="view active min-h-screen flex items-center justify-center p-4">
-        <div class="max-w-4xl w-full glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col md:flex-row">
-            <div class="md:w-1/3 bg-slate-900 p-10 text-white flex flex-col justify-between">
-                <div>
-                    <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-3xl font-black mb-6 shadow-lg shadow-blue-500/20">M</div>
-                    <h1 class="text-3xl font-extrabold tracking-tighter">MANY<span class="text-blue-500">.AI</span></h1>
-                    <p class="text-slate-400 text-sm mt-4 leading-relaxed font-semibold">The intelligent backbone for Algerian e-commerce.</p>
-                </div>
-                <div class="flex gap-2">
-                    <button onclick="setLanguage('ar')" class="text-xs font-bold px-3 py-1 border border-slate-700 rounded-full hover:bg-white hover:text-black transition">العربية</button>
-                    <button onclick="setLanguage('fr')" class="text-xs font-bold px-3 py-1 border border-slate-700 rounded-full hover:bg-white hover:text-black transition">Français</button>
-                </div>
-            </div>
+    <!-- AI Neural Network Background -->
+    <div id="ai-neural-network" class="fixed inset-0 pointer-events-none opacity-10">
+        <!-- Neural nodes will be dynamically generated -->
+    </div>
 
-            <div id="lang-container" class="md:w-2/3 p-10 bg-white">
-                <div class="mb-8">
-                    <h2 id="txt-title" class="text-2xl font-black mb-2">Initialize Your Merchant Account</h2>
-                    <p id="txt-subtitle" class="text-slate-400 text-sm">Fill in your store details to deploy your AI agent.</p>
+    <!-- Command Center -->
+    <div id="command-center" class="relative z-10 min-h-screen p-4 md:p-8">
+        
+        <!-- AI Navigation Bar -->
+        <nav class="glass-panel rounded-2xl p-4 md:p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center pulse-ring">
+                            <i class="fas fa-brain text-xl"></i>
+                        </div>
+                        <div class="data-stream" style="left: 50%;"></div>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-black gradient-text">
+                            MANY.AI 2.0
+                        </h1>
+                        <p class="text-sm text-gray-400">Enterprise AI Commerce Platform</p>
+                    </div>
                 </div>
                 
-                <form onsubmit="handleAuth(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="inp-store" placeholder="Store Name" required class="p-4 bg-slate-50 border rounded-xl focus:ring-2 ring-blue-50 outline-none transition">
-                    <select id="inp-type" class="p-4 bg-slate-50 border rounded-xl focus:ring-2 ring-blue-50 outline-none">
-                        <option value="Clothing">Clothing & Shoes</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Beauty">Beauty & Cosmetics</option>
-                    </select>
-                    <input type="text" id="inp-city" placeholder="City (Wilaya)" required class="p-4 bg-slate-50 border rounded-xl">
-                    <input type="tel" id="inp-phone" placeholder="Phone Number" required class="p-4 bg-slate-50 border rounded-xl">
-                    <div class="col-span-full">
-                        <input type="text" id="inp-code" placeholder="Activation Code (12 Digits)" class="p-5 bg-blue-50 border-2 border-dashed border-blue-200 rounded-2xl text-center font-black text-blue-600 tracking-widest mb-6">
-                        <button type="submit" class="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-xl hover:bg-blue-600 shadow-xl transition-all">Deploy MANY.AI</button>
+                <div class="flex items-center space-x-4">
+                    <!-- Language Switcher -->
+                    <div class="flex items-center space-x-2 glass-panel rounded-lg p-1">
+                        <button onclick="switchLanguage('en')" 
+                                class="language-switcher px-3 py-1.5 rounded-md text-sm font-medium transition-all hover:bg-white/10 active">
+                            <i class="fas fa-globe-americas mr-2"></i>EN
+                        </button>
+                        <button onclick="switchLanguage('ar')" 
+                                class="language-switcher px-3 py-1.5 rounded-md text-sm font-medium transition-all hover:bg-white/10">
+                            <i class="fas fa-globe-asia mr-2"></i>AR
+                        </button>
+                        <button onclick="switchLanguage('fr')" 
+                                class="language-switcher px-3 py-1.5 rounded-md text-sm font-medium transition-all hover:bg-white/10">
+                            <i class="fas fa-globe-europe mr-2"></i>FR
+                        </button>
                     </div>
-                </form>
-            </div>
-        </div>
-    </main>
-
-    <main id="view-dashboard" class="view min-h-screen">
-        <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b px-8 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white"><i class="fas fa-robot"></i></div>
-                <div>
-                    <h3 id="dash-store-name" class="font-black text-slate-900 text-lg">---</h3>
-                    <span class="flex items-center gap-1 text-[9px] font-bold text-green-500 uppercase tracking-widest"><i class="fas fa-circle text-[6px] animate-pulse"></i> AI Agent Active</span>
+                    
+                    <!-- System Status -->
+                    <div class="hidden md:flex items-center space-x-2">
+                        <div class="px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full text-xs font-bold flex items-center">
+                            <div class="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></div>
+                            <span class="system-status">System Active</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="hidden md:flex bg-slate-100 p-1 rounded-xl">
-                    <button onclick="switchTab('main')" class="px-6 py-2 rounded-lg text-xs font-black transition hover:bg-white active-tab">Overview</button>
-                    <button onclick="switchTab('inventory')" class="px-6 py-2 rounded-lg text-xs font-black transition hover:bg-white">Inventory</button>
-                    <button onclick="switchTab('shipping')" class="px-6 py-2 rounded-lg text-xs font-black transition hover:bg-white">Logistics</button>
-                </div>
-                <button onclick="location.reload()" class="w-10 h-10 bg-red-50 text-red-500 rounded-xl flex items-center justify-center hover:bg-red-500 hover:text-white transition"><i class="fas fa-power-off"></i></button>
             </div>
         </nav>
 
-        <div class="max-w-7xl mx-auto p-8">
-            <div id="tab-main" class="tab-content space-y-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="glass-card p-6 rounded-[2rem] border-l-4 border-l-blue-600">
-                        <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Industry Type</p>
-                        <h4 id="dash-type" class="text-xl font-black">---</h4>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem] border-l-4 border-l-slate-900">
-                        <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Primary Wilaya</p>
-                        <h4 id="dash-city" class="text-xl font-black">---</h4>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem] border-l-4 border-l-green-500">
-                        <p class="text-[10px] font-black text-slate-400 uppercase mb-2">AI Response Rate</p>
-                        <h4 class="text-xl font-black">99.8%</h4>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem] border-l-4 border-l-orange-500">
-                        <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Pending Orders</p>
-                        <h4 class="text-xl font-black">24</h4>
-                    </div>
+        <!-- Real-time Monitoring Dashboard -->
+        <div class="glass-panel rounded-2xl p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center">
+                    <i class="fas fa-heartbeat text-red-400 text-xl mr-3"></i>
+                    <h2 class="text-xl font-bold" data-i18n="monitoring_title">Real-time System Monitoring</h2>
                 </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div class="bg-slate-900 rounded-[3rem] p-10 text-white shadow-2xl">
-                        <h3 class="text-2xl font-black mb-4">MANY.AI Engine Status</h3>
-                        <p class="text-slate-400 text-sm mb-10">Your AI agent is currently synchronizing stock levels with WhatsApp orders and auto-generating shipping labels for Yalidine Express.</p>
-                        <div class="flex gap-4">
-                            <button class="flex-1 py-4 bg-blue-600 rounded-2xl font-black text-xs hover:scale-105 transition">Sync Inventory</button>
-                            <button class="flex-1 py-4 bg-slate-800 rounded-2xl font-black text-xs hover:bg-slate-700 transition">View AI Logs</button>
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs text-green-400 animate-pulse">Live</span>
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                </div>
+            </div>
+            
+            <div class="system-grid">
+                <!-- AI Processing Module -->
+                <div class="module-card glass-panel rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mr-3">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold" data-i18n="ai_processing">AI Processing</h3>
+                                <p class="text-xs text-gray-400" data-i18n="conversations">Conversations</p>
+                            </div>
+                        </div>
+                        <div class="live-badge px-3 py-1 bg-green-500/20 rounded-full">
+                            <span class="text-xs text-green-400" id="ai-load">1,540</span>
                         </div>
                     </div>
-                    <div class="glass-card rounded-[3rem] p-10">
-                        <h3 class="text-xl font-black mb-6">Connected Carriers</h3>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center p-5 bg-slate-50 rounded-2xl border border-blue-50">
-                                <span class="font-black text-sm">Yalidine Express</span>
-                                <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-[10px] font-black">Linked</span>
+                    <canvas id="aiChart" height="100"></canvas>
+                </div>
+                
+                <!-- Hallucination Prevention -->
+                <div class="module-card glass-panel rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mr-3">
+                                <i class="fas fa-shield-alt"></i>
                             </div>
-                            <div class="flex justify-between items-center p-5 bg-slate-50 rounded-2xl opacity-60">
-                                <span class="font-black text-sm">Zr Express</span>
-                                <button class="text-[10px] font-black text-blue-600">Connect +</button>
+                            <div>
+                                <h3 class="font-bold" data-i18n="hallucination_prevention">Hallucination Prevention</h3>
+                                <p class="text-xs text-gray-400" data-i18n="accuracy_rate">Accuracy Rate</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full">
+                            <span class="text-xs font-bold" id="accuracy-rate">94.7%</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span data-i18n="blocked_responses">Blocked Responses</span>
+                            <span class="text-red-400" id="blocked-count">28</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-green-500 to-emerald-600 h-2 rounded-full" style="width: 94.7%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Inventory Management -->
+                <div class="module-card glass-panel rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center mr-3">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold" data-i18n="inventory_management">Inventory Management</h3>
+                                <p class="text-xs text-gray-400" data-i18n="stock_levels">Stock Levels</p>
+                            </div>
+                        </div>
+                        <div class="live-badge px-3 py-1 bg-blue-500/20 rounded-full">
+                            <span class="text-xs text-blue-400" id="inventory-status">86%</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="low_stock">Low Stock</span>
+                            <span class="text-yellow-400 font-bold">12</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="out_of_stock">Out of Stock</span>
+                            <span class="text-red-400 font-bold">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Intelligent Systems Grid -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold mb-6 flex items-center" data-i18n="intelligent_systems">
+                <i class="fas fa-robot text-blue-400 mr-3"></i>
+                Intelligent Systems
+            </h2>
+            
+            <div class="system-grid">
+                <!-- Neural Language Processor -->
+                <div class="glass-panel rounded-xl p-5 hover:border-blue-500/30 border-2 border-transparent transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-language text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold" data-i18n="neural_language">Neural Language Processor</h3>
+                            <p class="text-sm text-gray-400" data-i18n="multilingual_ai">Multilingual AI Processing</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm" data-i18n="active_languages">Active Languages</span>
+                            </div>
+                            <div class="flex space-x-1">
+                                <span class="px-2 py-1 bg-blue-500/20 rounded text-xs">EN</span>
+                                <span class="px-2 py-1 bg-green-500/20 rounded text-xs">AR</span>
+                                <span class="px-2 py-1 bg-purple-500/20 rounded text-xs">FR</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-1">
+                            <div class="bg-gradient-to-r from-blue-500 to-cyan-600 h-1 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Smart Shipping System -->
+                <div class="glass-panel rounded-xl p-5 hover:border-green-500/30 border-2 border-transparent transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-shipping-fast text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold" data-i18n="smart_shipping">Smart Shipping System</h3>
+                            <p class="text-sm text-gray-400" data-i18n="logistics_ai">AI-Powered Logistics</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm" data-i18n="active_deliveries">Active Deliveries</span>
+                            <span class="text-green-400 font-bold">24</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm" data-i18n="avg_delivery_time">Avg Delivery Time</span>
+                            <span class="text-blue-400 font-bold">1.2 days</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subscription Intelligence -->
+                <div class="glass-panel rounded-xl p-5 hover:border-purple-500/30 border-2 border-transparent transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-sync-alt text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold" data-i18n="subscription_intelligence">Subscription Intelligence</h3>
+                            <p class="text-sm text-gray-400" data-i18n="revenue_management">Revenue & Renewal Management</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm" data-i18n="monthly_revenue">Monthly Revenue</span>
+                            <span class="text-purple-400 font-bold">₩8,500,000</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-1">
+                            <div class="bg-gradient-to-r from-purple-500 to-pink-600 h-1 rounded-full" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-time Data Processing -->
+        <div class="glass-panel rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold flex items-center" data-i18n="realtime_processing">
+                    <i class="fas fa-bolt text-yellow-400 mr-3"></i>
+                    Real-time Data Processing
+                </h2>
+                <button onclick="refreshData()" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
+                    <i class="fas fa-sync-alt mr-2"></i>
+                    <span data-i18n="refresh_data">Refresh Data</span>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Conversation Stream -->
+                <div class="bg-gray-900/50 rounded-xl p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold" data-i18n="live_conversations">Live Conversations</h3>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-xs text-green-400">24 Active</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3 max-h-64 overflow-y-auto">
+                        <div class="flex items-start p-3 bg-gray-800/50 rounded-lg">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mr-3">
+                                <i class="fab fa-whatsapp text-xs"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm mb-1" data-i18n="new_order">New order received via WhatsApp</p>
+                                <p class="text-xs text-gray-400">Customer: Ahmed • 12:45 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start p-3 bg-gray-800/50 rounded-lg">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center mr-3">
+                                <i class="fab fa-facebook-messenger text-xs"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm mb-1" data-i18n="price_inquiry">Price inquiry from new customer</p>
+                                <p class="text-xs text-gray-400">Customer: Sarah • 12:42 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start p-3 bg-gray-800/50 rounded-lg">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mr-3">
+                                <i class="fas fa-robot text-xs"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm mb-1" data-i18n="ai_response">AI response with 100% accuracy</p>
+                                <p class="text-xs text-gray-400">Verified • 12:40 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- System Health -->
+                <div class="bg-gray-900/50 rounded-xl p-4">
+                    <h3 class="font-bold mb-4" data-i18n="system_health">System Health</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm" data-i18n="ai_processor">AI Processor</span>
+                                <span class="text-sm text-green-400">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-green-500 to-emerald-600 h-2 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm" data-i18n="memory_usage">Memory Usage</span>
+                                <span class="text-sm text-blue-400">78%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-blue-500 to-cyan-600 h-2 rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm" data-i18n="database_health">Database Health</span>
+                                <span class="text-sm text-purple-400">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-purple-500 to-pink-600 h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-800">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm" data-i18n="response_time">Avg Response Time</span>
+                                <span class="text-green-400 font-bold">0.8s</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
 
+        <!-- Enterprise Management -->
+        <div class="glass-panel rounded-2xl p-6 mt-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold" data-i18n="enterprise_management">Enterprise Management</h2>
+                <div class="flex space-x-3">
+                    <button onclick="openSettings()" class="px-4 py-2 bg-gray-800 rounded-lg text-sm font-medium hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-cog mr-2"></i>
+                        <span data-i18n="settings">Settings</span>
+                    </button>
+                    <button onclick="generateReport()" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
+                        <i class="fas fa-chart-bar mr-2"></i>
+                        <span data-i18n="generate_report">Generate Report</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Subscription Management -->
+                <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-5">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-crown text-yellow-400 text-xl mr-3"></i>
+                        <h3 class="font-bold" data-i18n="subscription_management">Subscription Management</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="active_subscriptions">Active Subscriptions</span>
+                            <span class="text-green-400 font-bold">142</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="monthly_revenue">Monthly Revenue</span>
+                            <span class="text-purple-400 font-bold">₩2,840,000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="renewal_rate">Renewal Rate</span>
+                            <span class="text-blue-400 font-bold">92.5%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Inventory Analytics -->
+                <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-5">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-line text-green-400 text-xl mr-3"></i>
+                        <h3 class="font-bold" data-i18n="inventory_analytics">Inventory Analytics</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="total_products">Total Products</span>
+                            <span class="text-blue-400 font-bold">1,247</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="turnover_rate">Turnover Rate</span>
+                            <span class="text-green-400 font-bold">3.2x</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="stock_accuracy">Stock Accuracy</span>
+                            <span class="text-yellow-400 font-bold">98.4%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Shipping Performance -->
+                <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-5">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-truck text-orange-400 text-xl mr-3"></i>
+                        <h3 class="font-bold" data-i18n="shipping_performance">Shipping Performance</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="avg_delivery">Avg Delivery Time</span>
+                            <span class="text-green-400 font-bold">1.4 days</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="on_time_rate">On-time Rate</span>
+                            <span class="text-blue-400 font-bold">96.8%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm" data-i18n="shipping_cost">Avg Shipping Cost</span>
+                            <span class="text-purple-400 font-bold">₩450</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Translations -->
     <script>
-        const i18n = {
+        const translations = {
+            en: {
+                // Navigation
+                monitoring_title: "Real-time System Monitoring",
+                ai_processing: "AI Processing",
+                conversations: "Conversations",
+                hallucination_prevention: "Hallucination Prevention",
+                accuracy_rate: "Accuracy Rate",
+                blocked_responses: "Blocked Responses",
+                inventory_management: "Inventory Management",
+                stock_levels: "Stock Levels",
+                low_stock: "Low Stock",
+                out_of_stock: "Out of Stock",
+                intelligent_systems: "Intelligent Systems",
+                neural_language: "Neural Language Processor",
+                multilingual_ai: "Multilingual AI Processing",
+                active_languages: "Active Languages",
+                smart_shipping: "Smart Shipping System",
+                logistics_ai: "AI-Powered Logistics",
+                active_deliveries: "Active Deliveries",
+                avg_delivery_time: "Avg Delivery Time",
+                subscription_intelligence: "Subscription Intelligence",
+                revenue_management: "Revenue & Renewal Management",
+                monthly_revenue: "Monthly Revenue",
+                realtime_processing: "Real-time Data Processing",
+                refresh_data: "Refresh Data",
+                live_conversations: "Live Conversations",
+                new_order: "New order received via WhatsApp",
+                price_inquiry: "Price inquiry from new customer",
+                ai_response: "AI response with 100% accuracy",
+                system_health: "System Health",
+                ai_processor: "AI Processor",
+                memory_usage: "Memory Usage",
+                database_health: "Database Health",
+                response_time: "Avg Response Time",
+                enterprise_management: "Enterprise Management",
+                settings: "Settings",
+                generate_report: "Generate Report",
+                subscription_management: "Subscription Management",
+                active_subscriptions: "Active Subscriptions",
+                renewal_rate: "Renewal Rate",
+                inventory_analytics: "Inventory Analytics",
+                total_products: "Total Products",
+                turnover_rate: "Turnover Rate",
+                stock_accuracy: "Stock Accuracy",
+                shipping_performance: "Shipping Performance",
+                on_time_rate: "On-time Rate",
+                shipping_cost: "Avg Shipping Cost",
+                system_status: "System Active"
+            },
             ar: {
-                title: "تهيئة نظام التاجر الذكي",
-                subtitle: "أدخل بيانات متجرك بدقة لتفعيل الوكيل الذكي.",
-                store: "اسم المتجر",
-                type: "نوع النشاط",
-                city: "الولاية",
-                phone: "رقم الهاتف",
-                btn: "تفعيل MANY.AI"
+                // Navigation - Arabic
+                monitoring_title: "مراقبة النظام في الوقت الحقيقي",
+                ai_processing: "معالجة الذكاء الاصطناعي",
+                conversations: "المحادثات",
+                hallucination_prevention: "منع الهلوسة",
+                accuracy_rate: "معدل الدقة",
+                blocked_responses: "الردود المحظورة",
+                inventory_management: "إدارة المخزون",
+                stock_levels: "مستويات المخزون",
+                low_stock: "مخزون منخفض",
+                out_of_stock: "نفاذ المخزون",
+                intelligent_systems: "الأنظمة الذكية",
+                neural_language: "معالج اللغة العصبي",
+                multilingual_ai: "معالجة الذكاء الاصطناعي متعدد اللغات",
+                active_languages: "اللغات النشطة",
+                smart_shipping: "نظام الشحن الذكي",
+                logistics_ai: "اللوجستيات المدعومة بالذكاء الاصطناعي",
+                active_deliveries: "طلبات التوصيل النشطة",
+                avg_delivery_time: "متوسط وقت التوصيل",
+                subscription_intelligence: "ذكاء الاشتراكات",
+                revenue_management: "إدارة الإيرادات والتجديد",
+                monthly_revenue: "الإيرادات الشهرية",
+                realtime_processing: "معالجة البيانات في الوقت الحقيقي",
+                refresh_data: "تحديث البيانات",
+                live_conversations: "المحادثات الحية",
+                new_order: "طلب جديد عبر واتساب",
+                price_inquiry: "استفسار عن السعر من عميل جديد",
+                ai_response: "رد الذكاء الاصطناعي بدقة 100٪",
+                system_health: "صحة النظام",
+                ai_processor: "معالج الذكاء الاصطناعي",
+                memory_usage: "استخدام الذاكرة",
+                database_health: "صحة قاعدة البيانات",
+                response_time: "متوسط وقت الاستجابة",
+                enterprise_management: "إدارة المؤسسة",
+                settings: "الإعدادات",
+                generate_report: "توليد تقرير",
+                subscription_management: "إدارة الاشتراكات",
+                active_subscriptions: "الاشتراكات النشطة",
+                renewal_rate: "معدل التجديد",
+                inventory_analytics: "تحليلات المخزون",
+                total_products: "إجمالي المنتجات",
+                turnover_rate: "معدل الدوران",
+                stock_accuracy: "دقة المخزون",
+                shipping_performance: "أداء الشحن",
+                on_time_rate: "معدل التسليم في الوقت المحدد",
+                shipping_cost: "متوسط تكلفة الشحن",
+                system_status: "النظام نشط"
             },
             fr: {
-                title: "Initialiser votre compte Marchand",
-                subtitle: "Saisissez les détails pour déployer votre agent AI.",
-                store: "Nom de la boutique",
-                type: "Secteur d'activité",
-                city: "Wilaya",
-                phone: "Téléphone",
-                btn: "Déployer MANY.AI"
+                // Navigation - French
+                monitoring_title: "Surveillance du système en temps réel",
+                ai_processing: "Traitement IA",
+                conversations: "Conversations",
+                hallucination_prevention: "Prévention des hallucinations",
+                accuracy_rate: "Taux de précision",
+                blocked_responses: "Réponses bloquées",
+                inventory_management: "Gestion des stocks",
+                stock_levels: "Niveaux de stock",
+                low_stock: "Stock faible",
+                out_of_stock: "Rupture de stock",
+                intelligent_systems: "Systèmes intelligents",
+                neural_language: "Processeur de langage neuronal",
+                multilingual_ai: "Traitement IA multilingue",
+                active_languages: "Langues actives",
+                smart_shipping: "Système d'expédition intelligent",
+                logistics_ai: "Logistique alimentée par IA",
+                active_deliveries: "Livraisons actives",
+                avg_delivery_time: "Temps de livraison moyen",
+                subscription_intelligence: "Intelligence d'abonnement",
+                revenue_management: "Gestion des revenus et renouvellements",
+                monthly_revenue: "Revenus mensuels",
+                realtime_processing: "Traitement des données en temps réel",
+                refresh_data: "Actualiser les données",
+                live_conversations: "Conversations en direct",
+                new_order: "Nouvelle commande reçue via WhatsApp",
+                price_inquiry: "Demande de prix d'un nouveau client",
+                ai_response: "Réponse IA avec 100% de précision",
+                system_health: "Santé du système",
+                ai_processor: "Processeur IA",
+                memory_usage: "Utilisation de la mémoire",
+                database_health: "Santé de la base de données",
+                response_time: "Temps de réponse moyen",
+                enterprise_management: "Gestion d'entreprise",
+                settings: "Paramètres",
+                generate_report: "Générer un rapport",
+                subscription_management: "Gestion des abonnements",
+                active_subscriptions: "Abonnements actifs",
+                renewal_rate: "Taux de renouvellement",
+                inventory_analytics: "Analytique des stocks",
+                total_products: "Produits totaux",
+                turnover_rate: "Taux de rotation",
+                stock_accuracy: "Précision des stocks",
+                shipping_performance: "Performance d'expédition",
+                on_time_rate: "Taux de livraison à temps",
+                shipping_cost: "Coût d'expédition moyen",
+                system_status: "Système actif"
             }
         };
 
-        function setLanguage(lang) {
-            const container = document.getElementById('lang-container');
+        let currentLanguage = 'en';
+        let isDarkMode = true;
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize neural network background
+            initializeNeuralNetwork();
+            
+            // Initialize charts
+            initializeCharts();
+            
+            // Set initial language
+            switchLanguage('en');
+            
+            // Initialize live data updates
+            startLiveUpdates();
+        });
+
+        // Switch language function
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.language-switcher').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update system status
+            document.querySelector('.system-status').textContent = translations[lang].system_status;
+            
+            // Update direction based on language
             if (lang === 'ar') {
-                container.classList.add('rtl');
-                document.getElementById('txt-title').innerText = i18n.ar.title;
-                document.getElementById('txt-subtitle').innerText = i18n.ar.subtitle;
-                document.getElementById('inp-store').placeholder = i18n.ar.store;
-                document.getElementById('inp-city').placeholder = i18n.ar.city;
-                document.getElementById('inp-phone').placeholder = i18n.ar.phone;
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+                document.body.classList.add('rtl');
+                document.body.classList.remove('ltr');
             } else {
-                container.classList.remove('rtl');
-                document.getElementById('txt-title').innerText = i18n.fr.title;
-                document.getElementById('txt-subtitle').innerText = i18n.fr.subtitle;
-                document.getElementById('inp-store').placeholder = i18n.fr.store;
-                document.getElementById('inp-city').placeholder = i18n.fr.city;
-                document.getElementById('inp-phone').placeholder = i18n.fr.phone;
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', lang);
+                document.body.classList.add('ltr');
+                document.body.classList.remove('rtl');
             }
         }
 
-        let storeData = {};
-
-        function handleAuth(e) {
-            e.preventDefault();
-            storeData = {
-                name: document.getElementById('inp-store').value,
-                type: document.getElementById('inp-type').value,
-                city: document.getElementById('inp-city').value,
-                phone: document.getElementById('inp-phone').value
-            };
+        // Toggle theme
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const themeIcon = document.querySelector('[onclick="toggleTheme()"] i');
             
-            // Switch UI
-            document.getElementById('view-auth').classList.remove('active');
+            if (isDarkMode) {
+                document.body.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)';
+                themeIcon.className = 'fas fa-moon';
+            } else {
+                document.body.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
+                document.body.style.color = '#1e293b';
+                themeIcon.className = 'fas fa-sun';
+            }
+        }
+
+        // Initialize neural network background
+        function initializeNeuralNetwork() {
+            const neuralNetwork = document.getElementById('ai-neural-network');
+            const nodeCount = 15;
+            
+            for (let i = 0; i < nodeCount; i++) {
+                const node = document.createElement('div');
+                node.className = 'neural-node';
+                node.style.top = `${Math.random() * 100}%`;
+                node.style.left = `${Math.random() * 100}%`;
+                node.style.animationDelay = `${Math.random() * 3}s`;
+                neuralNetwork.appendChild(node);
+            }
+        }
+
+        // Initialize charts
+        function initializeCharts() {
+            // AI Processing Chart
+            const aiCtx = document.getElementById('aiChart').getContext('2d');
+            new Chart(aiCtx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                    datasets: [{
+                        label: 'AI Load',
+                        data: [800, 1200, 1800, 1540, 1300, 1100],
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#94a3b8' }
+                        },
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#94a3b8' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Refresh data function
+        function refreshData() {
+            // Simulate data refresh
+            const aiLoad = Math.floor(Math.random() * 500) + 1200;
+            const accuracy = (Math.random() * 3 + 92).toFixed(1);
+            const blocked = Math.floor(Math.random() * 5) + 25;
+            const inventory = Math.floor(Math.random() * 10) + 80;
+            
+            document.getElementById('ai-load').textContent = aiLoad.toLocaleString();
+            document.getElementById('accuracy-rate').textContent = `${accuracy}%`;
+            document.getElementById('blocked-count').textContent = blocked;
+            document.getElementById('inventory-status').textContent = `${inventory}%`;
+            
+            // Show success message
+            showNotification('Data refreshed successfully', 'success');
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 glass-panel p-4 rounded-lg z-50 transform transition-all duration-300 ${
+                type === 'success' ? 'border-green-500/30' : 'border-blue-500/30'
+            }`;
+            
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'} ${
+                type === 'success' ? 'text-green-400' : 'text-blue-400'
+            } mr-3"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
             setTimeout(() => {
-                document.getElementById('view-dashboard').classList.add('active');
-                renderDashboard();
-            }, 400);
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-10px)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
 
-        function renderDashboard() {
-            document.getElementById('dash-store-name').innerText = storeData.name;
-            document.getElementById('dash-type').innerText = storeData.type;
-            document.getElementById('dash-city').innerText = storeData.city;
+        // Start live updates
+        function startLiveUpdates() {
+            setInterval(() => {
+                // Update conversation count
+                const currentCount = parseInt(document.getElementById('ai-load').textContent.replace(/,/g, ''));
+                const newCount = currentCount + Math.floor(Math.random() * 10);
+                document.getElementById('ai-load').textContent = newCount.toLocaleString();
+                
+                // Update accuracy slightly
+                const accuracyElement = document.getElementById('accuracy-rate');
+                const currentAccuracy = parseFloat(accuracyElement.textContent);
+                const newAccuracy = Math.max(92, Math.min(97, currentAccuracy + (Math.random() - 0.5) * 0.2));
+                accuracyElement.textContent = `${newAccuracy.toFixed(1)}%`;
+                
+            }, 5000); // Update every 5 seconds
         }
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
-            document.getElementById('tab-' + tabId)?.classList.remove('hidden');
+        // Generate report
+        function generateReport() {
+            showNotification('Generating enterprise report...', 'info');
+            
+            // Simulate report generation
+            setTimeout(() => {
+                showNotification('Report generated and sent to your email', 'success');
+            }, 2000);
+        }
+
+        // Open settings
+        function openSettings() {
+            showNotification('Opening system settings...', 'info');
+        }
+
+        // Toggle dark mode
+        function toggleDarkMode() {
+            toggleTheme();
         }
     </script>
 </body>
