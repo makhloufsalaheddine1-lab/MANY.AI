@@ -3,1138 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANY.AI | بوابة المقاول الذاتي</title>
+    <title>MANY.AI | رحلة الشريك</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-        }
-        
-        .tab-active {
-            background-color: #eff6ff;
-            color: #2563eb;
-            border-bottom: 3px solid #2563eb;
-        }
-        
-        .status-active {
-            background-color: #dcfce7;
-            color: #166534;
-        }
-        
-        .status-pending {
-            background-color: #fef3c7;
-            color: #92400e;
-        }
-        
-        .status-expired {
-            background-color: #fee2e2;
-            color: #991b1b;
-        }
-        
-        .notification-badge {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        
-        .modal-content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        @media (max-width: 768px) {
-            .mobile-stack {
-                flex-direction: column !important;
-            }
-            
-            .mobile-full {
-                width: 100% !important;
-            }
-        }
+        body { font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
+        .step-content { display: none; animation: slideIn 0.4s ease-out; }
+        .step-content.active { display: block; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .progress-bar { transition: width 0.5s ease-in-out; }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-slate-50">
 
-    <!-- صفحة التسجيل -->
-    <div id="registration-page" class="min-h-screen flex items-center justify-center py-12 px-4">
-        <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl border border-primary-100">
-            <div class="text-center">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-primary-100 p-4 rounded-full">
-                        <i class="fas fa-robot text-primary-600 text-3xl"></i>
-                    </div>
-                </div>
-                <h1 class="text-2xl font-extrabold text-primary-900">إنشاء حساب MAK-DINE.DIGITAL</h1>
-                <p class="mt-2 text-sm text-gray-600">ابدأ رحلة السيادة التجارية مع MANY.AI</p>
+    <div id="onboarding-flow" class="min-h-screen flex flex-col items-center justify-center p-4">
+        
+        <div class="w-full max-w-md mb-8">
+            <div class="flex justify-between mb-2 text-xs font-bold text-slate-400">
+                <span id="step-label">الخطوة 1: التسجيل</span>
+                <span id="step-percent">33%</span>
             </div>
-            
-            <form id="registration-form" class="mt-8 space-y-6">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">اسم المتجر / النشاط *</label>
-                        <input type="text" required placeholder="مثال: متجر الأزياء الرجالي" 
-                               class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 border-gray-300">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني *</label>
-                        <input type="email" required placeholder="example@domain.com" 
-                               class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 border-gray-300">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">رقم الهاتف *</label>
-                        <input type="tel" required placeholder="05XXXXXXXX" 
-                               class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 border-gray-300">
-                    </div>
-                    
-                    <div class="p-4 bg-primary-50 rounded-lg border border-primary-100">
-                        <p class="text-sm font-bold text-primary-800 mb-3">
-                            <i class="fas fa-link ml-1"></i>
-                            اختر منصات التواصل لربط الوكيل الذكي:
-                        </p>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label class="flex items-center space-x-2 space-x-reverse p-2 hover:bg-primary-100 rounded cursor-pointer">
-                                <input type="checkbox" class="form-checkbox text-primary-600 rounded" checked> 
-                                <i class="fab fa-whatsapp text-green-500"></i>
-                                <span>WhatsApp</span>
-                            </label>
-                            <label class="flex items-center space-x-2 space-x-reverse p-2 hover:bg-primary-100 rounded cursor-pointer">
-                                <input type="checkbox" class="form-checkbox text-primary-600 rounded" checked> 
-                                <i class="fab fa-facebook-messenger text-blue-500"></i>
-                                <span>Messenger</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-                        <p class="text-sm font-bold text-yellow-800 mb-2">
-                            <i class="fas fa-crown ml-1"></i>
-                            اختر باقة الاشتراك
-                        </p>
-                        <select class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 border-gray-300">
-                            <option value="starter">الباقة الأساسية - 99 ر.س/شهر (تجربة 7 أيام مجاناً)</option>
-                            <option value="pro">الباقة الاحترافية - 199 ر.س/شهر</option>
-                            <option value="enterprise">الباقة المتقدمة - 399 ر.س/شهر</option>
-                        </select>
-                        <p class="text-xs text-yellow-600 mt-2">سيتم تجديد الاشتراك تلقائياً كل شهر</p>
-                    </div>
-                    
-                    <div class="flex items-center">
-                        <input type="checkbox" required class="h-4 w-4 text-primary-600 rounded focus:ring-primary-500 border-gray-300">
-                        <label class="mr-2 block text-sm text-gray-700">
-                            أوافق على 
-                            <a href="#" class="text-primary-600 hover:underline">شروط الاستخدام</a>
-                            و
-                            <a href="#" class="text-primary-600 hover:underline">سياسة الخصوصية</a>
-                        </label>
-                    </div>
-                </div>
+            <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div id="progress-line" class="progress-bar bg-blue-600 h-full w-1/3"></div>
+            </div>
+        </div>
 
-                <button type="submit" 
-                        class="w-full py-3 bg-primary-600 text-white rounded-lg font-bold hover:bg-primary-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                    <i class="fas fa-rocket ml-2"></i>
-                    بدء التجربة المجانية
-                </button>
+        <div id="step1" class="step-content active w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-plus text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-800">ابدأ رحلتك</h2>
+                <p class="text-slate-500">سجل بيانات متجرك للانضمام إلى MANY.AI</p>
+            </div>
+            <form onsubmit="goToStep(2); return false;" class="space-y-4">
+                <input type="text" id="store-name" required placeholder="اسم المتجر التجاري" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500 transition-all">
+                <input type="email" required placeholder="البريد الإلكتروني الرسمي" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500 transition-all">
+                <button type="submit" class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-100">متابعة لاختيار الباقة <i class="fas fa-chevron-left mr-2"></i></button>
             </form>
         </div>
-    </div>
 
-    <!-- لوحة التحكم -->
-    <div id="dashboard" class="hidden min-h-screen bg-gray-100">
-        <!-- شريط التنقل العلوي -->
-        <nav class="bg-white shadow-sm border-b">
-            <div class="px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex items-center">
-                        <div class="flex items-center space-x-3 space-x-reverse">
-                            <i class="fas fa-robot text-primary-600 text-xl"></i>
-                            <h1 class="text-lg font-bold text-primary-900">MANY.AI</h1>
-                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs flex items-center">
-                                <span class="w-2 h-2 bg-green-500 rounded-full ml-1"></span>
-                                نشط
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center space-x-4 space-x-reverse">
-                        <div class="relative">
-                            <button id="notification-btn" class="relative p-2 text-gray-600 hover:text-primary-600">
-                                <i class="fas fa-bell text-xl"></i>
-                                <span id="notification-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">3</span>
-                            </button>
-                        </div>
-                        <button id="logout-btn" class="text-gray-600 hover:text-primary-600">
-                            <i class="fas fa-sign-out-alt text-xl"></i>
-                        </button>
-                    </div>
+        <div id="step2" class="step-content w-full max-w-2xl bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-black text-slate-800">اختر خطة النجاح</h2>
+                <p class="text-slate-500">اختر الباقة التي تناسب حجم نشاطك</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div onclick="selectPlan(this)" class="plan-card p-6 border-2 border-slate-100 rounded-2xl cursor-pointer hover:border-blue-200 transition-all relative">
+                    <h3 class="font-bold text-lg">الباقة الأساسية</h3>
+                    <p class="text-2xl font-black text-blue-600 my-2">99 ر.س<span class="text-xs text-slate-400 font-normal">/شهرياً</span></p>
+                    <ul class="text-sm text-slate-500 space-y-2">
+                        <li><i class="fas fa-check text-green-500 ml-2"></i> 500 محادثة ذكية</li>
+                        <li><i class="fas fa-check text-green-500 ml-2"></i> دعم واتساب</li>
+                    </ul>
+                </div>
+                <div onclick="selectPlan(this)" class="plan-card p-6 border-2 border-blue-500 bg-blue-50 rounded-2xl cursor-pointer relative">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full">الأكثر طلباً</span>
+                    <h3 class="font-bold text-lg">باقة المحترفين</h3>
+                    <p class="text-2xl font-black text-blue-600 my-2">249 ر.س<span class="text-xs text-slate-400 font-normal">/شهرياً</span></p>
+                    <ul class="text-sm text-slate-500 space-y-2">
+                        <li><i class="fas fa-check text-green-500 ml-2"></i> محادثات لا محدودة</li>
+                        <li><i class="fas fa-check text-green-500 ml-2"></i> نظام منع الهلوسة المتقدم</li>
+                    </ul>
                 </div>
             </div>
+            <button onclick="goToStep(3)" class="w-full py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-black transition-all">تأكيد واشتراك</button>
+        </div>
+
+        <div id="step3" class="step-content w-full max-w-md bg-white p-10 rounded-2xl shadow-xl text-center">
+            <div id="activating-ui">
+                <div class="inline-block w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-6"></div>
+                <h2 class="text-2xl font-black text-slate-800 mb-2">جاري تفعيل اشتراكك...</h2>
+                <p class="text-slate-500">نقوم الآن بربط ذكاء MANY.AI بمتجرك</p>
+            </div>
+            <div id="success-ui" class="hidden">
+                <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-check text-4xl"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-800 mb-2">تم التفعيل بنجاح!</h2>
+                <p class="text-slate-500 mb-8">مرحباً بك في مستقبل التجارة الذكية</p>
+                <button onclick="launchDashboard()" class="w-full py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 shadow-lg shadow-green-100">الدخول للوحة التحكم <i class="fas fa-rocket mr-2"></i></button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="main-dashboard" class="hidden min-h-screen bg-slate-100">
+        <nav class="bg-white p-4 shadow-sm flex justify-between items-center">
+            <span class="font-bold text-blue-600">MANY.AI DASHBOARD</span>
+            <span id="user-store" class="bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-sm font-bold"></span>
         </nav>
-
-        <!-- المحتوى الرئيسي -->
-        <div class="py-6">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- رأس لوحة التحكم -->
-                <div class="mb-6">
-                    <h2 class="text-2xl font-bold text-gray-900">لوحة تحكم MANY.AI</h2>
-                    <p class="text-gray-600">مرحباً بك، <span id="store-name-display" class="font-bold">متجر الأزياء الرجالي</span></p>
-                </div>
-
-                <!-- تبويبات -->
-                <div class="border-b border-gray-200 mb-6">
-                    <nav class="-mb-px flex space-x-8 space-x-reverse overflow-x-auto">
-                        <button id="tab-dashboard" class="tab-btn py-4 px-1 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap">
-                            <i class="fas fa-tachometer-alt ml-2"></i>
-                            نظرة عامة
-                        </button>
-                        <button id="tab-subscriptions" class="tab-btn py-4 px-1 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap">
-                            <i class="fas fa-crown ml-2"></i>
-                            الاشتراكات
-                        </button>
-                        <button id="tab-hallucination" class="tab-btn py-4 px-1 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap">
-                            <i class="fas fa-brain ml-2"></i>
-                            نظام منع الهلوسة
-                        </button>
-                        <button id="tab-reports" class="tab-btn py-4 px-1 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap">
-                            <i class="fas fa-chart-bar ml-2"></i>
-                            التقارير
-                        </button>
-                        <button id="tab-settings" class="tab-btn py-4 px-1 font-medium text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap">
-                            <i class="fas fa-cog ml-2"></i>
-                            الإعدادات
-                        </button>
-                    </nav>
-                </div>
-
-                <!-- محتوى تبويب نظرة عامة -->
-                <div id="content-dashboard" class="tab-content space-y-6">
-                    <!-- بطاقات الإحصائيات -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div class="bg-white p-6 rounded-xl shadow-sm">
-                            <div class="flex items-center">
-                                <div class="bg-green-100 p-3 rounded-lg">
-                                    <i class="fas fa-comments text-green-600"></i>
-                                </div>
-                                <div class="mr-4">
-                                    <p class="text-sm text-gray-500">المحادثات اليوم</p>
-                                    <h3 class="text-2xl font-bold">1,247</h3>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white p-6 rounded-xl shadow-sm">
-                            <div class="flex items-center">
-                                <div class="bg-blue-100 p-3 rounded-lg">
-                                    <i class="fas fa-shopping-cart text-blue-600"></i>
-                                </div>
-                                <div class="mr-4">
-                                    <p class="text-sm text-gray-500">المبيعات اليوم</p>
-                                    <h3 class="text-2xl font-bold">28</h3>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white p-6 rounded-xl shadow-sm">
-                            <div class="flex items-center">
-                                <div class="bg-purple-100 p-3 rounded-lg">
-                                    <i class="fas fa-crown text-purple-600"></i>
-                                </div>
-                                <div class="mr-4">
-                                    <p class="text-sm text-gray-500">حالة الاشتراك</p>
-                                    <h3 class="text-lg font-bold text-green-600">نشط</h3>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white p-6 rounded-xl shadow-sm">
-                            <div class="flex items-center">
-                                <div class="bg-yellow-100 p-3 rounded-lg">
-                                    <i class="fas fa-shield-alt text-yellow-600"></i>
-                                </div>
-                                <div class="mr-4">
-                                    <p class="text-sm text-gray-500">منع الهلوسة</p>
-                                    <h3 class="text-lg font-bold text-green-600">مفعل</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- التنبيهات الهامة -->
-                    <div class="bg-white rounded-xl shadow-sm">
-                        <div class="p-6 border-b">
-                            <h3 class="text-lg font-bold text-gray-900">التنبيهات الهامة</h3>
-                        </div>
-                        <div class="p-6">
-                            <div class="space-y-4">
-                                <div class="flex items-start p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-                                    <i class="fas fa-exclamation-triangle text-yellow-600 mt-1 ml-3"></i>
-                                    <div>
-                                        <p class="font-medium text-yellow-800">اشتراكك سينتهي خلال 3 أيام</p>
-                                        <p class="text-sm text-yellow-600 mt-1">يرجى تجديد الاشتراك لاستمرار الخدمة</p>
-                                        <button class="mt-2 text-primary-600 hover:text-primary-800 font-medium text-sm">
-                                            تجديد الآن
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start p-4 bg-blue-50 rounded-lg border border-blue-100">
-                                    <i class="fas fa-chart-line text-blue-600 mt-1 ml-3"></i>
-                                    <div>
-                                        <p class="font-medium text-blue-800">تقرير الأسبوع جاهز</p>
-                                        <p class="text-sm text-blue-600 mt-1">تم إرسال التقرير الأسبوعي إلى بريدك الإلكتروني</p>
-                                        <button class="mt-2 text-primary-600 hover:text-primary-800 font-medium text-sm">
-                                            عرض التقرير
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- محتوى تبويب الاشتراكات -->
-                <div id="content-subscriptions" class="tab-content hidden space-y-6">
-                    <!-- حالة الاشتراك الحالي -->
-                    <div class="bg-white rounded-xl shadow-sm">
-                        <div class="p-6 border-b">
-                            <h3 class="text-lg font-bold text-gray-900">اشتراكك الحالي</h3>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gradient-to-l from-primary-50 to-blue-50 rounded-xl">
-                                <div>
-                                    <span class="status-active px-3 py-1 rounded-full text-sm font-medium">نشط</span>
-                                    <h4 class="text-xl font-bold text-gray-900 mt-2">الباقة الاحترافية</h4>
-                                    <p class="text-gray-600 mt-1">199 ر.س / شهر</p>
-                                    <div class="flex items-center mt-4">
-                                        <i class="fas fa-calendar-alt text-primary-600 ml-2"></i>
-                                        <span class="text-sm text-gray-600">ينتهي في: 15 ديسمبر 2023</span>
-                                    </div>
-                                </div>
-                                <button id="upgrade-btn" class="mt-4 md:mt-0 bg-primary-600 hover:bg-primary-700 text-white py-3 px-6 rounded-lg font-medium transition-colors">
-                                    <i class="fas fa-sync-alt ml-2"></i>
-                                    تجديد الاشتراك
-                                </button>
-                            </div>
-
-                            <!-- خيارات الاشتراك -->
-                            <div class="mt-8">
-                                <h4 class="text-lg font-bold text-gray-900 mb-4">ترقية اشتراكك</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div class="border border-gray-200 rounded-xl p-6 hover:border-primary-300 transition-colors">
-                                        <div class="text-center">
-                                            <h5 class="font-bold text-lg">الباقة الأساسية</h5>
-                                            <div class="mt-4">
-                                                <span class="text-3xl font-bold">99</span>
-                                                <span class="text-gray-600">ر.س/شهر</span>
-                                            </div>
-                                            <ul class="mt-6 space-y-3 text-sm text-gray-600 text-right">
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> 500 محادثة/شهر</li>
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> دعم فني أساسي</li>
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> تقرير أسبوعي</li>
-                                            </ul>
-                                            <button class="mt-6 w-full py-2 border border-primary-600 text-primary-600 rounded-lg font-medium hover:bg-primary-50 transition-colors">
-                                                اختر هذه الباقة
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="border-2 border-primary-500 rounded-xl p-6 bg-primary-50">
-                                        <div class="text-center">
-                                            <div class="inline-block bg-primary-600 text-white px-3 py-1 rounded-full text-sm mb-2">الأكثر شيوعاً</div>
-                                            <h5 class="font-bold text-lg">الباقة الاحترافية</h5>
-                                            <div class="mt-4">
-                                                <span class="text-3xl font-bold">199</span>
-                                                <span class="text-gray-600">ر.س/شهر</span>
-                                            </div>
-                                            <ul class="mt-6 space-y-3 text-sm text-gray-600 text-right">
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> محادثات غير محدودة</li>
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> دعم فني مميز</li>
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> تقرير يومي وأسبوعي</li>
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> نظام منع الهلوسة المتقدم</li>
-                                            </ul>
-                                            <button class="mt-6 w-full py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
-                                                الباقة الحالية
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="border border-gray-200 rounded-xl p-6 hover:border-primary-300 transition-colors">
-                                        <div class="text-center">
-                                            <h5 class="font-bold text-lg">الباقة المتقدمة</h5>
-                                            <div class="mt-4">
-                                                <span class="text-3xl font-bold">399</span>
-                                                <span class="text-gray-600">ر.س/شهر</span>
-                                            </div>
-                                            <ul class="mt-6 space-y-3 text-sm text-gray-600 text-right">
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> جميع ميزات الباقة الاحترافية</li>
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> دعم فني 24/7</li>
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> تقارير مخصصة</li>
-                                                <li><i class="fas fa-check text-green-500 ml-2"></i> تحليلات متقدمة</li>
-                                            </ul>
-                                            <button class="mt-6 w-full py-2 border border-primary-600 text-primary-600 rounded-lg font-medium hover:bg-primary-50 transition-colors">
-                                                اختر هذه الباقة
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- سجل الفواتير -->
-                            <div class="mt-8">
-                                <h4 class="text-lg font-bold text-gray-900 mb-4">سجل الفواتير</h4>
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-right">
-                                        <thead>
-                                            <tr class="bg-gray-50 text-sm">
-                                                <th class="p-4 font-medium">رقم الفاتورة</th>
-                                                <th class="p-4 font-medium">التاريخ</th>
-                                                <th class="p-4 font-medium">المبلغ</th>
-                                                <th class="p-4 font-medium">الحالة</th>
-                                                <th class="p-4 font-medium">الإجراء</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-sm">
-                                            <tr class="border-b hover:bg-gray-50">
-                                                <td class="p-4 font-bold">INV-2023-156</td>
-                                                <td class="p-4">15 نوفمبر 2023</td>
-                                                <td class="p-4 font-bold">199 ر.س</td>
-                                                <td class="p-4">
-                                                    <span class="status-active px-3 py-1 rounded-full text-xs">مدفوعة</span>
-                                                </td>
-                                                <td class="p-4">
-                                                    <button class="text-primary-600 hover:text-primary-800 font-medium">
-                                                        تحميل الفاتورة
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr class="border-b hover:bg-gray-50">
-                                                <td class="p-4 font-bold">INV-2023-155</td>
-                                                <td class="p-4">15 أكتوبر 2023</td>
-                                                <td class="p-4 font-bold">199 ر.س</td>
-                                                <td class="p-4">
-                                                    <span class="status-active px-3 py-1 rounded-full text-xs">مدفوعة</span>
-                                                </td>
-                                                <td class="p-4">
-                                                    <button class="text-primary-600 hover:text-primary-800 font-medium">
-                                                        تحميل الفاتورة
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- محتوى تبويب نظام منع الهلوسة -->
-                <div id="content-hallucination" class="tab-content hidden space-y-6">
-                    <div class="bg-white rounded-xl shadow-sm">
-                        <div class="p-6 border-b">
-                            <h3 class="text-lg font-bold text-gray-900">
-                                <i class="fas fa-brain ml-2"></i>
-                                نظام منع الهلوسة الذكي
-                            </h3>
-                            <p class="text-gray-600 text-sm mt-1">منع الردود غير الدقيقة والخاطئة من الوكيل الذكي</p>
-                        </div>
-                        
-                        <div class="p-6">
-                            <!-- إحصائيات منع الهلوسة -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                                <div class="bg-green-50 p-6 rounded-xl border border-green-100">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-sm text-gray-600">الردود الدقيقة</p>
-                                            <h4 class="text-2xl font-bold mt-1">94.7%</h4>
-                                        </div>
-                                        <i class="fas fa-check-circle text-green-600 text-2xl"></i>
-                                    </div>
-                                </div>
-                                
-                                <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-sm text-gray-600">المحادثات المفحوصة</p>
-                                            <h4 class="text-2xl font-bold mt-1">1,247</h4>
-                                        </div>
-                                        <i class="fas fa-search text-blue-600 text-2xl"></i>
-                                    </div>
-                                </div>
-                                
-                                <div class="bg-red-50 p-6 rounded-xl border border-red-100">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-sm text-gray-600">الردود المحظورة</p>
-                                            <h4 class="text-2xl font-bold mt-1">28</h4>
-                                        </div>
-                                        <i class="fas fa-ban text-red-600 text-2xl"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- إعدادات منع الهلوسة -->
-                            <div class="space-y-6">
-                                <div>
-                                    <h4 class="text-lg font-bold text-gray-900 mb-4">إعدادات نظام منع الهلوسة</h4>
-                                    
-                                    <div class="space-y-4">
-                                        <div class="flex items-center justify-between p-4 border rounded-lg">
-                                            <div>
-                                                <p class="font-medium">تفعيل نظام منع الهلوسة</p>
-                                                <p class="text-sm text-gray-600">فحص جميع ردود الوكيل الذكي تلقائياً</p>
-                                            </div>
-                                            <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" checked class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
-                                            </label>
-                                        </div>
-                                        
-                                        <div class="flex items-center justify-between p-4 border rounded-lg">
-                                            <div>
-                                                <p class="font-medium">التحقق من الأسعار والعروض</p>
-                                                <p class="text-sm text-gray-600">التحقق من صحة الأسعار والعروض المذكورة</p>
-                                            </div>
-                                            <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" checked class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
-                                            </label>
-                                        </div>
-                                        
-                                        <div class="flex items-center justify-between p-4 border rounded-lg">
-                                            <div>
-                                                <p class="font-medium">التحقق من المعلومات العامة</p>
-                                                <p class="text-sm text-gray-600">التحقق من صحة المعلومات العامة عن المتجر والمنتجات</p>
-                                            </div>
-                                            <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" checked class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
-                                            </label>
-                                        </div>
-                                        
-                                        <div class="flex items-center justify-between p-4 border rounded-lg">
-                                            <div>
-                                                <p class="font-medium">إشعارات التدخل البشري</p>
-                                                <p class="text-sm text-gray-600">إرسال إشعار عند اكتشاف رد يحتاج لمراجعة بشرية</p>
-                                            </div>
-                                            <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" checked class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- أمثلة على الردود المحظورة -->
-                                <div>
-                                    <h4 class="text-lg font-bold text-gray-900 mb-4">أمثلة على الردود المحظورة</h4>
-                                    <div class="space-y-4">
-                                        <div class="p-4 bg-red-50 rounded-lg border border-red-100">
-                                            <div class="flex items-start">
-                                                <i class="fas fa-times-circle text-red-600 mt-1 ml-3"></i>
-                                                <div>
-                                                    <p class="font-medium text-red-800">الرد المحظور:</p>
-                                                    <p class="text-red-600 mt-1">"هذا المنتج متوفر بسعر 50 ريال" (بينما السعر الحقيقي 75 ريال)</p>
-                                                    <p class="text-sm text-gray-600 mt-2">سبب الحظر: معلومات غير دقيقة عن السعر</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="p-4 bg-red-50 rounded-lg border border-red-100">
-                                            <div class="flex items-start">
-                                                <i class="fas fa-times-circle text-red-600 mt-1 ml-3"></i>
-                                                <div>
-                                                    <p class="font-medium text-red-800">الرد المحظور:</p>
-                                                    <p class="text-red-600 mt-1">"التوصيل مجاني لجميع المناطق" (بينما التوصيل مدفوع لبعض المناطق)</p>
-                                                    <p class="text-sm text-gray-600 mt-2">سبب الحظر: معلومات خاطئة عن سياسة الشحن</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- محتوى تبويب التقارير -->
-                <div id="content-reports" class="tab-content hidden space-y-6">
-                    <div class="bg-white rounded-xl shadow-sm">
-                        <div class="p-6 border-b">
-                            <h3 class="text-lg font-bold text-gray-900">
-                                <i class="fas fa-chart-bar ml-2"></i>
-                                التقارير والإحصائيات
-                            </h3>
-                        </div>
-                        
-                        <div class="p-6">
-                            <!-- خيارات التقرير -->
-                            <div class="mb-6">
-                                <h4 class="font-bold text-gray-900 mb-4">توليد تقرير جديد</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <button class="report-type-btn p-4 border rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors text-right" data-type="weekly">
-                                        <i class="fas fa-calendar-week text-primary-600 text-xl mb-2"></i>
-                                        <p class="font-medium">تقرير أسبوعي</p>
-                                        <p class="text-sm text-gray-600">ملخص للأداء الأسبوعي</p>
-                                    </button>
-                                    
-                                    <button class="report-type-btn p-4 border rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors text-right" data-type="subscriptions">
-                                        <i class="fas fa-crown text-primary-600 text-xl mb-2"></i>
-                                        <p class="font-medium">تقرير المشتركين</p>
-                                        <p class="text-sm text-gray-600">قائمة المشتركين والمدفوعات</p>
-                                    </button>
-                                    
-                                    <button class="report-type-btn p-4 border rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors text-right" data-type="hallucination">
-                                        <i class="fas fa-brain text-primary-600 text-xl mb-2"></i>
-                                        <p class="font-medium">تقرير منع الهلوسة</p>
-                                        <p class="text-sm text-gray-600">إحصائيات نظام منع الهلوسة</p>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- التقارير السابقة -->
-                            <div>
-                                <h4 class="font-bold text-gray-900 mb-4">التقارير السابقة</h4>
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-right">
-                                        <thead>
-                                            <tr class="bg-gray-50 text-sm">
-                                                <th class="p-4 font-medium">رقم التقرير</th>
-                                                <th class="p-4 font-medium">نوع التقرير</th>
-                                                <th class="p-4 font-medium">الفترة</th>
-                                                <th class="p-4 font-medium">تاريخ الإنشاء</th>
-                                                <th class="p-4 font-medium">حالة الإرسال</th>
-                                                <th class="p-4 font-medium">الإجراءات</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-sm">
-                                            <tr class="border-b hover:bg-gray-50">
-                                                <td class="p-4 font-bold">REP-2023-48</td>
-                                                <td class="p-4">تقرير أسبوعي</td>
-                                                <td class="p-4">12-18 نوفمبر 2023</td>
-                                                <td class="p-4">18 نوفمبر 2023</td>
-                                                <td class="p-4">
-                                                    <span class="status-active px-3 py-1 rounded-full text-xs">تم الإرسال</span>
-                                                </td>
-                                                <td class="p-4">
-                                                    <button class="text-primary-600 hover:text-primary-800 font-medium mr-4">
-                                                        <i class="fas fa-download ml-1"></i>
-                                                        تحميل
-                                                    </button>
-                                                    <button class="text-green-600 hover:text-green-800 font-medium">
-                                                        <i class="fas fa-paper-plane ml-1"></i>
-                                                        إعادة الإرسال
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr class="border-b hover:bg-gray-50">
-                                                <td class="p-4 font-bold">REP-2023-47</td>
-                                                <td class="p-4">تقرير المشتركين</td>
-                                                <td class="p-4">نوفمبر 2023</td>
-                                                <td class="p-4">1 ديسمبر 2023</td>
-                                                <td class="p-4">
-                                                    <span class="status-active px-3 py-1 rounded-full text-xs">تم الإرسال</span>
-                                                </td>
-                                                <td class="p-4">
-                                                    <button class="text-primary-600 hover:text-primary-800 font-medium mr-4">
-                                                        <i class="fas fa-download ml-1"></i>
-                                                        تحميل
-                                                    </button>
-                                                    <button class="text-green-600 hover:text-green-800 font-medium">
-                                                        <i class="fas fa-paper-plane ml-1"></i>
-                                                        إعادة الإرسال
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- محتوى تبويب الإعدادات -->
-                <div id="content-settings" class="tab-content hidden space-y-6">
-                    <div class="bg-white rounded-xl shadow-sm">
-                        <div class="p-6 border-b">
-                            <h3 class="text-lg font-bold text-gray-900">
-                                <i class="fas fa-cog ml-2"></i>
-                                إعدادات الحساب والإشعارات
-                            </h3>
-                        </div>
-                        
-                        <div class="p-6">
-                            <div class="space-y-8">
-                                <!-- إعدادات الإشعارات -->
-                                <div>
-                                    <h4 class="font-bold text-gray-900 mb-4">إعدادات الإشعارات</h4>
-                                    <div class="space-y-4">
-                                        <div class="flex items-center justify-between p-4 border rounded-lg">
-                                            <div>
-                                                <p class="font-medium">إشعارات تجديد الاشتراك</p>
-                                                <p class="text-sm text-gray-600">إرسال إشعارات قبل انتهاء الاشتراك</p>
-                                            </div>
-                                            <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" checked class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
-                                            </label>
-                                        </div>
-                                        
-                                        <div class="flex items-center justify-between p-4 border rounded-lg">
-                                            <div>
-                                                <p class="font-medium">الإشعارات الأسبوعية</p>
-                                                <p class="text-sm text-gray-600">إرسال التقارير الأسبوعية تلقائياً</p>
-                                            </div>
-                                            <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" checked class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
-                                            </label>
-                                        </div>
-                                        
-                                        <div class="flex items-center justify-between p-4 border rounded-lg">
-                                            <div>
-                                                <p class="font-medium">إشعارات التدخل البشري</p>
-                                                <p class="text-sm text-gray-600">إشعار عند الحاجة لتدخل بشري</p>
-                                            </div>
-                                            <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" checked class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- إعدادات البريد الإلكتروني -->
-                                <div>
-                                    <h4 class="font-bold text-gray-900 mb-4">إعدادات البريد الإلكتروني</h4>
-                                    <div class="space-y-4">
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني الرئيسي</label>
-                                            <input type="email" value="store@example.com" 
-                                                   class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 border-gray-300">
-                                        </div>
-                                        
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني للتقارير</label>
-                                            <input type="email" value="reports@example.com" 
-                                                   class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 border-gray-300">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="pt-4 border-t">
-                                    <button class="bg-primary-600 hover:bg-primary-700 text-white py-3 px-8 rounded-lg font-medium transition-colors">
-                                        حفظ الإعدادات
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة الإشعارات -->
-    <div id="notification-modal" class="modal">
-        <div class="modal-content">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-bold text-gray-900">الإشعارات</h3>
-                <button id="close-notifications" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="space-y-3 max-h-96 overflow-y-auto">
-                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-                    <div class="flex items-start">
-                        <i class="fas fa-exclamation-triangle text-yellow-600 mt-1 ml-3"></i>
-                        <div>
-                            <p class="font-medium text-yellow-800">تنبيه: اشتراكك سينتهي قريباً</p>
-                            <p class="text-sm text-yellow-600 mt-1">ينتهي اشتراكك خلال 3 أيام، يرجى التجديد</p>
-                            <p class="text-xs text-gray-500 mt-2">منذ ساعتين</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="p-4 bg-green-50 rounded-lg border border-green-100">
-                    <div class="flex items-start">
-                        <i class="fas fa-check-circle text-green-600 mt-1 ml-3"></i>
-                        <div>
-                            <p class="font-medium text-green-800">تم إرسال التقرير الأسبوعي</p>
-                            <p class="text-sm text-green-600 mt-1">تم إرسال تقرير الأداء الأسبوعي إلى بريدك الإلكتروني</p>
-                            <p class="text-xs text-gray-500 mt-2">منذ يوم</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                    <div class="flex items-start">
-                        <i class="fas fa-brain text-blue-600 mt-1 ml-3"></i>
-                        <div>
-                            <p class="font-medium text-blue-800">تم حظر رد غير دقيق</p>
-                            <p class="text-sm text-blue-600 mt-1">نظام منع الهلوسة حظر رداً يحتوي على معلومات خاطئة</p>
-                            <p class="text-xs text-gray-500 mt-2">منذ 3 أيام</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة تأكيد التجديد -->
-    <div id="renewal-modal" class="modal">
-        <div class="modal-content">
-            <div class="text-center">
-                <div class="bg-primary-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-sync-alt text-primary-600 text-2xl"></i>
-                </div>
-                
-                <h3 class="text-xl font-bold text-gray-900 mb-2">تأكيد تجديد الاشتراك</h3>
-                <p class="text-gray-600 mb-6">سيتم خصم مبلغ 199 ر.س من بطاقتك المسجلة</p>
-                
-                <div class="space-y-3 mb-6">
-                    <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
-                        <span>الباقة الحالية:</span>
-                        <span class="font-bold">الباقة الاحترافية</span>
-                    </div>
-                    <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
-                        <span>المبلغ:</span>
-                        <span class="font-bold">199 ر.س</span>
-                    </div>
-                    <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
-                        <span>تاريخ التجديد:</span>
-                        <span class="font-bold">15 ديسمبر 2023</span>
-                    </div>
-                </div>
-                
-                <div class="flex space-x-4 space-x-reverse">
-                    <button id="confirm-renewal" class="flex-1 bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-medium transition-colors">
-                        تأكيد التجديد
-                    </button>
-                    <button id="cancel-renewal" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg font-medium transition-colors">
-                        إلغاء
-                    </button>
-                </div>
-            </div>
+        <div class="p-8 text-center">
+            <h1 class="text-4xl font-black text-slate-800 mt-20">أهلاً بك في لوحتك الخاصة</h1>
+            <p class="text-slate-500 mt-4">يمكنك الآن البدء في ضبط إعدادات منع الهلوسة.</p>
         </div>
     </div>
 
     <script>
-        // متغيرات التطبيق
-        let currentTab = 'dashboard';
-        let notifications = [
-            {
-                id: 1,
-                title: 'تنبيه: اشتراكك سينتهي قريباً',
-                message: 'ينتهي اشتراكك خلال 3 أيام، يرجى التجديد',
-                type: 'warning',
-                time: 'منذ ساعتين',
-                read: false
-            },
-            {
-                id: 2,
-                title: 'تم إرسال التقرير الأسبوعي',
-                message: 'تم إرسال تقرير الأداء الأسبوعي إلى بريدك الإلكتروني',
-                type: 'success',
-                time: 'منذ يوم',
-                read: false
-            },
-            {
-                id: 3,
-                title: 'تم حظر رد غير دقيق',
-                message: 'نظام منع الهلوسة حظر رداً يحتوى على معلومات خاطئة',
-                type: 'info',
-                time: 'منذ 3 أيام',
-                read: true
-            }
-        ];
-
-        // تهيئة الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            // عناصر الصفحة
-            const registrationPage = document.getElementById('registration-page');
-            const dashboard = document.getElementById('dashboard');
-            const registrationForm = document.getElementById('registration-form');
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            const notificationBtn = document.getElementById('notification-btn');
-            const notificationModal = document.getElementById('notification-modal');
-            const closeNotifications = document.getElementById('close-notifications');
-            const upgradeBtn = document.getElementById('upgrade-btn');
-            const renewalModal = document.getElementById('renewal-modal');
-            const confirmRenewal = document.getElementById('confirm-renewal');
-            const cancelRenewal = document.getElementById('cancel-renewal');
-            const reportTypeBtns = document.querySelectorAll('.report-type-btn');
-            const notificationCount = document.getElementById('notification-count');
-
-            // تحديث عداد الإشعارات
-            function updateNotificationCount() {
-                const unreadCount = notifications.filter(n => !n.read).length;
-                if (unreadCount > 0) {
-                    notificationCount.textContent = unreadCount;
-                    notificationCount.classList.remove('hidden');
-                } else {
-                    notificationCount.classList.add('hidden');
-                }
-            }
-
-            // تسجيل الدخول
-            registrationForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                registrationPage.classList.add('hidden');
-                dashboard.classList.remove('hidden');
-                switchTab('dashboard');
-                updateNotificationCount();
-            });
-
-            // تبديل التبويبات
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const tabId = this.id.replace('tab-', '');
-                    switchTab(tabId);
-                });
-            });
-
-            // فتح نافذة الإشعارات
-            notificationBtn.addEventListener('click', function() {
-                notificationModal.style.display = 'block';
-                // تحديث الإشعارات كمقروءة
-                notifications.forEach(n => n.read = true);
-                updateNotificationCount();
-            });
-
-            // إغلاق نافذة الإشعارات
-            closeNotifications.addEventListener('click', function() {
-                notificationModal.style.display = 'none';
-            });
-
-            // نافذة تجديد الاشتراك
-            upgradeBtn.addEventListener('click', function() {
-                renewalModal.style.display = 'block';
-            });
-
-            // تأكيد التجديد
-            confirmRenewal.addEventListener('click', function() {
-                alert('تم تجديد اشتراكك بنجاح! سيتم إرسال إشعار إلى بريدك الإلكتروني.');
-                renewalModal.style.display = 'none';
-                
-                // إضافة إشعار جديد
-                notifications.unshift({
-                    id: notifications.length + 1,
-                    title: 'تم تجديد اشتراكك',
-                    message: 'تم تجديد اشتراكك بنجاح لمدة شهر إضافي',
-                    type: 'success',
-                    time: 'الآن',
-                    read: false
-                });
-                
-                updateNotificationCount();
-            });
-
-            // إلغاء التجديد
-            cancelRenewal.addEventListener('click', function() {
-                renewalModal.style.display = 'none';
-            });
-
-            // توليد التقارير
-            reportTypeBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const reportType = this.dataset.type;
-                    generateReport(reportType);
-                });
-            });
-
-            // إغلاق النوافذ عند النقر خارجها
-            window.addEventListener('click', function(e) {
-                if (e.target.classList.contains('modal')) {
-                    e.target.style.display = 'none';
-                }
-            });
-
-            // تهيئة أولية
-            updateNotificationCount();
-        });
-
-        // تبديل التبويب
-        function switchTab(tabId) {
-            currentTab = tabId;
+        function goToStep(stepNumber) {
+            // إخفاء كل الخطوات
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            // إظهار الخطوة المطلوبة
+            document.getElementById('step' + stepNumber).classList.add('active');
             
-            // تحديث أزرار التبويبات
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('border-primary-600', 'text-primary-600');
-                btn.classList.add('border-transparent', 'text-gray-500');
-            });
+            // تحديث شريط التقدم
+            const progress = (stepNumber / 3) * 100;
+            document.getElementById('progress-line').style.width = progress + '%';
+            document.getElementById('step-percent').innerText = Math.round(progress) + '%';
             
-            const activeTab = document.getElementById(`tab-${tabId}`);
-            if (activeTab) {
-                activeTab.classList.remove('border-transparent', 'text-gray-500');
-                activeTab.classList.add('border-primary-600', 'text-primary-600');
-            }
-            
-            // إخفاء جميع المحتويات
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-            
-            // إظهار المحتوى المحدد
-            const activeContent = document.getElementById(`content-${tabId}`);
-            if (activeContent) {
-                activeContent.classList.remove('hidden');
+            if(stepNumber === 1) document.getElementById('step-label').innerText = "الخطوة 1: التسجيل";
+            if(stepNumber === 2) document.getElementById('step-label').innerText = "الخطوة 2: الاشتراك";
+            if(stepNumber === 3) {
+                document.getElementById('step-label').innerText = "الخطوة 3: التفعيل";
+                simulateActivation();
             }
         }
 
-        // توليد التقرير
-        function generateReport(type) {
-            let reportName = '';
-            let message = '';
-            
-            switch(type) {
-                case 'weekly':
-                    reportName = 'تقرير أسبوعي';
-                    message = 'تم إنشاء التقرير الأسبوعي بنجاح. سيتم إرساله إلى بريدك الإلكتروني.';
-                    break;
-                case 'subscriptions':
-                    reportName = 'تقرير المشتركين';
-                    message = 'تم إنشاء تقرير المشتركين بنجاح. يحتوي على قائمة المشتركين والمدفوعات.';
-                    break;
-                case 'hallucination':
-                    reportName = 'تقرير منع الهلوسة';
-                    message = 'تم إنشاء تقرير منع الهلوسة بنجاح. يحتوي على إحصائيات النظام.';
-                    break;
-            }
-            
-            // محاكاة إرسال التقرير
+        function selectPlan(element) {
+            document.querySelectorAll('.plan-card').forEach(c => {
+                c.classList.remove('border-blue-500', 'bg-blue-50');
+                c.classList.add('border-slate-100');
+            });
+            element.classList.add('border-blue-500', 'bg-blue-50');
+            element.classList.remove('border-slate-100');
+        }
+
+        function simulateActivation() {
             setTimeout(() => {
-                // إضافة إشعار
-                notifications.unshift({
-                    id: notifications.length + 1,
-                    title: `تم إرسال ${reportName}`,
-                    message: `تم إرسال ${reportName} إلى بريدك الإلكتروني`,
-                    type: 'success',
-                    time: 'الآن',
-                    read: false
-                });
-                
-                // تحديث العداد
-                updateNotificationCount();
-                
-                // عرض رسالة نجاح
-                alert(message);
-            }, 1000);
+                document.getElementById('activating-ui').classList.add('hidden');
+                document.getElementById('success-ui').classList.remove('hidden');
+            }, 3000); // محاكاة لعملية تقنية تستغرق 3 ثواني
         }
 
-        // محاكاة إرسال الإشعارات البريدية (ستعمل في بيئة حقيقية مع خادم)
-        function sendEmailNotification(email, subject, message) {
-            console.log(`إرسال إشعار إلى: ${email}`);
-            console.log(`الموضوع: ${subject}`);
-            console.log(`المحتوى: ${message}`);
-            
-            // في التطبيق الحقيقي، هنا سيتم الاتصال بخادم البريد
-            return true;
-        }
-
-        // إرسال تقرير أسبوعي تلقائي (محاكاة)
-        function sendWeeklyReport() {
-            const weeklyReport = {
-                subject: 'تقرير MANY.AI الأسبوعي',
-                content: `
-                    تقرير الأداء الأسبوعي
-                    -----------------------
-                    التاريخ: ${new Date().toLocaleDateString('ar-SA')}
-                    
-                    إحصائيات الأسبوع:
-                    - إجمالي المحادثات: 8,729
-                    - المبيعات المؤكدة: 196
-                    - معدل التحويل: 2.25%
-                    - الردود المحظورة: 32
-                    - دقة الردود: 94.7%
-                    
-                    المشتركون الجدد هذا الأسبوع: 12
-                    المشتركون المجددون: 28
-                    
-                    ملاحظات:
-                    - أداء النظام ممتاز هذا الأسبوع
-                    - زيادة بنسبة 15% في المبيعات
-                    - تقليل الردود الخاطئة بنسبة 8%
-                `
-            };
-            
-            sendEmailNotification('store@example.com', weeklyReport.subject, weeklyReport.content);
-            
-            // إضافة إشعار في النظام
-            notifications.unshift({
-                id: notifications.length + 1,
-                title: 'تم إرسال التقرير الأسبوعي',
-                message: 'تم إرسال تقرير الأداء الأسبوعي إلى بريدك الإلكتروني',
-                type: 'info',
-                time: 'الآن',
-                read: false
-            });
-            
-            updateNotificationCount();
-        }
-
-        // محاكاة إرسال إشعار انتهاء الاشتراك
-        function sendSubscriptionReminder(daysLeft) {
-            const reminder = {
-                subject: `تنبيه: اشتراكك ينتهي خلال ${daysLeft} أيام`,
-                content: `
-                    عزيزي العميل،
-                    
-                    نود تذكيرك أن اشتراكك في MANY.AI سينتهي خلال ${daysLeft} أيام.
-                    يرجى تجديد اشتراكك لضمان استمرار الخدمة بدون انقطاع.
-                    
-                    للتجديد، يرجى زيارة لوحة التحكم الخاصة بك.
-                    
-                    مع تحياتنا،
-                    فريق MANY.AI
-                `
-            };
-            
-            sendEmailNotification('store@example.com', reminder.subject, reminder.content);
+        function launchDashboard() {
+            const name = document.getElementById('store-name').value;
+            document.getElementById('user-store').innerText = name;
+            document.getElementById('onboarding-flow').classList.add('hidden');
+            document.getElementById('main-dashboard').classList.remove('hidden');
         }
     </script>
 </body>
